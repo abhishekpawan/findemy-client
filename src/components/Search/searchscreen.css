@@ -1,0 +1,101 @@
+/* Search screen */
+
+.search {
+  min-width: 40rem;
+  margin: auto;
+  margin: 5rem auto;
+  padding: 0 3rem;
+  max-width: 134rem;
+}
+.search .courses.filter-hide {
+  width: 134rem;
+  /* transition: width 1s ease-in-out; */
+}
+.search .filter-panel.filter-hide {
+  display: none;
+}
+
+/* search screen filter side pannel */
+
+.search .filter button {
+  border: 1px solid var(--black-text);
+  width: 10rem;
+  height: 6.4rem;
+}
+.search .filter button:hover {
+  background-color: var(--grey-background);
+}
+
+.search .filter button:nth-child(2) {
+  width: 14rem;
+}
+
+.search .filter button svg {
+  font-size: 2rem;
+}
+
+.search .filter-panel .level div {
+  display: flex;
+  padding: 0.8rem 0;
+  min-width: 18rem;
+  max-width: 60rem;
+}
+.search .filter-panel .level div label,
+.search .filter-panel .level div input {
+  cursor: pointer;
+}
+.search .filter-panel .level div input[type="checkbox"] {
+  margin-right: 1.4rem;
+  border-radius: 0;
+  box-shadow: none;
+  border: 2px solid var(--black-text);
+}
+.search .filter-panel .level.rating div input[type="checkbox"] {
+  border-radius: 50%;
+}
+.search .filter-panel .level div input:checked {
+  background-color: var(--black-text);
+  border-color: var(--black-text);
+}
+
+/* search screen courses */
+
+.search .course {
+  border-bottom: 1px solid var(--light-grey-border);
+}
+
+.search .course .thumbnail img {
+  width: 100%;
+}
+.search .course .instructor-name,
+.search .course .num_reviews,
+.search .course .course_details {
+  color: var(--light-grey-text);
+}
+
+@media screen and (min-width: 768px) {
+  .search .course .thumbnail {
+    max-width: 28rem;
+  }
+}
+
+/* Search screen accordian styling */
+.accordion-item {
+  border: none;
+}
+
+.accordion-button:not(.collapsed),
+.accordion-button.collapsed {
+  color: var(--black-text);
+  background-color: white;
+  box-shadow: none;
+  padding: 1.4rem 0.2rem;
+
+  border-top: 1px solid var(--light-grey-border);
+  /* border-top: 1px solid var(--light-grey-border); */
+}
+
+.accordion-button:not(.collapsed)::after,
+.accordion-button.collapsed::after {
+  color: var(--black-text);
+}

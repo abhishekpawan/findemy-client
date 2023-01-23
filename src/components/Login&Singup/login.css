@@ -1,0 +1,109 @@
+/* Login page */
+.login,
+.signup {
+  min-width: 40rem;
+}
+
+.login .login__form,
+.signup .signup__form {
+  width: 100%;
+  max-width: 35rem;
+}
+
+.login .login__form button,
+.signup .signup__form button {
+  display: flex;
+  align-items: center;
+  height: 4.8rem;
+  margin-bottom: 0.8rem;
+  border: 1px solid black;
+  font-weight: 700;
+  font-size: 1.4rem;
+  padding: 0 1.2rem;
+}
+
+.login .login__form button:hover {
+  background-color: var(--grey-background);
+}
+.login .login__form button i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.2rem;
+  margin-right: 0.8rem;
+}
+
+.login .login__form button i#facebook {
+  color: #4267b2;
+}
+
+.login .login__form form input,
+.signup .signup__form form input {
+  padding: 1rem 1.8rem 0;
+  height: 6rem;
+  margin-bottom: 1.6rem;
+  border-color: black;
+  border-radius: 0;
+}
+
+.login .login__form form .form-floating > label,
+.signup .signup__form form .form-floating > label {
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  padding: 0;
+  padding-left: 2rem;
+  font-weight: 700;
+  line-height: 1.4;
+  font-size: 1.3rem;
+  transform-origin: -1rem -6rem;
+}
+.login .login__form .form-control,
+.signup .signup__form .form-control {
+  font-size: 1.4rem;
+}
+.login .login__form .form-control:focus,
+.signup .signup__form .form-control:focus,
+.signup .signup__form form button:hover,
+.signup .signup__form form button:active {
+  box-shadow: none;
+}
+
+.login .login__form form .form-floating a,
+.signup .signup__form form .form-floating a {
+  position: absolute;
+  top: 1.6rem;
+  right: 1rem;
+  font-size: 2rem;
+}
+
+.login .login__form form button,
+.signup .signup__form form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--purple-button-background);
+  color: white;
+  margin-bottom: 1.6rem;
+}
+
+.login .login__form form button:hover,
+.login .login__form form button:active,
+.signup .signup__form form button:hover,
+.signup .signup__form form button:active {
+  background-color: var(--purple-button-background-hover);
+}
+
+.login .login__form .login__signup a,
+.signup .signup__form .signup__login a {
+  text-decoration: underline;
+  color: var(--purple-text);
+  font-weight: 700;
+}
+
+/* Sinup page */
+
+.signup .signup__form .signup__terms-and-policy__underline {
+  margin: 1.6rem 0;
+  border-top: 1px solid #d1d7dc;
+}

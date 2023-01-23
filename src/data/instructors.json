@@ -1,0 +1,122 @@
+[
+  {
+    "id": 1,
+    "name": "John Smith",
+    "short_bio": "John is a experienced software developer with over 10 years of experience in the industry.",
+    "about": "John has a strong background in computer science and has worked on a variety of projects including web development, mobile app development, and data analysis. He is passionate about teaching and is excited to share his knowledge and experience with students.",
+    "profile_img": "https://img-b.udemycdn.com/user/200_H/10260436_946b_6.jpg",
+    "social_urls": [
+      "https://www.linkedin.com/in/johnsmith",
+      "https://twitter.com/johnsmith",
+      "https://github.com/johnsmith"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Jane Doe",
+    "short_bio": "Jane is a highly skilled graphic designer with over 15 years of experience in the industry.",
+    "about": "Jane has a degree in graphic design and has worked on a variety of projects including branding, packaging design, and advertising. She has a strong understanding of design principles and is able to create visually stunning designs that are both creative and effective. She is passionate about teaching and is excited to share her knowledge and experience with students.",
+    "profile_img": "https://www.example.com/jane_doe.jpg",
+    "social_urls": [
+      "https://www.linkedin.com/in/janedoe",
+      "https://twitter.com/janedoe",
+      "https://dribbble.com/janedoe"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Michael Johnson",
+    "short_bio": "Michael is a experienced music producer and audio engineer with over 8 years of experience in the industry.",
+    "about": "Michael has a degree in audio production and has worked on a variety of projects including music production, sound design, and mixing. He has a strong understanding of music theory and is able to create high quality audio for a variety of applications. He is passionate about teaching and is excited to share his knowledge and experience with students.",
+    "profile_img": "https://www.example.com/michael_johnson.jpg",
+    "social_urls": [
+      "https://www.linkedin.com/in/michaeljohnson",
+      "https://twitter.com/michaeljohnson",
+      "https://soundcloud.com/michaeljohnson"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Emily Davis",
+    "short_bio": "Emily is a experienced marketer with over 5 years of experience in the industry.",
+    "about": "Emily has a degree in marketing and has worked on a variety of projects including digital marketing, content marketing, and social media marketing. She has a strong understanding of marketing strategy and is able to create effective campaigns that drive results. She is passionate about teaching and is excited to share her knowledge and experience with students.",
+    "profile_img": "https://www.example.com/emily_davis.jpg",
+    "social_urls": [
+      "https://www.linkedin.com/in/emilydavis",
+      "https://twitter.com/emilydavis",
+      "https://www.instagram.com/emilydavismarketing"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Matthew Brown",
+    "short_bio": "Matthew is a experienced financial analyst with over 12 years of experience in the industry.",
+    "about": "Matthew has a degree in finance and has worked on a variety of projects including investment analysis, financial forecasting, and risk management. He has a strong understanding of financial markets and is able to provide valuable insights for both personal and business financial planning. He is passionate about teaching and is excited to share his knowledge and experience with students.",
+    "profile_img": "https://www.example.com/matthew_brown.jpg",
+    "social_urls": [
+      "https://www.linkedin.com/in/matthewbrown",
+      "https://twitter.com/matthewbrown",
+      "https://www.investopedia.com/matthewbrown"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Ashley Taylor",
+    "short_bio": "Ashley is a experienced teacher with over 8 years of experience in the education field.",
+    "about": "Ashley has a degree in education and has worked as a teacher for a variety of subjects including English, history, and math. She has a strong understanding of teaching methods and is able to provide a positive and engaging learning experience for students. She is passionate about teaching and is excited to share her knowledge and experience with students.",
+    "profile_img": "https://www.example.com/ashley_taylor.jpg",
+    "social_urls": [
+      "https://www.linkedin.com/in/ashleytaylor",
+      "https://twitter.com/ashleytaylor",
+      "https://www.education.com/ashleytaylor"
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Joshua Martinez",
+    "short_bio": "Joshua is a experienced data analyst with over 6 years of experience in the industry.",
+    "about": "Joshua has a degree in statistics and has worked on a variety of projects including data visualization, predictive modeling, and data mining. He has a strong understanding of data analysis techniques and is able to provide valuable insights from large data sets. He is passionate about teaching and is excited to share his knowledge and experience with students.",
+    "profile_img": "https://www.example.com/joshua_martinez.jpg",
+    "social_urls": [
+      "https://www.linkedin.com/in/joshuamartinez",
+      "https://twitter.com/joshuamartinez",
+      "https://github.com/joshuamartinez"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Nicholas Rodriguez",
+    "short_bio": "Nicholas is a experienced photographer with over 10 years of experience in the industry.",
+    "about": "Nicholas has a degree in photography and has worked on a variety of projects including portrait photography, landscape photography, and event photography. He has a strong understanding of photography techniques and is able to create stunning and visually striking images. He is passionate about teaching and is excited to share his knowledge and experience with students.",
+    "profile_img": "https://www.example.com/nicholas_rodriguez.jpg",
+    "social_urls": [
+      "https://www.linkedin.com/in/nicholasrodriguez",
+      "https://twitter.com/nicholasrodriguez",
+      "https://www.instagram.com/nicholasrodriguezphotography"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Amanda Garcia",
+    "short_bio": "Amanda is a experienced fitness trainer with over 5 years of experience in the industry.",
+    "about": "Amanda has a degree in kinesiology and has worked as a personal trainer for a variety of clients. She has a strong understanding of fitness and nutrition and is able to create customized workout plans for clients to help them reach their fitness goals. She is passionate about teaching and is excited to share her knowledge and experience with students.",
+    "profile_img": "https://www.example.com/amanda_garcia.jpg",
+    "social_urls": [
+      "https://www.linkedin.com/in/amandagarcia",
+      "https://twitter.com/amandagarcia",
+      "https://www.instagram.com/amandagarciafitness"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Brian Martinez",
+    "short_bio": "Brian is a experienced chef with over 8 years of experience in the culinary industry.",
+    "about": "Brian has a degree in culinary arts and has worked as a chef for a variety of restaurants and hotels. He has a strong understanding of different cuisines and cooking techniques and is able to create delicious and visually appealing dishes. He is passionate about teaching and is excited to share his knowledge and experience with students.",
+    "profile_img": "https://www.example.com/brian_martinez.jpg",
+    "social_urls": [
+      "https://www.linkedin.com/in/brianmartinez",
+      "https://twitter.com/brianmartinez",
+      "https://www.instagram.com/brianmartinezchef"
+    ]
+  }
+]

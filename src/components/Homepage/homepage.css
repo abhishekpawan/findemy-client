@@ -1,0 +1,77 @@
+/* homepage */
+
+.homepage__courses,
+.featured-topics__container .featured-topics {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 134rem;
+  margin: 6rem auto 0;
+  padding: 0 2.4rem;
+  min-width: 40rem;
+}
+
+.homepage__courses .course__card {
+  max-width: 37.5rem;
+  min-width: 17.3rem;
+  cursor: pointer;
+  /* margin: auto; */
+}
+.course__card-img img {
+  width: 100%;
+}
+.homepage__courses .course__card:hover .course__card-img img {
+  filter: brightness(75%);
+}
+
+.course__card .description--instructor-name {
+  color: var(--light-grey-text);
+}
+
+.course__card .description--rating {
+  color: var(--orange-dark);
+}
+
+.course__card .description--price span {
+  text-decoration: line-through;
+  color: var(--light-grey-text);
+}
+
+.course__card .description--rating span.num_reviews {
+  color: var(--light-grey-text);
+}
+
+.featured-topics__container {
+  margin-top: 6.4rem;
+  min-width: 40rem;
+  background-color: var(--grey-background);
+}
+
+.featured-topics__container .featured-topics {
+  padding: 6.4rem 2.4rem;
+  margin: auto;
+}
+
+.featured-topics__container .featured-topics .featured-topics__item a {
+  color: var(--purple-text);
+  text-decoration: underline;
+}
+
+.featured-topics__container .featured-topics .featured-topics__item span {
+  font-size: 1.4rem;
+  color: var(--light-grey-text);
+}
+.featured-topics__container .featured-topics .featured-topics__btn {
+  max-width: fit-content;
+  border: 1px solid black;
+  height: 4rem;
+}
+
+@media screen and (max-width: 767px) {
+  .featured-topics__container {
+    margin-top: 3.2rem;
+  }
+  .featured-topics__container .featured-topics {
+    padding-top: 3.2rem;
+  }
+}

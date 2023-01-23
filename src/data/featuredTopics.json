@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "field": "Development",
+    "topics": [
+      {
+        "id": 11,
+        "category": "Python",
+        "noOfStudents": "36,354,994"
+      },
+      {
+        "id": 12,
+        "category": "Web Development",
+        "noOfStudents": "11,415,615"
+      },
+      {
+        "id": 13,
+        "category": "Machine Learning",
+        "noOfStudents": "7,070,015"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "field": "Business",
+    "topics": [
+      {
+        "id": 21,
+        "category": "Financial Analysis",
+        "noOfStudents": "1,195,282"
+      },
+      {
+        "id": 22,
+        "category": "SQL",
+        "noOfStudents": "5,977,561"
+      },
+      {
+        "id": 23,
+        "category": "PMP",
+        "noOfStudents": "1,733,398"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "field": "IT and Software",
+    "topics": [
+      {
+        "id": 31,
+        "category": "AWS Certification",
+        "noOfStudents": "6,078,244"
+      },
+      {
+        "id": 32,
+        "category": "Ethical Hacking",
+        "noOfStudents": "10,931,066"
+      },
+      {
+        "id": 33,
+        "category": "Cyber Security",
+        "noOfStudents": " 3,998,037"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "field": "Design",
+    "topics": [
+      {
+        "id": 41,
+        "category": "Photoshop",
+        "noOfStudents": "10,909,736"
+      },
+      {
+        "id": 42,
+        "category": "Graphic Design",
+        "noOfStudents": "3,381,052"
+      },
+      {
+        "id": 43,
+        "category": " Drawing",
+        "noOfStudents": "2,410,849"
+      }
+    ]
+  }
+]

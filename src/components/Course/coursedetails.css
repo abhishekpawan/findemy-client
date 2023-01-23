@@ -1,0 +1,199 @@
+/* Course Details */
+
+.course__details {
+  min-width: 40rem;
+  position: relative;
+}
+
+.course__details__body__container {
+  background-color: var(--black-text);
+  color: var(--white-text);
+}
+
+.course__details__body,
+.course__details__desc {
+  width: 100%;
+  max-width: 118rem;
+  margin: 0 auto 0;
+  padding: 3.2rem 2.4rem;
+}
+
+.course__details__body-wrapper,
+.course__details__desc-wrapper {
+  max-width: 75rem;
+}
+
+.course__details .course__details-title h1 {
+  font-size: 3.2rem;
+}
+
+.course__details .course__details-rating .num_reviews {
+  color: var(--purple-light-text);
+}
+
+.course__details .course__details-instructor a {
+  color: var(--purple-light-text);
+  text-decoration: underline;
+}
+
+.course__details__desc .learning-points {
+  border: 1px solid #d1d7dc;
+  padding: 2.4rem;
+  margin-bottom: 3.2rem;
+}
+
+.course__details .learning-points .item svg {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+@media screen and (min-width: 1670px) {
+  .course__details__body,
+  .course__details__desc {
+    margin: 0 6rem;
+  }
+  .course__details__body-wrapper,
+  .course__details__desc-wrapper {
+    max-width: none;
+  }
+}
+
+/* course details card */
+
+.course__details .course__details__card {
+  position: fixed;
+
+  top: 10rem;
+  right: 15rem;
+  width: 34rem;
+  height: fit-content;
+  border-bottom: 1px solid #d1d7dc;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
+  background-color: #fff;
+  z-index: 10;
+}
+/* .course__details .course__details__card.scrolling-start {
+  top: 5rem;
+} */
+
+.course__details .course__details__card.not-fixed {
+  position: absolute;
+  top: auto;
+  bottom: 2rem;
+}
+
+.course__details .course__details__card img {
+  width: 100%;
+}
+
+.course__details .course__details__card-details {
+  padding: 2.4rem;
+  color: var(--black-text);
+}
+.course__details__card-details .discounted-price {
+  font-size: 3rem;
+}
+
+.course__details__card-details .price {
+  color: var(--light-grey-text);
+}
+
+.course__details__card-details .add_to_cart-btn {
+  height: 4.8rem;
+  width: 100%;
+  background: var(--purple-button-background);
+}
+.course__details__card-details .add_to_cart-btn:hover {
+  cursor: pointer;
+  background-color: var(--purple-button-background-hover);
+}
+.course__details__card-details .add_to_cart-btn button {
+  color: var(--white-text);
+}
+.course__details__card-details .buy_now-btn {
+  height: 4.8rem;
+  border: 1px solid var(--black-text);
+}
+
+.course__details__card-details .buy_now-btn:hover {
+  background-color: var(--grey-background);
+  cursor: pointer;
+}
+.course__details__card-details .buy_now-btn button {
+  color: var(--black-text);
+}
+
+.course__details__card-details .course__includes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.course__details__card-details .course__includes ul li {
+  padding: 0.4rem 0;
+  font-size: 1.4rem;
+}
+
+.course__details__card-details .course__includes ul li svg {
+  margin-right: 1.4rem;
+  width: 1.6rem;
+}
+
+.course__details__card-details .apply_coupon a {
+  font-weight: 700;
+  text-decoration: underline;
+  font-size: 1.4rem;
+}
+
+@media screen and (max-width: 1400px) {
+  .course__details__body-wrapper,
+  .course__details__desc-wrapper {
+    max-width: 70rem;
+  }
+  .course__details .course__details__card {
+    right: 8rem;
+  }
+}
+@media screen and (max-width: 1170px) {
+  .course__details__body-wrapper,
+  .course__details__desc-wrapper {
+    max-width: 60rem;
+  }
+  .course__details .course__details__card {
+    right: 4rem;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .course__details__body-wrapper,
+  .course__details__desc-wrapper {
+    max-width: 70rem;
+    margin: auto;
+  }
+  .course__details .course__details-img img {
+    width: 100%;
+    height: auto;
+  }
+
+  .course__details__body-wrapper .course__details__card-details {
+    padding: 2.4rem 0 0 0;
+    color: var(--white-text);
+  }
+  .course__details__card-details .buy_now-btn {
+    border: 1px solid var(--white-text);
+    margin-bottom: 1.6rem;
+    margin-top: 1.6rem;
+  }
+
+  .course__details__card-details .buy_now-btn:hover {
+    background-color: var(--grey-background);
+    cursor: pointer;
+  }
+  .course__details__card-details .buy_now-btn button {
+    font-weight: 700;
+    color: var(--white-text);
+  }
+  .course__details__card-details .apply_coupon {
+    justify-content: space-evenly;
+  }
+}

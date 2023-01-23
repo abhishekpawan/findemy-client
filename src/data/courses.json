@@ -1,0 +1,228 @@
+[
+  {
+    "id": 1,
+    "title": "The Complete Python Masterclass",
+    "instructor": "Tim Buchalka",
+    "price": 3999,
+    "discounted_price": 649,
+    "rating": 4.5,
+    "num_students": "2,12,333",
+    "num_reviews": "12,345",
+    "level": "beginners",
+    "tag": "bestseller",
+    "category": "python",
+    "thumbnail": "https://img-b.udemycdn.com/course/480x270/2776760_f176_10.jpg",
+    "summary_video": "https://example.com/python_masterclass_summary.mp4",
+    "body": {
+      "requirements": ["Basic knowledge of programming concepts"],
+      "description": "Learn Python from scratch and become an expert in the language. This course covers everything from the basics to advanced topics, including object-oriented programming, data structures, and more. Learn Python from scratch and become an expert in the language. This course covers everything from the basics to advanced topics, including object-oriented programming, data structures, and more. Learn Python from scratch and become an expert in the language. This course covers everything from the basics to advanced topics, including object-oriented programming, data structures, and more. Learn Python from scratch and become an expert in the language. This course covers everything from the basics to advanced topics, including object-oriented programming, data structures, and more. Learn Python from scratch and become an expert in the language. This course covers everything from the basics to advanced topics, including object-oriented programming, data structures, and more. Learn Python from scratch and become an expert in the language. This course covers everything from the basics to advanced topics, including object-oriented programming, data structures, and more. Learn Python from scratch and become an expert in the language. This course covers everything from the basics to advanced topics, including object-oriented programming, data structures, and more. Learn Python from scratch and become an expert in the language. This course covers everything from the basics to advanced topics, including object-oriented programming, data structures, and more. Learn Python from scratch and become an expert in the language. This course covers everything from the basics to advanced topics, including object-oriented programming, data structures, and more.",
+      "short_description": "Learn Python from scratch and become an expert in the language.",
+      "learning_points": [
+        "Learn the basics of Python programming",
+        "Understand object-oriented programming concepts",
+        "Master advanced Python topics such as data structures and algorithms",
+        "Build real-world projects using Python"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "title": "The Complete Machine Learning Course with Python",
+    "instructor": "Jose Portilla",
+    "price": 3999,
+    "discounted_price": 649,
+    "rating": 4.7,
+    "num_students": "2,12,33",
+    "num_reviews": "8,567",
+    "level": "intermediate",
+    "tag": "bestseller",
+    "category": "Machine Learning",
+    "thumbnail": "https://img-b.udemycdn.com/course/480x270/903744_8eb2.jpg",
+    "summary_video": "https://example.com/machine_learning_python_summary.mp4",
+    "body": {
+      "requirements": ["Familiarity with Python and basic math concepts"],
+      "description": "Learn the basics of machine learning and build real-world projects using Python. This course covers everything from supervised and unsupervised learning to deep learning and neural networks.",
+      "learning_points": [
+        "Understand the basics of machine learning",
+        "Learn to build supervised and unsupervised models",
+        "Explore deep learning and neural networks",
+        "Build real-world projects using Python"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "title": "JavaScript Fundamentals for Absolute Beginners",
+    "instructor": "Colt Steele",
+    "price": 3999,
+    "discounted_price": 649,
+    "rating": 4.6,
+    "num_students": "2,12,333",
+    "num_reviews": "23,456",
+    "level": "beginners",
+    "tag": "bestseller",
+    "category": "JavaScript",
+    "thumbnail": "https://img-b.udemycdn.com/course/480x270/851712_fc61_6.jpg",
+    "summary_video": "https://example.com/javascript_beginners_summary.mp4",
+    "body": {
+      "requirements": ["No prior programming experience required"],
+      "description": "Learn the basics of JavaScript and become a web developer. This course covers everything from the basics of the language to building real-world projects.",
+      "learning_points": [
+        "Learn the basics of JavaScript",
+        "Understand the Document Object Model (DOM)",
+        "Work with forms and events",
+        "Build real-world projects using JavaScript"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "title": "The Complete Python Masterclass",
+    "instructor": "Tim Buchalka",
+    "price": 3999,
+    "discounted_price": 649,
+    "rating": 4.5,
+    "num_students": "2,12,333",
+    "num_reviews": "12,345",
+    "level": "beginners",
+    "tag": "bestseller",
+    "category": "python",
+    "thumbnail": "https://img-b.udemycdn.com/course/480x270/2776760_f176_10.jpg",
+    "summary_video": "https://example.com/python_masterclass_summary.mp4",
+    "body": {
+      "requirements": ["Basic knowledge of programming concepts"],
+      "description": "Learn Python from scratch and become an expert in the language. This course covers everything from the basics to advanced topics, including object-oriented programming, data structures, and more.",
+      "learning_points": [
+        "Learn the basics of Python programming",
+        "Understand object-oriented programming concepts",
+        "Master advanced Python topics such as data structures and algorithms",
+        "Build real-world projects using Python"
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "title": "The Complete Machine Learning Course with Python",
+    "instructor": "Jose Portilla",
+    "price": 3999,
+    "discounted_price": 649,
+    "rating": 4.7,
+    "num_students": "2,12,333",
+    "num_reviews": "8,567",
+    "level": "intermediate",
+    "tag": "bestseller",
+    "category": "Machine Learning",
+    "thumbnail": "https://img-b.udemycdn.com/course/480x270/903744_8eb2.jpg",
+    "summary_video": "https://example.com/machine_learning_python_summary.mp4",
+    "body": {
+      "requirements": ["Familiarity with Python and basic math concepts"],
+      "description": "Learn the basics of machine learning and build real-world projects using Python. This course covers everything from supervised and unsupervised learning to deep learning and neural networks.",
+      "learning_points": [
+        "Understand the basics of machine learning",
+        "Learn to build supervised and unsupervised models",
+        "Explore deep learning and neural networks",
+        "Build real-world projects using Python"
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "title": "JavaScript Fundamentals for Absolute Beginners",
+    "instructor": "Colt Steele",
+    "price": 3999,
+    "discounted_price": 649,
+    "rating": 4.6,
+    "num_students": "2,12,333",
+    "num_reviews": "23,456",
+    "level": "beginners",
+    "tag": "bestseller",
+    "category": "JavaScript",
+    "thumbnail": "https://img-b.udemycdn.com/course/480x270/851712_fc61_6.jpg",
+    "summary_video": "https://example.com/javascript_beginners_summary.mp4",
+    "body": {
+      "requirements": ["No prior programming experience required"],
+      "description": "Learn the basics of JavaScript and become a web developer. This course covers everything from the basics of the language to building real-world projects.",
+      "learning_points": [
+        "Learn the basics of JavaScript",
+        "Understand the Document Object Model (DOM)",
+        "Work with forms and events",
+        "Build real-world projects using JavaScript"
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "title": "The Complete Python Masterclass",
+    "instructor": "Tim Buchalka",
+    "price": 3999,
+    "discounted_price": 649,
+    "rating": 4.5,
+    "num_students": "2,12,333",
+    "num_reviews": "12,345",
+    "level": "beginners",
+    "tag": "bestseller",
+    "category": "python",
+    "thumbnail": "https://img-b.udemycdn.com/course/480x270/2776760_f176_10.jpg",
+    "summary_video": "https://example.com/python_masterclass_summary.mp4",
+    "body": {
+      "requirements": ["Basic knowledge of programming concepts"],
+      "description": "Learn Python from scratch and become an expert in the language. This course covers everything from the basics to advanced topics, including object-oriented programming, data structures, and more.",
+      "learning_points": [
+        "Learn the basics of Python programming",
+        "Understand object-oriented programming concepts",
+        "Master advanced Python topics such as data structures and algorithms",
+        "Build real-world projects using Python"
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "title": "The Complete Machine Learning Course with Python",
+    "instructor": "Jose Portilla",
+    "price": 3999,
+    "discounted_price": 649,
+    "rating": 4.7,
+    "num_students": "2,12,333",
+    "num_reviews": "8,567",
+    "level": "intermediate",
+    "tag": "bestseller",
+    "category": "Machine Learning",
+    "thumbnail": "https://img-b.udemycdn.com/course/480x270/903744_8eb2.jpg",
+    "summary_video": "https://example.com/machine_learning_python_summary.mp4",
+    "body": {
+      "requirements": ["Familiarity with Python and basic math concepts"],
+      "description": "Learn the basics of machine learning and build real-world projects using Python. This course covers everything from supervised and unsupervised learning to deep learning and neural networks.",
+      "learning_points": [
+        "Understand the basics of machine learning",
+        "Learn to build supervised and unsupervised models",
+        "Explore deep learning and neural networks",
+        "Build real-world projects using Python"
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "title": "JavaScript Fundamentals for Absolute Beginners",
+    "instructor": "Colt Steele",
+    "price": 3999,
+    "discounted_price": 649,
+    "rating": 4.6,
+    "num_students": "2,12,333",
+    "num_reviews": "23,456",
+    "level": "beginners",
+    "tag": "bestseller",
+    "category": "JavaScript",
+    "thumbnail": "https://img-b.udemycdn.com/course/480x270/851712_fc61_6.jpg",
+    "summary_video": "https://example.com/javascript_beginners_summary.mp4",
+    "body": {
+      "requirements": ["No prior programming experience required"],
+      "description": "Learn the basics of JavaScript and become a web developer. This course covers everything from the basics of the language to building real-world projects.",
+      "learning_points": [
+        "Learn the basics of JavaScript",
+        "Understand the Document Object Model (DOM)",
+        "Work with forms and events",
+        "Build real-world projects using JavaScript"
+      ]
+    }
+  }
+]

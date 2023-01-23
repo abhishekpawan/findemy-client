@@ -1,0 +1,57 @@
+/* Shopping cart */
+
+.cart {
+  min-width: 40rem;
+  margin: auto;
+  margin: 5rem auto;
+  /* padding: 3rem; */
+  max-width: 134rem;
+}
+
+.cart .course {
+  border-top: 1px solid var(--light-grey-border);
+  padding: 1.6rem 0;
+}
+
+.cart .course .thumbnail img {
+  width: 100%;
+}
+
+.cart .course .price span:first-of-type,
+.cart .course .price svg {
+  color: var(--purple-button-background);
+}
+
+.cart .course .course_details,
+.cart .course .num_reviews,
+.cart .course .normal-price {
+  color: var(--light-grey-text);
+}
+
+.cart .course .actions a {
+  color: var(--purple-text);
+}
+
+.cart .total-prices .checkout-btn {
+  height: 4.8rem;
+  width: 100%;
+  cursor: pointer;
+  background: var(--purple-button-background);
+}
+
+.cart .total-prices .checkout-btn:hover {
+  background: var(--purple-button-background-hover);
+}
+
+.cart .total-prices .checkout-btn button {
+  color: var(--white-text);
+}
+@media screen and (min-width: 768px) {
+  .cart .course .thumbnail {
+    width: 26rem;
+    /* border: 1px solid var(--light-grey-text); */
+  }
+  .cart .course .actions {
+    width: 16rem;
+  }
+}

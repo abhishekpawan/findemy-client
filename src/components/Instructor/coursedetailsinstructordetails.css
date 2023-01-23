@@ -1,0 +1,32 @@
+/* course detail Instructor detail */
+
+.course__details_instructor .name a {
+  color: var(--purple-text);
+}
+
+.course__details_instructor .short-bio {
+  color: var(--light-grey-text);
+}
+
+.course__details_instructor .profile-img {
+  width: 11.2rem;
+  height: 11.2rem;
+}
+
+.course__details_instructor .profile-img img {
+  width: 100%;
+}
+
+.course__details_instructor .stats ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.course__details_instructor .stats ul li {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+}
+
+.course__details_instructor .stats ul li svg {
+  margin-right: 1.4rem;
+}

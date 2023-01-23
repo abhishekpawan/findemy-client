@@ -1,15 +1,22 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
+import "../node_modules/jquery/dist/jquery.slim.min.js";
+import "../node_modules/popper.js/dist/umd/popper.min.js";
+import { BrowserRouter } from "react-router-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const rootElement = document.getElementById("root");
+if (!rootElement) throw new Error("Failed to find the root element");
+const root = createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
 

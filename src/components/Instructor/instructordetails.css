@@ -1,0 +1,25 @@
+/* instructor page */
+
+.instructor {
+  min-width: 40rem;
+  margin: auto;
+  margin: 5rem auto;
+}
+
+.instructor__details .title {
+  color: var(--light-grey-text);
+}
+
+.instructor__details h1 {
+  font-size: 4rem;
+}
+
+.total__students div:first-of-type,
+.total__reviews div:first-of-type {
+  color: var(--light-grey-text);
+}
+
+.instructor__social .social-btn {
+  width: 20rem;
+  height: 4.8rem;
+}
