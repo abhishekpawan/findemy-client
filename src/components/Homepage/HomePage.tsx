@@ -1,6 +1,4 @@
-import courseData from "../../data/courses.json";
 import featuredTopics from "../../data/featuredTopics.json";
-
 import HomepageCourseCard from "./HomepageCourseCard";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -47,7 +45,6 @@ const HomePage = () => {
     prevArrow: <PrevArrow />,
     dots: false,
     speed: 500,
-    // initialSlide: 0,
     responsive: [
       {
         breakpoint: 1024,
@@ -100,9 +97,6 @@ const HomePage = () => {
 
     getAllCourses();
   }, []);
-
-  console.log(allCourses);
-  console.log(allCourses);
 
   return (
     <main className="homepage">
