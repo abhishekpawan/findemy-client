@@ -1,14 +1,74 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { BsFacebook, BsApple } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm, SubmitHandler } from "react-hook-form";
 import "./login.css";
+import { AppContext } from "../../App";
+import { showNotification } from "../ToastNotification/ToastNotification";
+
+type Inputs = {
+  email: string;
+  password: string;
+};
 
 const Login = () => {
+  const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
+  let email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+  const { setUser, isUserLoggedIn, setUserLoggedin } = useContext(AppContext);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  useEffect(() => {
+    if (isUserLoggedIn == true) {
+      navigate("/");
+    }
+  }, [isUserLoggedIn]);
+
   const showPassword = (): void => {
     setPasswordVisible(!passwordVisible);
+  };
+
+  const onSubmit: SubmitHandler<Inputs> = async (loginData) => {
+    try {
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
+      };
+      let response = await fetch(
+        "http://localhost:3001/users/login",
+        requestOptions
+      );
+      const data = await response.json();
+
+      if (data.success == true) {
+        const userInfromation = {
+          id: data.id,
+          name: data.name,
+          email: data.email,
+          token: data.token,
+        };
+        localStorage.setItem("user", JSON.stringify(userInfromation));
+        setUser(userInfromation);
+        setUserLoggedin(true);
+
+        //setting notification popup
+        showNotification("success", "You logged in succesfully!");
+        navigate("/");
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error: any) {
+      //setting notification popup
+      showNotification("error", error.toString());
+    }
   };
   return (
     <main className="login d-flex justify-content-center align-items-center p-5">
@@ -36,17 +96,28 @@ const Login = () => {
             Continue with Apple
           </button>
           <div>
-            <form className="d-flex flex-column">
+            <form
+              className="d-flex flex-column"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div className="form-floating">
                 <input
                   type="text"
                   className="form-control"
                   id="email"
                   placeholder="Email"
-                  name="email"
-                  required
+                  {...register("email", {
+                    required: true,
+                    pattern: email_regex,
+                  })}
                 />
-
+                <p role="alert">
+                  {errors.email && (
+                    <span className="mb-3 text-danger">
+                      Please enter a valid email ID!
+                    </span>
+                  )}
+                </p>
                 <label htmlFor="email">Email</label>
               </div>
 
@@ -56,9 +127,17 @@ const Login = () => {
                   className="form-control"
                   id="password"
                   placeholder="Password"
-                  name="password"
-                  required
+                  {...register("password", {
+                    required: true,
+                  })}
                 />
+                <p role="alert">
+                  {errors.password && (
+                    <span className="mb-3 text-danger">
+                      Please enter a Password!
+                    </span>
+                  )}
+                </p>
                 <label htmlFor="password">Password</label>
                 <a>
                   {passwordVisible ? (

@@ -82,7 +82,7 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    const getAllCourses = async () => {
+    const signup = async () => {
       try {
         let response = await axios.get("http://localhost:3001/courses/all");
         if (response.data.success === true) {
@@ -95,7 +95,7 @@ const HomePage = () => {
       }
     };
 
-    getAllCourses();
+    signup();
   }, []);
 
   return (

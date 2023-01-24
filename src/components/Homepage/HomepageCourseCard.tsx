@@ -31,7 +31,7 @@ const HomepageCourseCard: FC<ICourseCard> = (props: ICourseCard) => {
       </div>
       <div className="description ">
         <h3 className="description--title fw-bold my-2 fs-3">{props.title}</h3>
-        <div className="description--instructor-name fs-6 mb-2 ">
+        <div className="description--instructor-name fs-5 mb-2 ">
           {props.instructor}
         </div>
         <div className="description--rating d-flex align-item-center mb-2 fw-bold fs-4">
