@@ -129,7 +129,10 @@ const CourseDetails = () => {
               </span> */}
                 </div>
                 <div className="course__details-instructor mb-3">
-                  Created by <a>{courseDetails?.instructor_name}</a>
+                  Created by{" "}
+                  <a href="#course__details_instructor">
+                    {courseDetails?.instructor_name}
+                  </a>
                 </div>
                 <div className="course__details-last-update d-flex align-items-center ">
                   <span className="date ">

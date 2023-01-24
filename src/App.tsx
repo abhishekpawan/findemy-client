@@ -50,7 +50,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/coursedetails/:id" element={<CourseDetails />} />
-          <Route path="/instructordetails" element={<InstructorDetails />} />
+          <Route
+            path="/instructordetails/:id"
+            element={<InstructorDetails />}
+          />
           {isUserLoggedIn ? (
             <Route path="/cart" element={<ShoppingCart />} />
           ) : (

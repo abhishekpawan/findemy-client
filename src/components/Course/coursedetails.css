@@ -31,7 +31,8 @@
   color: var(--purple-light-text);
 }
 
-.course__details .course__details-instructor a {
+.course__details .course__details-instructor a,
+.course__details .course__details-instructor a:hover {
   color: var(--purple-light-text);
   text-decoration: underline;
 }
