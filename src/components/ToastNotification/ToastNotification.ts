@@ -9,6 +9,6 @@ export const showNotification = (
   notification[type]({
     message: notificationMessage,
     placement: "topLeft",
-    duration: 4,
+    duration: 5,
   });
 };
