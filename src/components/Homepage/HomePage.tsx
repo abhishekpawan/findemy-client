@@ -10,8 +10,10 @@ import PrevArrow from "../UI_Components/PrevArrow";
 import "./homepage.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import HomePageCourseCardLoader from "./HomePageCourseCardLoader";
+import { showNotification } from "../ToastNotification/ToastNotification";
 
-interface ICourse {
+export interface ICourse {
   _id: string;
   title: string;
   instructor_id: string;
@@ -29,11 +31,12 @@ interface ICourse {
   requirements: string[];
   description: string;
   short_description: string;
-  learning_points: string[];
+  learning_point: string[];
 }
 
 const HomePage = () => {
   const [allCourses, setAllCourses] = useState<ICourse[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(true);
 
   const sliderSettings = {
     slidesToShow: 5,
@@ -87,11 +90,13 @@ const HomePage = () => {
         let response = await axios.get("http://localhost:3001/courses/all");
         if (response.data.success === true) {
           setAllCourses(response.data.allCourses);
+          setLoading(false);
         } else {
           throw new Error("Something went wrong! " + response.status);
         }
-      } catch (error) {
-        console.log(error);
+      } catch (error: any) {
+        setLoading(true);
+        showNotification("error", error.toString());
       }
     };
 
@@ -102,26 +107,44 @@ const HomePage = () => {
     <main className="homepage">
       <div className="homepage__courses ">
         <h2 className="fw-bold mb-5 fs-1"> Students are viewing</h2>
-        <Slider {...sliderSettings}>
-          {allCourses?.map((course: ICourse) => {
-            return (
-              <HomepageCourseCard
-                key={course._id}
-                id={course._id}
-                title={course.title}
-                instructor={course.instructor_name}
-                price={course.original_price}
-                discounted_price={course.discounted_price}
-                rating={course.rating}
-                num_reviews={course.num_reviews}
-                level={course.level}
-                tag={course.tag}
-                category={course.category}
-                thumbnail={course.course_thumbnail}
-              />
-            );
-          })}
-        </Slider>
+        {isLoading ? (
+          <>
+            <div className="d-none d-lg-flex">
+              <HomePageCourseCardLoader />
+              <HomePageCourseCardLoader />
+              <HomePageCourseCardLoader />
+              <HomePageCourseCardLoader />
+            </div>
+            <div className="d-none d-sm-flex d-lg-none">
+              <HomePageCourseCardLoader />
+              <HomePageCourseCardLoader />
+            </div>
+            <div className="d-flex d-sm-none">
+              <HomePageCourseCardLoader />
+            </div>
+          </>
+        ) : (
+          <Slider {...sliderSettings}>
+            {allCourses?.map((course: ICourse) => {
+              return (
+                <HomepageCourseCard
+                  key={course._id}
+                  id={course._id}
+                  title={course.title}
+                  instructor={course.instructor_name}
+                  price={course.original_price}
+                  discounted_price={course.discounted_price}
+                  rating={course.rating}
+                  num_reviews={course.num_reviews}
+                  level={course.level}
+                  tag={course.tag}
+                  category={course.category}
+                  thumbnail={course.course_thumbnail}
+                />
+              );
+            })}
+          </Slider>
+        )}
       </div>
 
       <div className="featured-topics__container ">

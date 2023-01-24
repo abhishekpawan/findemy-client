@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -58,7 +57,7 @@ const Signup = () => {
 
       if (data.success == true) {
         const userInfromation = {
-          id: data.id,
+          id: data._id,
           name: data.name,
           email: data.email,
           token: data.token,

@@ -4,7 +4,7 @@ import "./shoppingcart.css";
 
 const ShoppingCart = () => {
   return (
-    <main className="cart container">
+    <main className="cart container p-4">
       <div className="row">
         <h1 className="fw-bold">Shopping Cart</h1>
         <h3 className="fw-bold fs-4 mt-4 mb-3">3 Course in Cart</h3>

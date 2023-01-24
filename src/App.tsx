@@ -49,9 +49,13 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/coursedetails" element={<CourseDetails />} />
+          <Route path="/coursedetails/:id" element={<CourseDetails />} />
           <Route path="/instructordetails" element={<InstructorDetails />} />
-          <Route path="/cart" element={<ShoppingCart />} />
+          {isUserLoggedIn ? (
+            <Route path="/cart" element={<ShoppingCart />} />
+          ) : (
+            ""
+          )}
           <Route path="/search" element={<SearchScreen />} />
           <Route path="*" element={<HomePage />} />
         </Routes>

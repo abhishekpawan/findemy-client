@@ -5,8 +5,15 @@ import { IoMdPeople } from "react-icons/io";
 import { IoPlayCircle } from "react-icons/io5";
 
 import "./coursedetailsinstructordetails.css";
+import { FC, useEffect } from "react";
 
-export const CourseDetailsInstructorDetails = () => {
+export const CourseDetailsInstructorDetails: FC<{
+  instructor_id?: string;
+}> = (props) => {
+  useEffect(() => {
+    const getInstructorData = async () => {};
+  }, []);
+
   return (
     <div className="course__details_instructor">
       <h2 className="fw-bold mb-4">Instructor</h2>

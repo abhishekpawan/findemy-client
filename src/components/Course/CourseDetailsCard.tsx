@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { BsPlayBtn, BsFileEarmark, BsTrophy } from "react-icons/bs";
 import { HiOutlineFolderDownload, HiOutlineDeviceMobile } from "react-icons/hi";
 import { IoIosInfinite } from "react-icons/io";
@@ -7,14 +7,19 @@ import courseData from "../../data/courses.json";
 
 import "./coursedetails.css";
 
-const CourseDetailsCard = () => {
+const CourseDetailsCard: FC<{
+  course_thumbnail?: string;
+  original_price?: number;
+  discounted_price?: number;
+  buyNowHandler(): void;
+  addToCartHandler(): void;
+}> = (props) => {
   const { isFooterVisible, setIsFooterVisible } = useContext(AppContext);
   const [isScrollingStart, setIsScrollingStart] = useState<Boolean>(false);
-  // const [isFoooter, setIsScrollingStart] = useState<Boolean>(false);
+  const { isUserLoggedIn } = useContext(AppContext);
 
   window.onscroll = function () {
     let scrollLimit = 80;
-    // let footerScrollLimit = document.documentElement.scrollHeight - 1000;
     if (window.scrollY >= scrollLimit) {
       setIsScrollingStart(true);
     } else {
@@ -32,15 +37,15 @@ const CourseDetailsCard = () => {
       <div
         className={`${isScrollingStart ? " " : ""}course__details__card-img `}
       >
-        <img src={courseData[0].thumbnail} alt="" />
+        <img src={props.course_thumbnail} alt="" />
       </div>
       <div className="course__details__card-details">
         <div className="price-details d-flex align-items-center">
           <div className="discounted-price fw-bold fs-1 py-2 me-3">
-            ₹{courseData[0].discounted_price}
+            ₹{props?.discounted_price}
           </div>
           <div className="price me-3 text-decoration-line-through ">
-            ₹{courseData[0].price}
+            ₹{props?.original_price}
           </div>
           <div className="percentage">
             {100 -
@@ -50,10 +55,16 @@ const CourseDetailsCard = () => {
             % off
           </div>
         </div>
-        <div className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3">
+        <div
+          onClick={props.addToCartHandler}
+          className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+        >
           <button className="fw-bold">Add to cart</button>
         </div>
-        <div className="buy_now-btn d-flex justify-content-center align-items-center mb-4">
+        <div
+          onClick={props.buyNowHandler}
+          className="buy_now-btn d-flex justify-content-center align-items-center mb-4"
+        >
           <button className="fw-bold">Buy now</button>
         </div>
         <div className="fs-4 text-center mb-4">30-Day Money-Back Guarantee</div>

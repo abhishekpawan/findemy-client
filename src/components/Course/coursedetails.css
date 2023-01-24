@@ -186,7 +186,8 @@
   }
 
   .course__details__card-details .buy_now-btn:hover {
-    background-color: var(--grey-background);
+    background-color: transparent;
+    filter: brightness(75%);
     cursor: pointer;
   }
   .course__details__card-details .buy_now-btn button {

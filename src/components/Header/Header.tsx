@@ -25,12 +25,9 @@ const Header = () => {
   };
 
   const logoutUser = () => {
+    showNotification("success", "You logged out succesfully!");
     localStorage.removeItem("user");
     setUserLoggedin(false);
-
-    //setting notification popup
-    showNotification("success", "You logged out succesfully!");
-
     navigate("/");
   };
 
@@ -78,7 +75,7 @@ const Header = () => {
         <AiOutlineShoppingCart />
       </div>
       {isUserLoggedIn ? (
-        <div className="position-relative">
+        <div className="position-relative d-none d-md-block">
           <button
             onMouseEnter={() => setUserMenuVisible(true)}
             className="user-profile-btn d-none d-md-block me-3 me-md-0"
