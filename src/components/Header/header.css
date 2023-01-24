@@ -42,16 +42,18 @@ header .my-learning:hover {
 }
 
 header .user-profile {
+  border-bottom: 1px solid var(--light-grey-border);
+}
+
+header .user-profile-btn {
   border: 1px solid var(--black-text);
   border-radius: 50%;
   padding: 1rem 1.3rem;
-  /* width: 5rem;
-  height: 4rem; */
   color: var(--white-text);
   background-color: var(--black-text);
 }
 
-header .user-profile:hover {
+header .user-profile-btn:hover {
   filter: brightness(75%);
 }
 
@@ -59,13 +61,22 @@ header .user-menu {
   display: flex;
   right: 1px;
   top: 6rem;
-  padding: 2rem;
+  /* padding: 2rem; */
   border: 1px solid var(--light-grey-border);
   background-color: var(--white-text);
   box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
 }
 header .user-menu.hidden {
   display: none;
+}
+
+header .user-menu-options a {
+  margin-bottom: 0.8rem;
+  color: var(--black-text);
+}
+
+header .user-menu-options a:hover {
+  color: var(--purple-text);
 }
 header .header__login-btn button {
   height: 4rem;

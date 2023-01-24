@@ -5,8 +5,11 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../App";
-import "./login.css";
 import { showNotification } from "../ToastNotification/ToastNotification";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
+
+import "./login.css";
 
 type Inputs = {
   name: string;
@@ -17,11 +20,15 @@ type Inputs = {
 const Signup = () => {
   const navigate = useNavigate();
   const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
-  const { user, setUser, isUserLoggedIn, setUserLoggedin } =
-    useContext(AppContext);
+  const { setUser, isUserLoggedIn, setUserLoggedin } = useContext(AppContext);
   let email_regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   let password_regex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
 
+  const [isSpinning, setSpining] = useState<boolean>(false);
+
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 34, color: "purple" }} spin />
+  );
   const {
     register,
     handleSubmit,
@@ -36,6 +43,7 @@ const Signup = () => {
   }, [isUserLoggedIn]);
 
   const onSubmit: SubmitHandler<Inputs> = async (signupData) => {
+    setSpining(true);
     try {
       const requestOptions = {
         method: "POST",
@@ -58,6 +66,7 @@ const Signup = () => {
         localStorage.setItem("user", JSON.stringify(userInfromation));
         setUser(userInfromation);
         setUserLoggedin(true);
+        setSpining(false);
 
         showNotification(
           "success",
@@ -68,6 +77,8 @@ const Signup = () => {
         throw new Error(data.message);
       }
     } catch (error: any) {
+      setSpining(false);
+
       showNotification("error", error.toString());
     }
   };
@@ -86,84 +97,86 @@ const Signup = () => {
           </h2>
 
           <div>
-            <form
-              className="d-flex flex-column"
-              onSubmit={handleSubmit(onSubmit)}
-            >
-              <div className="form-floating">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="fullName"
-                  placeholder="Full Name"
-                  {...register("name", {
-                    required: true,
-                    minLength: 6,
-                    maxLength: 20,
-                  })}
-                />
-                <p role="alert">
-                  {errors.name && (
-                    <span className="mb-3 text-danger">
-                      name must be more than 6 characters and less than 20
-                      characters
-                    </span>
-                  )}
-                </p>
-                <label htmlFor="fullName">Full Name</label>
-              </div>
-              <div className="form-floating">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="email"
-                  placeholder="Email"
-                  {...register("email", {
-                    required: true,
-                    pattern: email_regex,
-                  })}
-                />
-                <p role="alert">
-                  {errors.email && (
-                    <span className="mb-3 text-danger">
-                      Please enter a valid email ID!
-                    </span>
-                  )}
-                </p>
-                <label htmlFor="email">Email</label>
-              </div>
+            <Spin indicator={antIcon} spinning={isSpinning}>
+              <form
+                className="d-flex flex-column"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <div className="form-floating">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="fullName"
+                    placeholder="Full Name"
+                    {...register("name", {
+                      required: true,
+                      minLength: 6,
+                      maxLength: 20,
+                    })}
+                  />
+                  <p role="alert">
+                    {errors.name && (
+                      <span className="mb-3 text-danger">
+                        name must be more than 6 characters and less than 20
+                        characters
+                      </span>
+                    )}
+                  </p>
+                  <label htmlFor="fullName">Full Name</label>
+                </div>
+                <div className="form-floating">
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="email"
+                    placeholder="Email"
+                    {...register("email", {
+                      required: true,
+                      pattern: email_regex,
+                    })}
+                  />
+                  <p role="alert">
+                    {errors.email && (
+                      <span className="mb-3 text-danger">
+                        Please enter a valid email ID!
+                      </span>
+                    )}
+                  </p>
+                  <label htmlFor="email">Email</label>
+                </div>
 
-              <div className="form-floating">
-                <input
-                  type={passwordVisible ? "text" : "password"}
-                  className="form-control"
-                  id="password"
-                  placeholder="Password"
-                  {...register("password", {
-                    required: true,
-                    pattern: password_regex,
-                  })}
-                />
-                <p role="alert">
-                  {errors.password && (
-                    <span className="mb-3 text-danger">
-                      password should be min 6 character with MIX of Uppercase,
-                      lowercase, digits and symbols!
-                    </span>
-                  )}
-                </p>
-                <label htmlFor="password">Password</label>
-                <a>
-                  {passwordVisible ? (
-                    <AiFillEyeInvisible onClick={showPassword} />
-                  ) : (
-                    <AiFillEye onClick={showPassword} />
-                  )}
-                </a>
-              </div>
+                <div className="form-floating">
+                  <input
+                    type={passwordVisible ? "text" : "password"}
+                    className="form-control"
+                    id="password"
+                    placeholder="Password"
+                    {...register("password", {
+                      required: true,
+                      pattern: password_regex,
+                    })}
+                  />
+                  <p role="alert">
+                    {errors.password && (
+                      <span className="mb-3 text-danger">
+                        password should be min 6 character with MIX of
+                        Uppercase, lowercase, digits and symbols!
+                      </span>
+                    )}
+                  </p>
+                  <label htmlFor="password">Password</label>
+                  <a>
+                    {passwordVisible ? (
+                      <AiFillEyeInvisible onClick={showPassword} />
+                    ) : (
+                      <AiFillEye onClick={showPassword} />
+                    )}
+                  </a>
+                </div>
 
-              <button>Sign up</button>
-            </form>
+                <button>Sign up</button>
+              </form>
+            </Spin>
             <div className="signup__terms-and-policy mt-3 fs-6 text-center">
               <p>
                 By signing up, you agree to our <u>Terms of Use</u> and{" "}

@@ -81,7 +81,7 @@ const Header = () => {
         <div className="position-relative">
           <button
             onMouseEnter={() => setUserMenuVisible(true)}
-            className="user-profile d-none d-md-block me-3 me-md-0"
+            className="user-profile-btn d-none d-md-block me-3 me-md-0"
           >
             <FaUserAlt />
           </button>
@@ -91,17 +91,23 @@ const Header = () => {
             user-menu flex-column position-absolute`}
             onMouseLeave={() => setUserMenuVisible(false)}
           >
-            <div className="d-flex">
-              <FaUserAlt />
-              <div className="d-flex flex-column">
+            <div className="user-profile d-flex align-items-center justify-content-center p-4 mb-4">
+              <button className="user-profile-btn me-3">
+                <FaUserAlt />
+              </button>
+              <div className="d-flex flex-column fs-5">
                 <div>{user.name}</div>
                 <div>{user.email}</div>
               </div>
             </div>
-            <Link to="/mylearnigs">My Learning</Link>
-            <Link to="/cart">My Cart</Link>
-            <Link to="/help">Help</Link>
-            <a onClick={logoutUser}>Log out</a>
+            <div className="user-menu-options p-4 pt-0 d-flex flex-column">
+              <Link to="/mylearnigs">My Learning</Link>
+              <Link to="/cart">My Cart</Link>
+              <Link to="/help">Help</Link>
+              <a href="" onClick={logoutUser}>
+                Log out
+              </a>
+            </div>
           </div>
         </div>
       ) : (
