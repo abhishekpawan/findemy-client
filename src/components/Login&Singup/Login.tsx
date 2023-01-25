@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm, SubmitHandler } from "react-hook-form";
 import "./login.css";
 import { AppContext } from "../../App";
-import { showNotification } from "../ToastNotification/ToastNotification";
+import { showNotification } from "../../utils/ToastNotification";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 

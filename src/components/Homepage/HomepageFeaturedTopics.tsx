@@ -1,17 +1,6 @@
-import React, { FC } from "react";
+import { FC } from "react";
+import { IFeaturedTopics } from "../../utils/interface";
 import HomepageFeaturedTopicsItem from "./HomepageFeaturedTopicsItem";
-
-export interface ITopics {
-  id: number;
-  category: string;
-  noOfStudents: string;
-}
-
-interface IFeaturedTopics {
-  id: number;
-  field: string;
-  topics: ITopics[];
-}
 
 const HomepageFeaturedTopics: FC<IFeaturedTopics> = (
   props: IFeaturedTopics

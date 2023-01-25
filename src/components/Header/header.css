@@ -32,6 +32,11 @@ header .header__search-bar button {
   left: 1.2rem;
   top: 1.3rem;
 }
+
+header .cart-icon a {
+  color: var(--black-text);
+}
+
 header .my-learning {
   color: var(--black-text);
   min-width: fit-content;
@@ -140,4 +145,10 @@ header .header__nav-icon button {
   align-items: center;
   justify-content: start;
   font-size: 1.8rem;
+}
+
+@media screen and (max-width: 767px) {
+  header .header__logo a img {
+    margin-left: 4rem;
+  }
 }

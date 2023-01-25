@@ -1,20 +1,7 @@
 import { FC, useState } from "react";
 import StarRatings from "react-star-ratings";
 import { useNavigate } from "react-router-dom";
-
-interface ICourseCard {
-  id: string;
-  title: string;
-  instructor: string;
-  price: number;
-  discounted_price: number;
-  rating: number;
-  num_reviews: string;
-  level: string;
-  tag: string;
-  category: string;
-  thumbnail: string;
-}
+import { ICourseCard } from "../../utils/interface";
 
 const HomepageCourseCard: FC<ICourseCard> = (props: ICourseCard) => {
   const navigate = useNavigate();

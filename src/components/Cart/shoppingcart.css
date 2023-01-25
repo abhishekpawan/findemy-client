@@ -2,6 +2,7 @@
 
 .cart {
   min-width: 40rem;
+  min-height: 50vh;
   margin: auto;
   margin: 5rem auto;
   /* padding: 3rem; */
@@ -11,6 +12,10 @@
 .cart .course {
   border-top: 1px solid var(--light-grey-border);
   padding: 1.6rem 0;
+}
+.cart .course:hover {
+  cursor: pointer;
+  filter: brightness(75%);
 }
 
 .cart .course .thumbnail img {

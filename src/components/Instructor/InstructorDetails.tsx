@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { showNotification } from "../ToastNotification/ToastNotification";
-import { InstructorDetails } from "./CourseDetailsInstructorDetails";
+import { InstructorDetails } from "../../utils/interface";
+import { showNotification } from "../../utils/ToastNotification";
 
 import "./instructordetails.css";
 import InstructorDetailsLoader from "./InstructorDetailsLoader";
@@ -20,6 +20,8 @@ const InstructorDetailsPage = () => {
         if (data.success == true) {
           setInstructorDetails(data.instructor);
           setLoading(false);
+        } else {
+          throw new Error(data.message);
         }
       } catch (error: any) {
         showNotification("error", error.toString());

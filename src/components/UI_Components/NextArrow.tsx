@@ -1,11 +1,7 @@
 import React, { FC } from "react";
 import { IoIosArrowForward } from "react-icons/io";
+import { ISlick } from "../../utils/interface";
 import "./arrow.css";
-
-interface ISlick {
-  onClick?: () => void;
-  className?: string;
-}
 
 const NextArrow: FC<ISlick> = (props) => {
   return (

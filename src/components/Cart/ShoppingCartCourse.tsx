@@ -1,56 +1,87 @@
 import courseData from "../../data/courses.json";
 import { BsTagFill } from "react-icons/bs";
 import StarRatings from "react-star-ratings";
-const CartCourse = () => {
+import { FC, useContext, useEffect } from "react";
+import { ICartCourse } from "../../utils/interface";
+import { AppContext } from "../../App";
+import { showNotification } from "../../utils/ToastNotification";
+import { useNavigate } from "react-router-dom";
+
+const CartCourse: FC<{
+  cartDetails: ICartCourse;
+  onDeleteHandler(course_id: string): void;
+}> = (props) => {
+  const navigate = useNavigate();
+  const { user } = useContext(AppContext);
+
   return (
-    <div className="course d-flex flex-column flex-md-row">
-      <div className="thumbnail me-0 me-md-3">
-        <img src={courseData[0].thumbnail} alt="" />
+    <div
+      key={props.cartDetails?._id}
+      className="course d-flex flex-column flex-md-row"
+    >
+      <div
+        onClick={() =>
+          navigate(`/coursedetails/${props.cartDetails?.course_id}`)
+        }
+        className="thumbnail me-0 me-md-3"
+      >
+        <img src={props.cartDetails?.course_thumbnail} alt="" />
         <div className="mt-3 d-block d-md-none">
-          <h3 className="title fw-bold fs-2 mt-3">{courseData[0].title}</h3>
+          <h3 className="title fw-bold fs-2 mt-3">
+            {props.cartDetails?.title}
+          </h3>
 
           <div className="instructot fw-normal fs-4">
-            by {courseData[0].instructor}
+            by {props.cartDetails?.instructor_name}
           </div>
         </div>
       </div>
-      <div className="d-flex flex-column flex-md-row justify-content-between container-fluid">
-        <div className="description ">
+      <div className="p-0 d-flex flex-column flex-md-row justify-content-between container-fluid">
+        <div
+          onClick={() =>
+            navigate(`/coursedetails/${props.cartDetails?.course_id}`)
+          }
+          className="description "
+        >
           <div className="d-none d-md-block">
-            <h3 className="title fw-bold fs-3">{courseData[0].title}</h3>
+            <h3 className="title fw-bold fs-3">{props.cartDetails?.title}</h3>
 
-            <div className="instructot fw-normal fs-5">
-              by {courseData[0].instructor}
+            <div className=" fw-normal fs-5">
+              by {props.cartDetails?.instructor_name}
             </div>
           </div>
-          <div className={`tag__${courseData[0].tag}`}>{courseData[0].tag}</div>
+          <div className={`tag__${props.cartDetails?.tag}`}>
+            {props.cartDetails?.tag}
+          </div>
 
           <div className="rating d-flex align-item-center mb-2 fw-bold fs-4">
-            <span className="rating_num me-2 pt-1">{courseData[0].rating}</span>
+            <span className="rating_num me-2 pt-1">
+              {props.cartDetails?.rating}
+            </span>
 
             <StarRatings
-              rating={courseData[0].rating}
+              rating={props.cartDetails?.rating}
               starDimension="14px"
               starSpacing="0px"
               starRatedColor="orange"
               numberOfStars={5}
             />
             <span className="num_reviews pt-2 fw-normal fs-5 ms-2">
-              ({courseData[0].num_reviews} ratings)
+              ({props.cartDetails?.num_reviews} ratings)
             </span>
           </div>
           <div className="course_details fs-5 d-md-block d-none">
             <span className="me-2">21 hours</span>
             <span className="me-2">110 lectures</span>
-            <span className="me-2">{courseData[0].level}</span>
+            <span className="me-2">{props.cartDetails?.level}</span>
           </div>
           <div className="price d-flex d-md-none align-items-center">
             <span className="mb-2 fw-bold fs-1">
-              ₹{courseData[0].discounted_price}
+              ₹{props.cartDetails?.discounted_price}
             </span>
 
             <span className="normal-price fs-5 mx-2 text-decoration-line-through">
-              ₹{courseData[0].price}
+              ₹{props.cartDetails?.original_price}
             </span>
             <div>
               <BsTagFill />
@@ -61,11 +92,15 @@ const CartCourse = () => {
         <div className="course_details fs-5 d-block d-md-none">
           <span className="me-2">21 hours</span>
           <span className="me-2">110 lectures</span>
-          <span className="me-2">{courseData[0].level}</span>
+          <span className="me-2">{props.cartDetails?.level}</span>
         </div>
         <div className="d-flex">
           <div className="actions fs-5 fs- d-flex flex-md-column align-items-end mt-3 mt-md-1 me-md-5">
-            <a className="me-3 me-md-0 mb-md-3" href="">
+            <a
+              onClick={() => props.onDeleteHandler(props.cartDetails._id)}
+              className="me-3 me-md-0 mb-md-3"
+              href="#"
+            >
               Remove
             </a>
             <a className="me-3 me-md-0 mb-md-3" href="">
@@ -75,11 +110,11 @@ const CartCourse = () => {
           </div>
           <div className="price d-none d-md-flex flex-column align-items-end ">
             <span className="mb-2 fw-bold fs-1">
-              ₹{courseData[0].discounted_price}
+              ₹{props.cartDetails?.discounted_price}
             </span>
 
             <span className="normal-price fs-5 mx-2 text-decoration-line-through">
-              ₹{courseData[0].price}
+              ₹{props.cartDetails?.original_price}
             </span>
             <div>
               <BsTagFill />

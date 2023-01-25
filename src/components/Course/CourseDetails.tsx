@@ -6,10 +6,10 @@ import CourseDetailsCard from "./CourseDetailsCard";
 import { CourseDetailsInstructorDetails } from "../Instructor/CourseDetailsInstructorDetails";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { showNotification } from "../ToastNotification/ToastNotification";
-import { ICourse } from "../Homepage/HomePage";
+import { showNotification } from "../../utils/ToastNotification";
 import CourseDetailsLoader from "./CourseDetailsLoader";
 import { AppContext } from "../../App";
+import { ICourse } from "../../utils/interface";
 
 const CourseDetails = () => {
   const navigate = useNavigate();
@@ -26,6 +26,8 @@ const CourseDetails = () => {
         if (data.success == true) {
           setCourseDetails(data.course);
           setLoading(false);
+        } else {
+          throw new Error(data.message);
         }
       } catch (error: any) {
         showNotification("error", error.toString());
@@ -85,9 +87,11 @@ const CourseDetails = () => {
     }
   };
 
-  // const percentage: number = Math.round(
-  //   (courseDetails?.discounted_price / courseDetails?.original_price) * 100
-  // );
+  const percentage: number =
+    100 -
+    Math.round(
+      (courseDetails?.discounted_price! / courseDetails?.original_price!) * 100
+    );
 
   return (
     <>
@@ -151,7 +155,7 @@ const CourseDetails = () => {
                     <div className="price me-3 text-decoration-line-through">
                       ₹{courseDetails?.original_price}
                     </div>
-                    <div className="percentage">{80}% off</div>
+                    <div className="percentage">{percentage}% off</div>
                   </div>
 
                   <div
@@ -192,25 +196,27 @@ const CourseDetails = () => {
               <div className="learning-points">
                 <h2 className="fw-bold mb-4">What you'll learn</h2>
                 <div className="row">
-                  {courseDetails?.learning_point?.map((learningPoint) => {
-                    return (
-                      <div
-                        key={learningPoint.charCodeAt(0)}
-                        className="item d-flex p-3 col-12 col-md-6"
-                      >
-                        <div>
-                          <AiOutlineCheck />
+                  {courseDetails?.learning_point?.map(
+                    (learningPoint: string) => {
+                      return (
+                        <div
+                          key={learningPoint.charCodeAt(0)}
+                          className="item d-flex p-3 col-12 col-md-6"
+                        >
+                          <div>
+                            <AiOutlineCheck />
+                          </div>
+                          <span className="ms-4">{learningPoint}</span>
                         </div>
-                        <span className="ms-4">{learningPoint}</span>
-                      </div>
-                    );
-                  })}
+                      );
+                    }
+                  )}
                 </div>
               </div>
               <div className="requirements mb-5">
                 <h2 className="fw-bold mb-4">Requirements</h2>
                 <ul>
-                  {courseDetails?.requirements?.map((requirement) => {
+                  {courseDetails?.requirements?.map((requirement: string) => {
                     return (
                       <li key={requirement.charCodeAt(0)}>{requirement}</li>
                     );

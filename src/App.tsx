@@ -39,12 +39,9 @@ function App() {
           setUserLoggedin,
           user,
           setUser,
-          // notificationMessage,
-          // showNotification,
         }}
       >
         <Header />
-        {/* <div className="container"> */}
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<Login />} />
@@ -63,7 +60,6 @@ function App() {
           <Route path="*" element={<HomePage />} />
         </Routes>
         <Footer />
-        {/* </div> */}
       </AppContext.Provider>
     </>
   );

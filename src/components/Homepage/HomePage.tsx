@@ -11,28 +11,8 @@ import "./homepage.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import HomePageCourseCardLoader from "./HomePageCourseCardLoader";
-import { showNotification } from "../ToastNotification/ToastNotification";
-
-export interface ICourse {
-  _id: string;
-  title: string;
-  instructor_id: string;
-  instructor_name: string;
-  original_price: number;
-  discounted_price: number;
-  rating: number;
-  num_students: string;
-  num_reviews: string;
-  level: string;
-  tag: string;
-  category: string;
-  course_thumbnail: string;
-  course_video: string;
-  requirements: string[];
-  description: string;
-  short_description: string;
-  learning_point: string[];
-}
+import { showNotification } from "../../utils/ToastNotification";
+import { ICourse } from "../../utils/interface";
 
 const HomePage = () => {
   const [allCourses, setAllCourses] = useState<ICourse[]>([]);

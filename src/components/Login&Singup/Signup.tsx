@@ -4,7 +4,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { AppContext } from "../../App";
-import { showNotification } from "../ToastNotification/ToastNotification";
+import { showNotification } from "../../utils/ToastNotification";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 

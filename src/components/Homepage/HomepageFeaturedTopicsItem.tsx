@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { ITopics } from "./HomepageFeaturedTopics";
+import { ITopics } from "../../utils/interface";
 
 const HomepageFeaturedTopicsItem: FC<ITopics> = (props: ITopics) => {
   return (

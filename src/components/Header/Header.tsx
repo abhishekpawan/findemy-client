@@ -6,11 +6,11 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { HiBars3 } from "react-icons/hi2";
 import { FaUserAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import FindemyLogo from "../../Assets/img/Findemy.png";
+import FindemyLogo from "../../assets/img/Findemy.png";
 
 import "./header.css";
 import { AppContext } from "../../App";
-import { showNotification } from "../ToastNotification/ToastNotification";
+import { showNotification } from "../../utils/ToastNotification";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -68,11 +68,19 @@ const Header = () => {
         ""
       )}
 
-      <div className="header__cart-icon  d-flex justify-content-center fs-1 px-2 me-3">
+      <div className="header__cart-icon  d-flex justify-content-center align-items-center fs-1 px-2 me-3">
         <div className="d-flex d-md-none pe-4">
           <AiOutlineSearch />
         </div>
-        <AiOutlineShoppingCart />
+        {isUserLoggedIn ? (
+          <div className="cart-icon">
+            <Link to="/cart">
+              <AiOutlineShoppingCart />
+            </Link>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
       {isUserLoggedIn ? (
         <div className="position-relative d-none d-md-block">

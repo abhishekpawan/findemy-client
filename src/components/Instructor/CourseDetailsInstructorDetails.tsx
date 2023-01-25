@@ -6,18 +6,9 @@ import { IoPlayCircle } from "react-icons/io5";
 
 import "./coursedetailsinstructordetails.css";
 import { FC, useEffect, useState } from "react";
-import { showNotification } from "../ToastNotification/ToastNotification";
+import { showNotification } from "../../utils/ToastNotification";
 import { Link } from "react-router-dom";
-
-export interface InstructorDetails {
-  _id: string;
-  name: string;
-  email: string;
-  short_bio: string;
-  about: string;
-  profile_img: string;
-  social_urls: string[];
-}
+import { InstructorDetails } from "../../utils/interface";
 
 export const CourseDetailsInstructorDetails: FC<{
   instructor_id?: string;
@@ -34,6 +25,8 @@ export const CourseDetailsInstructorDetails: FC<{
         let data = await response.json();
         if (data.success == true) {
           setInstructorDetails(data.instructor);
+        } else {
+          throw new Error(data.message);
         }
       } catch (error: any) {
         showNotification("error", error.toString());
