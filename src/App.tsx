@@ -6,20 +6,16 @@ import Footer from "./components/Footer/Footer";
 import Login from "./components/Login&Singup/Login";
 import Signup from "./components/Login&Singup/Signup";
 import CourseDetails from "./components/Course/CourseDetails";
-
-import "./App.css";
 import InstructorDetails from "./components/Instructor/InstructorDetails";
 import ShoppingCart from "./components/Cart/ShoppingCart";
 import SearchScreen from "./components/Search/SearchScreen";
 import MyLearnings from "./components/MyLearnings/MyLearnings";
+import Checkout from "./components/Checkout/Checkout";
+
+import "./App.css";
+import { UserData } from "./utils/interface";
 
 export const AppContext = createContext<any>(null);
-type UserData = {
-  id: string;
-  name: string;
-  email: string;
-  token: string;
-};
 
 function App() {
   const [isFooterVisible, setIsFooterVisible] = useState<boolean>(false);
@@ -56,6 +52,7 @@ function App() {
             <>
               <Route path="/cart" element={<ShoppingCart />} />
               <Route path="/mylearnings" element={<MyLearnings />} />{" "}
+              <Route path="/checkout" element={<Checkout />} />{" "}
             </>
           ) : (
             ""

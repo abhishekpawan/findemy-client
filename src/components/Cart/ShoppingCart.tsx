@@ -7,6 +7,7 @@ import { showNotification } from "../../utils/ToastNotification";
 import { ICartCourse } from "../../utils/interface";
 import ShopingCartLoader from "./ShopingCartLoader";
 import EmptyCart from "./EmptyCart";
+import { Link } from "react-router-dom";
 
 const ShoppingCart = () => {
   const { user } = useContext(AppContext);
@@ -120,9 +121,12 @@ const ShoppingCart = () => {
                       ₹{totalOriginalPrice}
                     </div>
                     <div className="mb-3 fs-5">{totalPercentageOff}% off</div>
-                    <div className="checkout-btn d-flex justify-content-center align-items-center ">
+                    <Link
+                      to="/checkout"
+                      className="checkout-btn d-flex justify-content-center align-items-center "
+                    >
                       <button className="fw-bold ">Checkout</button>
-                    </div>
+                    </Link>
                   </div>
                 </div>
               </div>

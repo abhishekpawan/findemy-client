@@ -1,15 +1,15 @@
+import React, { useContext, useEffect, useState } from "react";
 import StarRatings from "react-star-ratings";
+import { useNavigate, useParams } from "react-router-dom";
 import { BsPatchExclamationFill } from "react-icons/bs";
 import { TbWorld } from "react-icons/tb";
 import { AiOutlineCheck } from "react-icons/ai";
 import CourseDetailsCard from "./CourseDetailsCard";
 import { CourseDetailsInstructorDetails } from "../Instructor/CourseDetailsInstructorDetails";
-import { useNavigate, useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { showNotification } from "../../utils/ToastNotification";
 import CourseDetailsLoader from "./CourseDetailsLoader";
 import { AppContext } from "../../App";
-import { ICourse } from "../../utils/interface";
+import { showNotification } from "../../utils/ToastNotification";
+import { ICartCourse, ICourse } from "../../utils/interface";
 
 const CourseDetails = () => {
   const navigate = useNavigate();
@@ -17,8 +17,13 @@ const CourseDetails = () => {
   const { isUserLoggedIn, user } = useContext(AppContext);
   const [courseDetails, setCourseDetails] = useState<ICourse>();
   const [isLoading, setLoading] = useState<boolean>(true);
+  const [cartCourses, setcartCourses] = useState<ICartCourse[]>([]);
+  const [isCourseAddedToCart, setCourseAddedToCart] = useState<boolean>(false);
+  const [isCoursePurchases, setCoursePurchases] = useState<boolean>(true);
+  let courseExistInCart;
 
   useEffect(() => {
+    //Getting course details
     const getCourseDetail = async () => {
       try {
         let response = await fetch(`http://localhost:3001/courses/${id}`);
@@ -36,6 +41,7 @@ const CourseDetails = () => {
     getCourseDetail();
   }, []);
 
+  //adding course to cart
   const addCourseToCart = async () => {
     const CourseDataForCart = {
       ...courseDetails,
@@ -55,7 +61,9 @@ const CourseDetails = () => {
       const data = await response.json();
       if (data.success === true) {
         showNotification("success", "Course added to cart!");
+        setCourseAddedToCart(true);
       } else {
+        setCourseAddedToCart(false);
         throw new Error(data.message);
       }
       // console.log(body);
@@ -63,6 +71,43 @@ const CourseDetails = () => {
       showNotification("error", error.message.toString());
     }
   };
+
+  //checking if course is added to cart
+
+  useEffect(() => {
+    const getCartCourses = async () => {
+      try {
+        let response = await fetch(
+          `http://localhost:3001/cart/user/${user.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user?.token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        let data = await response.json();
+        if (data.success == true) {
+          setcartCourses(data.cartCourse);
+        } else {
+          throw new Error(data.message);
+        }
+      } catch (error: any) {
+        showNotification("error", error.toString());
+        setLoading(false);
+      }
+    };
+    getCartCourses();
+  }, []);
+  courseExistInCart = cartCourses.filter((cartCourse: ICartCourse) => {
+    return cartCourse.course_id === courseDetails?._id;
+  });
+
+  useEffect(() => {
+    if (courseExistInCart.length > 0) {
+      setCourseAddedToCart(true);
+    }
+  }, [courseExistInCart]);
 
   const addToCartHandler = () => {
     if (isUserLoggedIn === false) {
@@ -158,18 +203,30 @@ const CourseDetails = () => {
                     <div className="percentage">{percentage}% off</div>
                   </div>
 
-                  <div
-                    onClick={addToCartHandler}
-                    className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
-                  >
-                    <button className="fw-bold">Add to cart</button>
-                  </div>
-                  <div
-                    onClick={buyNowHandler}
-                    className="buy_now-btn d-flex justify-content-center align-items-center mb-4"
-                  >
-                    <button className="fw-bold">Buy now</button>
-                  </div>
+                  {isCourseAddedToCart ? (
+                    <div
+                      onClick={() => navigate("/cart")}
+                      className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+                    >
+                      <button className="fw-bold">Go to Cart</button>
+                    </div>
+                  ) : (
+                    <>
+                      <div
+                        onClick={addToCartHandler}
+                        className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+                      >
+                        <button className="fw-bold">Add to cart</button>
+                      </div>
+                      <div
+                        onClick={buyNowHandler}
+                        className="buy_now-btn d-flex justify-content-center align-items-center mb-4"
+                      >
+                        <button className="fw-bold">Buy now</button>
+                      </div>
+                    </>
+                  )}
+
                   <div className="fs-4 text-center mb-4">
                     30-Day Money-Back Guarantee <br /> <br />
                     Full Lifetime Access
@@ -183,6 +240,7 @@ const CourseDetails = () => {
                 </div>
               </div>
               <CourseDetailsCard
+                isCourseAddedToCart={isCourseAddedToCart}
                 course_thumbnail={courseDetails?.course_thumbnail}
                 discounted_price={courseDetails?.discounted_price}
                 original_price={courseDetails?.original_price}

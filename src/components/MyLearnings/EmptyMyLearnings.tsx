@@ -13,7 +13,7 @@ const EmptyMyLearnings = () => {
   };
   return (
     <div className="emptymylearning-courses d-flex flex-column justify-content-center align-items-center p-2">
-      <Lottie options={defaultOptions} height={240} width={400} />
+      <Lottie options={defaultOptions} width={280} />
       <p className="mt-3 fw-bold">
         Start learning from over 213,000 courses today.
       </p>

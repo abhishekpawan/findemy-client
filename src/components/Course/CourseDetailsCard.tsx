@@ -2,21 +2,23 @@ import { FC, useContext, useEffect, useState } from "react";
 import { BsPlayBtn, BsFileEarmark, BsTrophy } from "react-icons/bs";
 import { HiOutlineFolderDownload, HiOutlineDeviceMobile } from "react-icons/hi";
 import { IoIosInfinite } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
 import courseData from "../../data/courses.json";
 
 import "./coursedetails.css";
 
 const CourseDetailsCard: FC<{
+  isCourseAddedToCart?: boolean;
   course_thumbnail?: string;
   original_price?: number;
   discounted_price?: number;
   buyNowHandler(): void;
   addToCartHandler(): void;
 }> = (props) => {
+  const navigate = useNavigate();
   const { isFooterVisible, setIsFooterVisible } = useContext(AppContext);
   const [isScrollingStart, setIsScrollingStart] = useState<Boolean>(false);
-  const { isUserLoggedIn } = useContext(AppContext);
 
   window.onscroll = function () {
     let scrollLimit = 80;
@@ -55,18 +57,30 @@ const CourseDetailsCard: FC<{
             % off
           </div>
         </div>
-        <div
-          onClick={props.addToCartHandler}
-          className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
-        >
-          <button className="fw-bold">Add to cart</button>
-        </div>
-        <div
-          onClick={props.buyNowHandler}
-          className="buy_now-btn d-flex justify-content-center align-items-center mb-4"
-        >
-          <button className="fw-bold">Buy now</button>
-        </div>
+        {props.isCourseAddedToCart ? (
+          <div
+            onClick={() => navigate("/cart")}
+            className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+          >
+            <button className="fw-bold">Go to cart</button>
+          </div>
+        ) : (
+          <>
+            <div
+              onClick={props.addToCartHandler}
+              className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+            >
+              <button className="fw-bold">Add to cart</button>
+            </div>
+            <div
+              onClick={props.buyNowHandler}
+              className="buy_now-btn d-flex justify-content-center align-items-center mb-4"
+            >
+              <button className="fw-bold">Buy now</button>
+            </div>
+          </>
+        )}
+
         <div className="fs-4 text-center mb-4">30-Day Money-Back Guarantee</div>
         <div className="course__includes">
           <h2 className="fw-bold fs-3">This course includes:</h2>

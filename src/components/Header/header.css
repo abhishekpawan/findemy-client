@@ -5,7 +5,7 @@ header {
   /* width: 100%; */
   background-color: var(--white-text);
   top: 0;
-  z-index: 50;
+  z-index: 11;
   min-width: 40rem;
   height: 7.2rem;
   box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
@@ -151,4 +151,61 @@ header .header__nav-icon button {
   header .header__logo a img {
     margin-left: 4rem;
   }
+}
+
+/* mobile navbar */
+.side-navbar-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 16;
+  opacity: 0.5;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  transition: opacity 0.15s linear;
+}
+
+.side-navbar {
+  z-index: 17;
+  position: absolute;
+  left: 0rem;
+  top: 0rem;
+  margin-left: -400px;
+  width: 280px;
+  height: 100vh;
+  background-color: var(--white-text);
+  transition: 0.5s;
+}
+
+.active {
+  margin-left: 0;
+}
+
+.side-navbar .navbar-close-btn {
+  font-size: 2.4rem;
+  border-radius: 50%;
+  padding: 1rem;
+  position: absolute;
+  right: -5.5rem;
+  top: 1rem;
+  background-color: var(--white-text);
+  transform: scale(0);
+  transition: transform 150ms cubic-bezier(0.2, 0, 1, 0.9);
+}
+
+.side-navbar.active .navbar-close-btn {
+  transform: scale(1);
+  transition: transform 100ms cubic-bezier(0, 0, 0.38, 0.9) 400ms;
+}
+
+.side-navbar .user-profile {
+  background-color: #f7f9fa;
+}
+.side-navbar .user-profile span {
+  color: var(--light-grey-text);
+}
+.side-navbar .user-profile-btn {
+  font-size: 2rem;
+  padding: 2rem;
 }
