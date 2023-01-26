@@ -65,22 +65,22 @@ const HomePage = () => {
   };
 
   useEffect(() => {
-    const signup = async () => {
+    const getAllCourses = async () => {
       try {
-        let response = await axios.get("http://localhost:3001/courses/all");
-        if (response.data.success === true) {
-          setAllCourses(response.data.allCourses);
+        let response = await fetch("http://localhost:3001/courses/all");
+        let data = await response.json();
+        if (data.success == true) {
+          setAllCourses(data.allCourses);
           setLoading(false);
         } else {
-          throw new Error("Something went wrong! " + response.status);
+          throw new Error(data.message);
         }
       } catch (error: any) {
-        setLoading(true);
         showNotification("error", error.toString());
+        setLoading(false);
       }
     };
-
-    signup();
+    getAllCourses();
   }, []);
 
   return (
@@ -88,21 +88,7 @@ const HomePage = () => {
       <div className="homepage__courses ">
         <h2 className="fw-bold mb-5 fs-1"> Students are viewing</h2>
         {isLoading ? (
-          <>
-            <div className="d-none d-lg-flex">
-              <HomePageCourseCardLoader />
-              <HomePageCourseCardLoader />
-              <HomePageCourseCardLoader />
-              <HomePageCourseCardLoader />
-            </div>
-            <div className="d-none d-sm-flex d-lg-none">
-              <HomePageCourseCardLoader />
-              <HomePageCourseCardLoader />
-            </div>
-            <div className="d-flex d-sm-none">
-              <HomePageCourseCardLoader />
-            </div>
-          </>
+          <HomePageCourseCardLoader />
         ) : (
           <Slider {...sliderSettings}>
             {allCourses?.map((course: ICourse) => {

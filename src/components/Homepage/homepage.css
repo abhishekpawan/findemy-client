@@ -11,7 +11,7 @@
   min-width: 40rem;
 }
 
-.homepage__courses .course__card {
+.course__card {
   max-width: 37.5rem;
   min-width: 17.3rem;
   cursor: pointer;
@@ -20,7 +20,7 @@
 .course__card-img img {
   width: 100%;
 }
-.homepage__courses .course__card:hover .course__card-img img {
+.course__card:hover .course__card-img img {
   filter: brightness(75%);
 }
 

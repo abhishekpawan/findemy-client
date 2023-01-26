@@ -5,7 +5,6 @@
   min-height: 50vh;
   margin: auto;
   margin: 5rem auto;
-  /* padding: 3rem; */
   max-width: 134rem;
 }
 
@@ -50,6 +49,25 @@
 
 .cart .total-prices .checkout-btn button {
   color: var(--white-text);
+}
+
+.cart .empty-cart {
+  border: 1px solid var(--light-grey-border);
+  padding: 4rem;
+}
+
+.cart .keep-shopping-btn button {
+  height: 4.8rem;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  padding: 0 1.2rem;
+  background: var(--purple-button-background);
+  color: white;
+}
+
+.cart .keep-shopping-btn button:hover {
+  background-color: var(--purple-button-background-hover);
 }
 @media screen and (min-width: 768px) {
   .cart .course .thumbnail {

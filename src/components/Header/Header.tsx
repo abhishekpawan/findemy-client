@@ -59,7 +59,7 @@ const Header = () => {
       </div>
       {isUserLoggedIn ? (
         <Link
-          to="/mylearnigs"
+          to="/mylearnings"
           className="my-learning px-2 fs-4 d-none d-md-block"
         >
           My Learnings
@@ -106,7 +106,7 @@ const Header = () => {
               </div>
             </div>
             <div className="user-menu-options p-4 pt-0 d-flex flex-column">
-              <Link to="/mylearnigs">My Learning</Link>
+              <Link to="/mylearnings">My Learning</Link>
               <Link to="/cart">My Cart</Link>
               <Link to="/help">Help</Link>
               <a href="" onClick={logoutUser}>

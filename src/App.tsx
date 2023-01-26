@@ -11,6 +11,7 @@ import "./App.css";
 import InstructorDetails from "./components/Instructor/InstructorDetails";
 import ShoppingCart from "./components/Cart/ShoppingCart";
 import SearchScreen from "./components/Search/SearchScreen";
+import MyLearnings from "./components/MyLearnings/MyLearnings";
 
 export const AppContext = createContext<any>(null);
 type UserData = {
@@ -52,7 +53,10 @@ function App() {
             element={<InstructorDetails />}
           />
           {isUserLoggedIn ? (
-            <Route path="/cart" element={<ShoppingCart />} />
+            <>
+              <Route path="/cart" element={<ShoppingCart />} />
+              <Route path="/mylearnings" element={<MyLearnings />} />{" "}
+            </>
           ) : (
             ""
           )}
