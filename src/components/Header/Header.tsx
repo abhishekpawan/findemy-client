@@ -17,6 +17,8 @@ const Header = () => {
   const { isUserLoggedIn, setUserLoggedin, user } = useContext(AppContext);
   const [isUserMenuVisible, setUserMenuVisible] = useState<boolean>(false);
   const [isMobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
+  const [isMobileSearchVisible, setMobileSearchVisible] =
+    useState<boolean>(false);
 
   const loginHandler = () => {
     navigate("/login");
@@ -160,7 +162,10 @@ const Header = () => {
       )}
 
       <div className="header__cart-icon  d-flex justify-content-center align-items-center fs-1 px-2 me-3">
-        <div className="d-flex d-md-none pe-4">
+        <div
+          className="d-flex d-md-none pe-4 pt-2"
+          onClick={() => setMobileSearchVisible(true)}
+        >
           <AiOutlineSearch />
         </div>
         {isUserLoggedIn ? (
@@ -173,6 +178,35 @@ const Header = () => {
           ""
         )}
       </div>
+      {isMobileSearchVisible ? (
+        <div className="mobile-search d-block d-md-none">
+          <div className="search-bar position-relative d-flex justify-content-center">
+            <button
+              className="search-btn position-absolute d-flex justify-content-center fs-2"
+              aria-label="search"
+            >
+              <AiOutlineSearch />
+            </button>
+            <input
+              type="text"
+              placeholder="Search for anything"
+              aria-label="search"
+              className="fs-5"
+            />
+            <button
+              onClick={() => setMobileSearchVisible(false)}
+              type="button"
+              className="search-close-btn fs-2 mt-1 p-3 d-flex justify-content-center align-items-center"
+              aria-label="Close"
+            >
+              <IoMdClose />
+            </button>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+
       {isUserLoggedIn ? (
         <div className="position-relative d-none d-md-block">
           <button

@@ -209,3 +209,41 @@ header .header__nav-icon button {
   font-size: 2rem;
   padding: 2rem;
 }
+
+/* mobile search page */
+.mobile-search {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--white-text);
+  min-width: 40rem;
+}
+
+.mobile-search .search-bar {
+  width: 100%;
+  min-width: 40rem;
+  height: 4.6rem;
+}
+
+.mobile-search .search-bar input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid var(--light-grey-border);
+  padding: 0 2.4rem 0 4rem;
+}
+.mobile-search .search-bar input:focus {
+  outline: none;
+}
+
+.mobile-search .search-bar .search-btn {
+  left: 1.2rem;
+  top: 1.3rem;
+}
+
+.mobile-search .search-close-btn {
+  position: absolute;
+  width: fit-content;
+  right: 0rem;
+}
