@@ -92,22 +92,7 @@ const HomePage = () => {
         ) : (
           <Slider {...sliderSettings}>
             {allCourses?.map((course: ICourse) => {
-              return (
-                <HomepageCourseCard
-                  key={course._id}
-                  id={course._id}
-                  title={course.title}
-                  instructor={course.instructor_name}
-                  price={course.original_price}
-                  discounted_price={course.discounted_price}
-                  rating={course.rating}
-                  num_reviews={course.num_reviews}
-                  level={course.level}
-                  tag={course.tag}
-                  category={course.category}
-                  thumbnail={course.course_thumbnail}
-                />
-              );
+              return <HomepageCourseCard key={course._id} course={course} />;
             })}
           </Slider>
         )}

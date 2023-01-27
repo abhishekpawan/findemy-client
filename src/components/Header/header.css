@@ -164,6 +164,7 @@ header .header__nav-icon button {
   height: 100vh;
   background-color: #000;
   transition: opacity 0.15s linear;
+  min-width: 40rem;
 }
 
 .side-navbar {

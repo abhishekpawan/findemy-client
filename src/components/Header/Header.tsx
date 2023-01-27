@@ -15,6 +15,7 @@ import { showNotification } from "../../utils/ToastNotification";
 const Header = () => {
   const navigate = useNavigate();
   const { isUserLoggedIn, setUserLoggedin, user } = useContext(AppContext);
+  const [searchText, setSearchText] = useState<string>();
   const [isUserMenuVisible, setUserMenuVisible] = useState<boolean>(false);
   const [isMobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
   const [isMobileSearchVisible, setMobileSearchVisible] =
@@ -48,7 +49,7 @@ const Header = () => {
       {isMobileNavVisible ? (
         <div
           onClick={() => setMobileNavVisible(false)}
-          className="side-navbar-backdrop"
+          className="side-navbar-backdrop d-block d-md-none"
         ></div>
       ) : (
         ""
@@ -140,6 +141,7 @@ const Header = () => {
         <button
           className="position-absolute d-flex justify-content-center fs-2"
           aria-label="search"
+          onClick={() => navigate(`/search/${searchText}`)}
         >
           <AiOutlineSearch />
         </button>
@@ -148,6 +150,10 @@ const Header = () => {
           placeholder="Search for anything"
           aria-label="search"
           className="fs-5"
+          onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") navigate(`/search/${searchText}`);
+          }}
         />
       </div>
       {isUserLoggedIn ? (
@@ -184,6 +190,10 @@ const Header = () => {
             <button
               className="search-btn position-absolute d-flex justify-content-center fs-2"
               aria-label="search"
+              onClick={() => {
+                navigate(`/search/${searchText}`);
+                setMobileSearchVisible(false);
+              }}
             >
               <AiOutlineSearch />
             </button>
@@ -192,6 +202,13 @@ const Header = () => {
               placeholder="Search for anything"
               aria-label="search"
               className="fs-5"
+              onChange={(e) => setSearchText(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  navigate(`/search/${searchText}`);
+                  setMobileSearchVisible(false);
+                }
+              }}
             />
             <button
               onClick={() => setMobileSearchVisible(false)}

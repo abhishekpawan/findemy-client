@@ -26,19 +26,19 @@ export interface ICourse {
   learning_point: string[];
 }
 
-export interface ICourseCard {
-  id: string;
-  title: string;
-  instructor: string;
-  price: number;
-  discounted_price: number;
-  rating: number;
-  num_reviews: string;
-  level: string;
-  tag: string;
-  category: string;
-  thumbnail: string;
-}
+// export interface ICourseCard {
+//   id: string;
+//   title: string;
+//   instructor: string;
+//   price: number;
+//   discounted_price: number;
+//   rating: number;
+//   num_reviews: string;
+//   level: string;
+//   tag: string;
+//   category: string;
+//   thumbnail: string;
+// }
 
 export interface ICartCourse extends ICourse {
   user_id: string;

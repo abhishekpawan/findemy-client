@@ -20,20 +20,18 @@ export const CourseDetailsInstructorDetails: FC<{
     const getInstructorData = async () => {
       try {
         let response = await fetch(
-          `http://localhost:3001/instructors/${props.instructor_id}`
+          `http://localhost:3001/instructors/${props?.instructor_id}`
         );
         let data = await response.json();
         if (data.success == true) {
           setInstructorDetails(data.instructor);
-        } else {
-          throw new Error(data.message);
         }
-      } catch (error: any) {
-        showNotification("error", error.toString());
+      } catch (error) {
+        // showNotification("error", error.toString());
       }
     };
     getInstructorData();
-  }, []);
+  }, [props?.instructor_id]);
 
   return (
     <div className="course__details_instructor" id="course__details_instructor">

@@ -11,6 +11,10 @@ const InstructorDetailsPage = () => {
   const [instructorDetails, setInstructorDetails] =
     useState<InstructorDetails>();
   const [isLoading, setLoading] = useState<boolean>(true);
+  const regex = new RegExp(
+    "(http://www.|https://www.|https://|http://)(\\w+)",
+    "gm"
+  );
 
   useEffect(() => {
     const getInstructorData = async () => {
@@ -71,7 +75,19 @@ const InstructorDetailsPage = () => {
                 </div>
                 <div className="social-btn d-none d-md-flex flex-column align-items-center ">
                   {instructorDetails?.social_urls.map((social_url: string) => {
-                    return <button key={social_url}>{social_url}</button>;
+                    let m;
+                    let result;
+                    while ((m = regex.exec(social_url!)) !== null) {
+                      if (m.index === regex.lastIndex) {
+                        regex.lastIndex++;
+                      }
+                      result = m[2];
+                    }
+                    return (
+                      <a key={social_url} target="_blank" href={social_url}>
+                        {result}
+                      </a>
+                    );
                   })}
                 </div>
               </div>

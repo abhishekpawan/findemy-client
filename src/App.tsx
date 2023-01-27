@@ -57,7 +57,7 @@ function App() {
           ) : (
             ""
           )}
-          <Route path="/search" element={<SearchScreen />} />
+          <Route path="/search/:text" element={<SearchScreen />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
         <Footer />

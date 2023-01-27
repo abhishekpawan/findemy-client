@@ -78,7 +78,7 @@ const CourseDetails = () => {
     const getCartCourses = async () => {
       try {
         let response = await fetch(
-          `http://localhost:3001/cart/user/${user.id}`,
+          `http://localhost:3001/cart/user/${user?.id}`,
           {
             headers: {
               Authorization: `Bearer ${user?.token}`,
@@ -89,11 +89,8 @@ const CourseDetails = () => {
         let data = await response.json();
         if (data.success == true) {
           setcartCourses(data.cartCourse);
-        } else {
-          throw new Error(data.message);
         }
       } catch (error: any) {
-        showNotification("error", error.toString());
         setLoading(false);
       }
     };

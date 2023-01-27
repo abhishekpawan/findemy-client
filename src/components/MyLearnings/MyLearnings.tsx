@@ -60,20 +60,7 @@ const MyLearnings = () => {
                 {boughtCourses?.map((course: ICartCourse) => {
                   return (
                     <div className="col-12 col-md-4 col-lg-3">
-                      <HomepageCourseCard
-                        key={course._id}
-                        id={course.course_id}
-                        title={course.title}
-                        instructor={course.instructor_name}
-                        price={course.original_price}
-                        discounted_price={course.discounted_price}
-                        rating={course.rating}
-                        num_reviews={course.num_reviews}
-                        level={course.level}
-                        tag={course.tag}
-                        category={course.category}
-                        thumbnail={course.course_thumbnail}
-                      />
+                      <HomepageCourseCard course={course} />
                     </div>
                   );
                 })}
