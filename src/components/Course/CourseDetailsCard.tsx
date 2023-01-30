@@ -52,7 +52,7 @@ const CourseDetailsCard: FC<{
           <div className="percentage">
             {100 -
               Math.round(
-                (courseData[0].discounted_price / courseData[0].price) * 100
+                (props?.discounted_price! / props?.original_price!) * 100
               )}
             % off
           </div>

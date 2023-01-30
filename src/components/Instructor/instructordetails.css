@@ -19,7 +19,13 @@
   color: var(--light-grey-text);
 }
 
-.instructor__social .social-btn {
+.instructor__social .social-btn a {
+  border: 1px solid var(--black-text);
   width: 20rem;
   height: 4.8rem;
+  margin-bottom: 1.4rem;
+  color: var(--black-text);
+}
+.instructor__social .social-btn a:hover {
+  background-color: var(--grey-background);
 }

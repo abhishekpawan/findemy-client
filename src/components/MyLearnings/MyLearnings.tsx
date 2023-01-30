@@ -56,15 +56,16 @@ const MyLearnings = () => {
             <EmptyMyLearnings />
           ) : (
             <div className="mylearning-courses row">
-              <div className="col-12">
-                {boughtCourses?.map((course: ICartCourse) => {
-                  return (
-                    <div className="col-12 col-md-4 col-lg-3">
-                      <HomepageCourseCard course={course} />
-                    </div>
-                  );
-                })}
-              </div>
+              {boughtCourses?.map((course: ICartCourse) => {
+                return (
+                  <div
+                    key={course._id}
+                    className="col-12 col-md-6 col-lg-3 mt-4"
+                  >
+                    <HomepageCourseCard course={course} />
+                  </div>
+                );
+              })}
             </div>
           )}
         </main>

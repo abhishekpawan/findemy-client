@@ -84,7 +84,12 @@ const InstructorDetailsPage = () => {
                       result = m[2];
                     }
                     return (
-                      <a key={social_url} target="_blank" href={social_url}>
+                      <a
+                        key={social_url}
+                        className="d-flex fw-bold align-items-center justify-content-center"
+                        target="_blank"
+                        href={social_url}
+                      >
                         {result}
                       </a>
                     );

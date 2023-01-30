@@ -1,8 +1,6 @@
 import { useState, createContext, useRef } from "react";
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header/Header";
 import HomePage from "./components/Homepage/HomePage";
-import Footer from "./components/Footer/Footer";
 import Login from "./components/Login&Singup/Login";
 import Signup from "./components/Login&Singup/Signup";
 import CourseDetails from "./components/Course/CourseDetails";
@@ -14,6 +12,8 @@ import Checkout from "./components/Checkout/Checkout";
 
 import "./App.css";
 import { UserData } from "./utils/interface";
+import Layout1 from "./Layouts/Layout1";
+import CheckoutSuccess from "./components/Checkout/CheckoutSuccess";
 
 export const AppContext = createContext<any>(null);
 
@@ -38,29 +38,30 @@ function App() {
           setUser,
         }}
       >
-        <Header />
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/coursedetails/:id" element={<CourseDetails />} />
-          <Route
-            path="/instructordetails/:id"
-            element={<InstructorDetails />}
-          />
-          {isUserLoggedIn ? (
-            <>
-              <Route path="/cart" element={<ShoppingCart />} />
-              <Route path="/mylearnings" element={<MyLearnings />} />{" "}
-              <Route path="/checkout" element={<Checkout />} />{" "}
-            </>
-          ) : (
-            ""
-          )}
-          <Route path="/search/:text" element={<SearchScreen />} />
-          <Route path="*" element={<HomePage />} />
+          <Route path="/" element={<Layout1 />}>
+            <Route path="" element={<HomePage />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="coursedetails/:id" element={<CourseDetails />} />
+            <Route
+              path="instructordetails/:id"
+              element={<InstructorDetails />}
+            />
+            {isUserLoggedIn ? (
+              <>
+                <Route path="cart" element={<ShoppingCart />} />
+                <Route path="mylearnings" element={<MyLearnings />} />
+              </>
+            ) : (
+              ""
+            )}
+            <Route path="search/:text" element={<SearchScreen />} />
+            <Route path="*" element={<HomePage />} />
+          </Route>
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout/success" element={<CheckoutSuccess />} />
         </Routes>
-        <Footer />
       </AppContext.Provider>
     </>
   );

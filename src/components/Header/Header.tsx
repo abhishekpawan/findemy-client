@@ -184,6 +184,7 @@ const Header = () => {
           ""
         )}
       </div>
+      
       {isMobileSearchVisible ? (
         <div className="mobile-search d-block d-md-none">
           <div className="search-bar position-relative d-flex justify-content-center">

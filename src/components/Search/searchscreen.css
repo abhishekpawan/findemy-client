@@ -84,12 +84,12 @@
 }
 
 /* Search screen accordian styling */
-.accordion-item {
+.search .accordion-item {
   border: none;
 }
 
-.accordion-button:not(.collapsed),
-.accordion-button.collapsed {
+.search .accordion-button:not(.collapsed),
+.search .accordion-button.collapsed {
   color: var(--black-text);
   background-color: white;
   box-shadow: none;
@@ -99,7 +99,7 @@
   /* border-top: 1px solid var(--light-grey-border); */
 }
 
-.accordion-button:not(.collapsed)::after,
-.accordion-button.collapsed::after {
+.search .accordion-button:not(.collapsed)::after,
+.search .accordion-button.collapsed::after {
   color: var(--black-text);
 }
