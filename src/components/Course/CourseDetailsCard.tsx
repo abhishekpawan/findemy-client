@@ -10,6 +10,7 @@ import "./coursedetails.css";
 
 const CourseDetailsCard: FC<{
   isCourseAddedToCart?: boolean;
+  isCoursePurchased?: boolean;
   course_thumbnail?: string;
   original_price?: number;
   discounted_price?: number;
@@ -42,46 +43,60 @@ const CourseDetailsCard: FC<{
         <img src={props.course_thumbnail} alt="" />
       </div>
       <div className="course__details__card-details">
-        <div className="price-details d-flex align-items-center">
-          <div className="discounted-price fw-bold fs-1 py-2 me-3">
-            ₹{props?.discounted_price}
-          </div>
-          <div className="price me-3 text-decoration-line-through ">
-            ₹{props?.original_price}
-          </div>
-          <div className="percentage">
-            {100 -
-              Math.round(
-                (props?.discounted_price! / props?.original_price!) * 100
-              )}
-            % off
-          </div>
-        </div>
-        {props.isCourseAddedToCart ? (
-          <div
-            onClick={() => navigate("/cart")}
-            className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
-          >
-            <button className="fw-bold">Go to cart</button>
-          </div>
+        {props.isCoursePurchased ? (
+          <>
+            <div className="fs-3 fw-bold text-center mb-4">
+              You have enrolled in this Course!
+            </div>
+            <div className="fs-4 text-center mb-4">Start Learning Now!</div>
+          </>
         ) : (
           <>
-            <div
-              onClick={props.addToCartHandler}
-              className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
-            >
-              <button className="fw-bold">Add to cart</button>
+            {" "}
+            <div className="price-details d-flex align-items-center">
+              <div className="discounted-price fw-bold fs-1 py-2 me-3">
+                ₹{props?.discounted_price}
+              </div>
+              <div className="price me-3 text-decoration-line-through ">
+                ₹{props?.original_price}
+              </div>
+              <div className="percentage">
+                {100 -
+                  Math.round(
+                    (props?.discounted_price! / props?.original_price!) * 100
+                  )}
+                % off
+              </div>
             </div>
-            <div
-              onClick={props.buyNowHandler}
-              className="buy_now-btn d-flex justify-content-center align-items-center mb-4"
-            >
-              <button className="fw-bold">Buy now</button>
+            {props.isCourseAddedToCart ? (
+              <div
+                onClick={() => navigate("/cart")}
+                className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+              >
+                <button className="fw-bold">Go to cart</button>
+              </div>
+            ) : (
+              <>
+                <div
+                  onClick={props.addToCartHandler}
+                  className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+                >
+                  <button className="fw-bold">Add to cart</button>
+                </div>
+                <div
+                  onClick={props.buyNowHandler}
+                  className="buy_now-btn d-flex justify-content-center align-items-center mb-4"
+                >
+                  <button className="fw-bold">Buy now</button>
+                </div>
+              </>
+            )}
+            <div className="fs-4 text-center mb-4">
+              30-Day Money-Back Guarantee
             </div>
           </>
         )}
 
-        <div className="fs-4 text-center mb-4">30-Day Money-Back Guarantee</div>
         <div className="course__includes">
           <h2 className="fw-bold fs-3">This course includes:</h2>
           <ul>

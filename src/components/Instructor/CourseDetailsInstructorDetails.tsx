@@ -8,13 +8,16 @@ import "./coursedetailsinstructordetails.css";
 import { FC, useEffect, useState } from "react";
 import { showNotification } from "../../utils/ToastNotification";
 import { Link } from "react-router-dom";
-import { InstructorDetails } from "../../utils/interface";
+import { ICourse, InstructorDetails } from "../../utils/interface";
 
 export const CourseDetailsInstructorDetails: FC<{
   instructor_id?: string;
 }> = (props) => {
   const [instructorDetails, setInstructorDetails] =
     useState<InstructorDetails>();
+  let totalStudents: number = 0;
+  let totalReviews: number = 0;
+  const [instructorsCourses, setInstructorsCourses] = useState<ICourse[]>([]);
 
   useEffect(() => {
     const getInstructorData = async () => {
@@ -32,6 +35,32 @@ export const CourseDetailsInstructorDetails: FC<{
     };
     getInstructorData();
   }, [props?.instructor_id]);
+
+  useEffect(() => {
+    const getInstructorCourses = async () => {
+      try {
+        let response = await fetch(
+          `http://localhost:3001/courses/instructor/${props?.instructor_id}`
+        );
+        let data = await response.json();
+        if (data.success == true) {
+          setInstructorsCourses(data.course);
+        } else {
+          throw new Error(data.message);
+        }
+      } catch (error: any) {
+        showNotification("error", error.toString());
+      }
+    };
+    getInstructorCourses();
+  }, []);
+
+  for (const course of instructorsCourses) {
+    totalStudents =
+      totalStudents + parseFloat(course.num_students.replaceAll(",", ""));
+    totalReviews =
+      totalReviews + parseFloat(course.num_reviews.replaceAll(",", ""));
+  }
 
   return (
     <div className="course__details_instructor" id="course__details_instructor">
@@ -56,13 +85,14 @@ export const CourseDetailsInstructorDetails: FC<{
               <AiTwotoneStar /> 4.6 instructor rating
             </li>
             <li>
-              <FaAward /> 388,333 reviews
+              <FaAward /> {totalReviews.toLocaleString("en-IN")} reviews
             </li>
             <li>
-              <IoMdPeople /> 23,444,2 Students
+              <IoMdPeople /> {totalStudents.toLocaleString("en-In")} Students
             </li>
             <li>
-              <IoPlayCircle /> 8 Courses
+              <IoPlayCircle /> {instructorsCourses.length}
+              {instructorsCourses.length > 1 ? " Courses" : " Course"}
             </li>
           </ul>
         </div>

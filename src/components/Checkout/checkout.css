@@ -1,0 +1,189 @@
+/* checkout page */
+
+.payment {
+  max-width: 64rem;
+  min-width: 40rem;
+
+  padding: 0 4.8rem 0 2.4rem;
+}
+
+.payment h1 {
+  margin: 3.2rem 0;
+  font-size: 3.2rem;
+}
+
+.payment select {
+  height: 4.8rem;
+  border: 1px solid var(--black-text);
+  background: var(--white-text);
+  border-radius: 0;
+  cursor: pointer;
+  display: block;
+  padding: 0 4rem 0 1.2rem;
+  width: 100%;
+}
+.payment select:hover {
+  background-color: var(--grey-background);
+}
+
+.payment select:focus-visible {
+  outline: none;
+}
+
+.payment .accordion-header {
+  position: relative;
+  border: 1px solid #d1d7dc;
+  border-bottom: none;
+  background: var(--grey-background);
+  padding: 0.8rem;
+  height: 4.5rem;
+  cursor: pointer;
+}
+
+.payment .accordion-header.wallets,
+.payment .accordion-body.wallet {
+  border-bottom: 1px solid #d1d7dc;
+}
+.payment .accordion-opner {
+  position: absolute;
+  height: 4.5rem;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.payment .accordion-opner label {
+  position: absolute;
+  padding-left: 8rem;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.payment .accordion-header img,
+.payment .accordion-body.card img {
+  height: 2.8rem;
+  border: 1px solid #d1d7dc;
+  border-radius: 4px;
+  background: #fff;
+  margin: 0 0.8rem 0 0;
+}
+
+.payment .accordion-body {
+  border: 1px solid #d1d7dc;
+  border-bottom: none;
+  padding: 3.2rem 2.4rem;
+}
+
+.payment .upi_payment-btn {
+  background-color: var(--black-text);
+  color: var(--white-text);
+}
+
+.checkout-courses .course-img img {
+  height: 7rem;
+  width: 12rem;
+}
+
+.payment .or {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#d1d7dc, #d1d7dc) no-repeat center/.3rem 100%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 767px) {
+  .payment {
+    padding: 2.4rem;
+  }
+  .payment .or {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(#d1d7dc, #d1d7dc) no-repeat center/100% 0.3rem;
+  }
+}
+
+.payment .or div {
+  background: #d1d7dc;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  text-align: center;
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.payment .qr {
+  height: 16rem;
+  width: auto;
+}
+
+.summary-wrapper {
+  background-color: var(--grey-background);
+}
+
+.summary {
+  max-width: 38.4rem;
+  padding: 0 3.2rem 0 4.8rem;
+  position: sticky;
+  top: 12rem;
+  width: 100%;
+  margin-top: 10.4rem;
+}
+
+.summary .prices,
+.summary-fixed .prices {
+  padding-bottom: 1.6rem;
+  border-bottom: 1px solid var(--light-grey-border);
+}
+
+.summary .complete_checkout-btn,
+.summary-fixed .complete_checkout-btn {
+  color: var(--white-text);
+  background-color: var(--purple-button-background);
+}
+
+.summary .complete_checkout-btn:hover,
+.summary-fixed .complete_checkout-btn:hover {
+  background-color: var(--purple-button-background-hover);
+}
+
+.summary-fixed {
+  background-color: var(--white-text);
+  margin: 0;
+  padding: 1.6rem 2rem;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-width: 100%;
+  position: fixed;
+  border-top: 1px solid #d1d7dc;
+  overflow-y: hidden;
+  box-shadow: 0 -2px 4px rgb(0 0 0 / 8%), 0 -4px 12px rgb(0 0 0 / 8%);
+}
+
+.checkout-complete button {
+  padding: 1.6rem;
+  margin: 1.6rem;
+  height: 4.8rem;
+  width: 12rem;
+}
+
+.checkout-complete button.success {
+  background-color: green;
+  color: var(--white-text);
+}
+
+.checkout-complete button.fail {
+  background-color: red;
+  color: var(--white-text);
+}

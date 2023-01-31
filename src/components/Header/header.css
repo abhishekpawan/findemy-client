@@ -32,9 +32,28 @@ header .header__search-bar button {
   left: 1.2rem;
   top: 1.3rem;
 }
+header .cart-icon {
+  position: relative;
+}
 
 header .cart-icon a {
+  font-size: 3rem;
   color: var(--black-text);
+}
+header .cart-icon .cart-count {
+  position: absolute;
+  right: -1rem;
+  top: -0.5rem;
+  min-width: 2em;
+  padding: 0.4rem 0.8rem;
+  margin: 0;
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+  background: #a435f0;
+  color: #fff;
 }
 
 header .my-learning {

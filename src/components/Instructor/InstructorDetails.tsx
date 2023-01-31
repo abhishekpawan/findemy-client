@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { InstructorDetails } from "../../utils/interface";
+import { ICourse, InstructorDetails } from "../../utils/interface";
 import { showNotification } from "../../utils/ToastNotification";
+import HomepageCourseCard from "../Homepage/HomepageCourseCard";
 
 import "./instructordetails.css";
 import InstructorDetailsLoader from "./InstructorDetailsLoader";
@@ -11,10 +12,14 @@ const InstructorDetailsPage = () => {
   const [instructorDetails, setInstructorDetails] =
     useState<InstructorDetails>();
   const [isLoading, setLoading] = useState<boolean>(true);
+  const [instructorsCourses, setInstructorsCourses] = useState<ICourse[]>([]);
   const regex = new RegExp(
     "(http://www.|https://www.|https://|http://)(\\w+)",
     "gm"
   );
+
+  let totalStudents: number = 0;
+  let totalReviews: number = 0;
 
   useEffect(() => {
     const getInstructorData = async () => {
@@ -33,7 +38,33 @@ const InstructorDetailsPage = () => {
     };
     getInstructorData();
   }, []);
-  // console.log(instructorDetails?.social_urls[1].split(".")[1]);
+
+  useEffect(() => {
+    const getInstructorCourses = async () => {
+      try {
+        let response = await fetch(
+          `http://localhost:3001/courses/instructor/${id}`
+        );
+        let data = await response.json();
+        if (data.success == true) {
+          setInstructorsCourses(data.course);
+          setLoading(false);
+        } else {
+          throw new Error(data.message);
+        }
+      } catch (error: any) {
+        showNotification("error", error.toString());
+      }
+    };
+    getInstructorCourses();
+  }, []);
+
+  for (const course of instructorsCourses) {
+    totalStudents =
+      totalStudents + parseFloat(course.num_students.replaceAll(",", ""));
+    totalReviews =
+      totalReviews + parseFloat(course.num_reviews.replaceAll(",", ""));
+  }
   return (
     <>
       {isLoading ? (
@@ -51,16 +82,37 @@ const InstructorDetailsPage = () => {
                 <div className="instructor__stats d-flex mb-5">
                   <div className="total__students me-5">
                     <div className="fw-bold fs-4">Total Students</div>
-                    <div className="fw-bold fs-1">666,322</div>
+                    <div className="fw-bold fs-1">
+                      {totalStudents.toLocaleString("en-IN")}
+                    </div>
                   </div>
                   <div className="total__reviews">
                     <div className="fw-bold fs-4">Reviews</div>
-                    <div className="fw-bold fs-1">73,221</div>
+                    <div className="fw-bold fs-1">
+                      {totalReviews.toLocaleString("en-IN")}
+                    </div>
                   </div>
                 </div>
-                <div className="about">
+                <div className="about mb-5">
                   <h2 className="fw-bold fs-4">About</h2>
                   <div>{instructorDetails?.about}</div>
+                </div>
+              </div>
+              <div className="instructors__courses">
+                <h2 className="fw-bold fs-3">
+                  My courses ({instructorsCourses.length})
+                </h2>
+                <div className="mylearning-courses row">
+                  {instructorsCourses?.map((course: ICourse) => {
+                    return (
+                      <div
+                        key={course._id}
+                        className="col-12 col-md-6 col-lg-3 mt-4"
+                      >
+                        <HomepageCourseCard course={course} />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>

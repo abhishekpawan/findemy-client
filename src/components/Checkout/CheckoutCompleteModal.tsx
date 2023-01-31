@@ -1,7 +1,10 @@
-import { FC, useContext, useEffect } from "react";
+import { FC, useContext } from "react";
 import { Modal } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
+import { addToBoughtCoursesAsync } from "../../redux/reducers/boughtCourses.reducer";
+import { AppDispatch } from "../../redux/store/store";
 import { ICartCourse } from "../../utils/interface";
 import { showNotification } from "../../utils/ToastNotification";
 import { CardDetails } from "./Checkout";
@@ -17,38 +20,15 @@ const CheckoutCompleteModal: FC<{
   const navigate = useNavigate();
 
   const { user } = useContext(AppContext);
+  const dispatch = useDispatch<AppDispatch>();
 
   const checkoutSuccessHandler = () => {
-    //adding course to cart
-    const addToBoughtCourses = async () => {
-      let totalBoughtCourses = [];
-      for (const course of props.cartCourses) {
-        totalBoughtCourses.push({ ...course, bought: true });
-      }
-      try {
-        const response = await fetch("http://localhost:3001/boughtcourse/add", {
-          headers: {
-            Authorization: `Bearer ${user?.token}`,
-            "Content-Type": "application/json",
-          },
-          method: "Post",
-          body: JSON.stringify(totalBoughtCourses),
-        });
-
-        const data = await response.json();
-        if (data.success === true) {
-          showNotification("success", "Courses successfully purchased!");
-          navigate("/checkoutsuccess");
-        } else {
-          // setCourseAddedToCart(false);
-          throw new Error(data.message);
-        }
-        // console.log(body);
-      } catch (error: any) {
-        showNotification("error", error.message.toString());
-      }
-    };
-    addToBoughtCourses();
+    let totalBoughtCourses = [];
+    for (const course of props.cartCourses) {
+      totalBoughtCourses.push({ ...course, bought: true });
+    }
+    dispatch(addToBoughtCoursesAsync({ user, totalBoughtCourses }));
+    navigate("checkout/success", { replace: true });
   };
 
   const checkoutFailHandler = () => {

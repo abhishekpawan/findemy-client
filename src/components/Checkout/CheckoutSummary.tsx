@@ -7,7 +7,6 @@ const CheckoutSummary: FC<{
 }> = (props) => {
   return (
     <>
-      {" "}
       <div className="summary-wrapper col-12 col-lg-5 d-none d-lg-block">
         <div className="summary col-12 ">
           <h2 className="fw-bold fs-2">Summary</h2>

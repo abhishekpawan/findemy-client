@@ -8,15 +8,22 @@ const SearchScreenCourse: FC<{ searchedCourse: ICourse }> = (props) => {
   const navigate = useNavigate();
   return (
     <div
-      onClick={() => navigate(`/coursedetails/${props?.searchedCourse._id}`)}
       key={props?.searchedCourse._id}
       className="course pb-4 mb-4 d-flex flex-column flex-sm-row"
     >
-      <div className="thumbnail me-0 me-sm-3 mb-4 mb-lg-0">
+      <div
+        onClick={() => navigate(`/coursedetails/${props?.searchedCourse._id}`)}
+        className="thumbnail me-0 me-sm-3 mb-4 mb-lg-0"
+      >
         <img src={props.searchedCourse?.course_thumbnail} alt="" />
       </div>
       <div className="d-flex justify-content-between container-fluid p-0">
-        <div className="description me-md-4 d-flex flex-column">
+        <div
+          onClick={() =>
+            navigate(`/coursedetails/${props?.searchedCourse._id}`)
+          }
+          className="description me-md-4 d-flex flex-column"
+        >
           <div className="title fw-bold fs-2">
             {props.searchedCourse?.title}
           </div>
@@ -51,14 +58,22 @@ const SearchScreenCourse: FC<{ searchedCourse: ICourse }> = (props) => {
             {props.searchedCourse?.tag}
           </div>
         </div>
-        <div className="price d-flex flex-column align-items-end">
-          <span className="mb-2 fw-bold fs-1">
-            ₹{props.searchedCourse?.discounted_price}
-          </span>
+        <div className="price d-flex flex-column justify-content-between">
+          <div className=" d-flex flex-column align-items-end">
+            <span className="mb-2 fw-bold fs-1">
+              ₹{props.searchedCourse?.discounted_price}
+            </span>
 
-          <span className="normal-price fs-5 text-decoration-line-through">
-            ₹{props.searchedCourse?.original_price}
-          </span>
+            <span className="normal-price fs-5 text-decoration-line-through">
+              ₹{props.searchedCourse?.original_price}
+            </span>
+          </div>
+          <div
+            // onClick={addToCartHandler}
+            className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+          >
+            <button className="fw-bold">Add to cart</button>
+          </div>
         </div>
       </div>
     </div>

@@ -64,7 +64,8 @@
 .search .course {
   border-bottom: 1px solid var(--light-grey-border);
 }
-.search .course:hover {
+.search .thumbnail:hover,
+.search .description:hover {
   cursor: pointer;
   filter: brightness(75%);
 }
@@ -75,6 +76,19 @@
 .search .course .num_reviews,
 .search .course .course_details {
   color: var(--light-grey-text);
+}
+
+.search .add_to_cart-btn {
+  background: var(--purple-button-background);
+}
+.search .add_to_cart-btn:hover {
+  background: var(--purple-button-background-hover);
+}
+
+.search .add_to_cart-btn button {
+  height: 4.8rem;
+  color: var(--white-text);
+  width: 13rem;
 }
 
 @media screen and (min-width: 768px) {

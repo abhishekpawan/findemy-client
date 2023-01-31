@@ -1,4 +1,4 @@
-import { useState, createContext, useRef } from "react";
+import { useState, createContext, useRef, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./components/Homepage/HomePage";
 import Login from "./components/Login&Singup/Login";
@@ -14,6 +14,15 @@ import "./App.css";
 import { UserData } from "./utils/interface";
 import Layout1 from "./Layouts/Layout1";
 import CheckoutSuccess from "./components/Checkout/CheckoutSuccess";
+import { AppDispatch, useAppSelector } from "./redux/store/store";
+import { useDispatch } from "react-redux";
+import { fetchCoursesAsync } from "./redux/reducers/courses.reducer";
+import {
+  fetchCartCoursesAsync,
+  selectStatus,
+} from "./redux/reducers/cart.reducer";
+import { showNotification } from "./utils/ToastNotification";
+import { fetchBoughtCoursesAsync } from "./redux/reducers/boughtCourses.reducer";
 
 export const AppContext = createContext<any>(null);
 
@@ -24,8 +33,26 @@ function App() {
   const [isUserLoggedIn, setUserLoggedin] = useState<boolean>(
     user ? true : false
   );
-  // const notificationMessage = useRef<string>("");
+  const dispatch = useDispatch<AppDispatch>();
+  const { courses } = useAppSelector((store) => store.courses);
+  const { cartCourses, error } = useAppSelector((store) => store.cartCourses);
+  const { boughtCourses } = useAppSelector((store) => store.boughtCouses);
 
+  useEffect(() => {
+    if (courses.length === 0) {
+      dispatch(fetchCoursesAsync(user!));
+    }
+    if (cartCourses.length === 0 && isUserLoggedIn === true) {
+      dispatch(fetchCartCoursesAsync(user!));
+    }
+    if (boughtCourses.length === 0 && isUserLoggedIn === true) {
+      dispatch(fetchBoughtCoursesAsync(user!));
+    }
+  }, []);
+
+  if (error !== null) {
+    showNotification("error", error.toString());
+  }
   return (
     <>
       <AppContext.Provider
@@ -59,7 +86,12 @@ function App() {
             <Route path="search/:text" element={<SearchScreen />} />
             <Route path="*" element={<HomePage />} />
           </Route>
-          <Route path="/checkout" element={<Checkout />} />
+          {cartCourses.length > 0 ? (
+            <Route path="/checkout" element={<Checkout />} />
+          ) : (
+            ""
+          )}
+
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
         </Routes>
       </AppContext.Provider>

@@ -10,102 +10,52 @@ import CourseDetailsLoader from "./CourseDetailsLoader";
 import { AppContext } from "../../App";
 import { showNotification } from "../../utils/ToastNotification";
 import { ICartCourse, ICourse } from "../../utils/interface";
+import { AppDispatch, useAppSelector } from "../../redux/store/store";
+import { useDispatch } from "react-redux";
+import { addToCartAsync } from "../../redux/reducers/cart.reducer";
 
 const CourseDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { isUserLoggedIn, user } = useContext(AppContext);
   const [courseDetails, setCourseDetails] = useState<ICourse>();
-  const [isLoading, setLoading] = useState<boolean>(true);
-  const [cartCourses, setcartCourses] = useState<ICartCourse[]>([]);
-  const [isCourseAddedToCart, setCourseAddedToCart] = useState<boolean>(false);
-  const [isCoursePurchases, setCoursePurchases] = useState<boolean>(true);
   let courseExistInCart;
+  const [isCourseAddedToCart, setCourseAddedToCart] = useState<boolean>(false);
+  let courseIsPurchased;
+  const [isCoursePurchased, setCoursePurchased] = useState<boolean>(false);
+  const { courses } = useAppSelector((store) => store.courses);
+  const { cartCourses } = useAppSelector((store) => store.cartCourses);
+  const { boughtCourses } = useAppSelector((store) => store.boughtCouses);
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    //Getting course details
-    const getCourseDetail = async () => {
-      try {
-        let response = await fetch(`http://localhost:3001/courses/${id}`);
-        let data = await response.json();
-        if (data.success == true) {
-          setCourseDetails(data.course);
-          setLoading(false);
-        } else {
-          throw new Error(data.message);
-        }
-      } catch (error: any) {
-        showNotification("error", error.toString());
-      }
-    };
-    getCourseDetail();
-  }, []);
-
-  //adding course to cart
-  const addCourseToCart = async () => {
-    const CourseDataForCart = {
-      ...courseDetails,
-      course_id: courseDetails?._id,
-      user_id: user.id,
-    };
-    try {
-      const response = await fetch("http://localhost:3001/cart/add", {
-        headers: {
-          Authorization: `Bearer ${user?.token}`,
-          "Content-Type": "application/json",
-        },
-        method: "Post",
-        body: JSON.stringify(CourseDataForCart),
-      });
-
-      const data = await response.json();
-      if (data.success === true) {
-        showNotification("success", "Course added to cart!");
-        setCourseAddedToCart(true);
-      } else {
-        setCourseAddedToCart(false);
-        throw new Error(data.message);
-      }
-      // console.log(body);
-    } catch (error: any) {
-      showNotification("error", error.message.toString());
-    }
-  };
+    setCourseDetails(
+      courses.find((course) => {
+        return course._id === id?.toString();
+      })
+    );
+  }, [courseDetails, courses]);
 
   //checking if course is added to cart
-
-  useEffect(() => {
-    const getCartCourses = async () => {
-      try {
-        let response = await fetch(
-          `http://localhost:3001/cart/user/${user?.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${user?.token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        let data = await response.json();
-        if (data.success == true) {
-          setcartCourses(data.cartCourse);
-        }
-      } catch (error: any) {
-        setLoading(false);
-      }
-    };
-    getCartCourses();
-  }, []);
   courseExistInCart = cartCourses.filter((cartCourse: ICartCourse) => {
     return cartCourse.course_id === courseDetails?._id;
+  });
+
+  //checking if course is already purchased
+  courseIsPurchased = boughtCourses.filter((boughtCourse: ICartCourse) => {
+    return boughtCourse.course_id === courseDetails?._id;
   });
 
   useEffect(() => {
     if (courseExistInCart.length > 0) {
       setCourseAddedToCart(true);
     }
-  }, [courseExistInCart]);
+    if (courseIsPurchased.length > 0) {
+      setCoursePurchased(true);
+    }
+  }, [courseExistInCart, courseIsPurchased]);
 
+  //adding course to cart
   const addToCartHandler = () => {
     if (isUserLoggedIn === false) {
       showNotification(
@@ -113,7 +63,8 @@ const CourseDetails = () => {
         "Please Log in or Sign up first to add the course in your cart!"
       );
     } else {
-      addCourseToCart();
+      dispatch(addToCartAsync({ user, courseDetails: courseDetails! }));
+      setCourseAddedToCart(true);
     }
   };
 
@@ -124,7 +75,8 @@ const CourseDetails = () => {
         "Please Log in or Sign up first to buy the course!"
       );
     } else {
-      addCourseToCart();
+      dispatch(addToCartAsync({ user, courseDetails: courseDetails! }));
+      setCourseAddedToCart(true);
       navigate("/cart");
     }
   };
@@ -137,9 +89,7 @@ const CourseDetails = () => {
 
   return (
     <>
-      {isLoading ? (
-        <CourseDetailsLoader />
-      ) : (
+      {courseDetails?._id ? (
         <main className="course__details d-flex flex-column">
           <div className="course__details__body__container">
             <div className="course__details__body">
@@ -171,8 +121,8 @@ const CourseDetails = () => {
                     ({courseDetails?.num_reviews} ratings)
                   </span>
                   {/* <span className="num_students fw-normal ms-2 ">
-                {courseData[0].num_students} students
-              </span> */}
+              {courseData[0].num_students} students
+            </span> */}
                 </div>
                 <div className="course__details-instructor mb-3">
                   Created by{" "}
@@ -190,44 +140,55 @@ const CourseDetails = () => {
                 </div>
 
                 <div className="course__details__card-details d-block d-lg-none pt-1 ">
-                  <div className="price-details d-flex align-items-center">
-                    <div className="discounted-price fw-bold  py-2 me-3">
-                      ₹{courseDetails?.discounted_price}
-                    </div>
-                    <div className="price me-3 text-decoration-line-through">
-                      ₹{courseDetails?.original_price}
-                    </div>
-                    <div className="percentage">{percentage}% off</div>
-                  </div>
-
-                  {isCourseAddedToCart ? (
-                    <div
-                      onClick={() => navigate("/cart")}
-                      className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
-                    >
-                      <button className="fw-bold">Go to Cart</button>
-                    </div>
+                  {isCoursePurchased ? (
+                    <>
+                      <div className="fs-3 fw-bold text-center my-4">
+                        You have enrolled in this Course!
+                      </div>
+                      <div className="fs-4 text-center mb-4">
+                        Start Learning Now!
+                      </div>
+                    </>
                   ) : (
                     <>
-                      <div
-                        onClick={addToCartHandler}
-                        className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
-                      >
-                        <button className="fw-bold">Add to cart</button>
+                      <div className="price-details d-flex align-items-center">
+                        <div className="discounted-price fw-bold  py-2 me-3">
+                          ₹{courseDetails?.discounted_price}
+                        </div>
+                        <div className="price me-3 text-decoration-line-through">
+                          ₹{courseDetails?.original_price}
+                        </div>
+                        <div className="percentage">{percentage}% off</div>
                       </div>
-                      <div
-                        onClick={buyNowHandler}
-                        className="buy_now-btn d-flex justify-content-center align-items-center mb-4"
-                      >
-                        <button className="fw-bold">Buy now</button>
+                      {isCourseAddedToCart ? (
+                        <div
+                          onClick={() => navigate("/cart")}
+                          className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+                        >
+                          <button className="fw-bold">Go to Cart</button>
+                        </div>
+                      ) : (
+                        <>
+                          <div
+                            onClick={addToCartHandler}
+                            className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+                          >
+                            <button className="fw-bold">Add to cart</button>
+                          </div>
+                          <div
+                            onClick={buyNowHandler}
+                            className="buy_now-btn d-flex justify-content-center align-items-center mb-4"
+                          >
+                            <button className="fw-bold">Buy now</button>
+                          </div>
+                        </>
+                      )}
+                      <div className="fs-4 text-center mb-4">
+                        30-Day Money-Back Guarantee <br /> <br />
+                        Full Lifetime Access
                       </div>
                     </>
                   )}
-
-                  <div className="fs-4 text-center mb-4">
-                    30-Day Money-Back Guarantee <br /> <br />
-                    Full Lifetime Access
-                  </div>
 
                   <div className="apply_coupon  d-flex align-items-center justify-content-between py-4">
                     <a>Share</a>
@@ -237,6 +198,7 @@ const CourseDetails = () => {
                 </div>
               </div>
               <CourseDetailsCard
+                isCoursePurchased={isCoursePurchased}
                 isCourseAddedToCart={isCourseAddedToCart}
                 course_thumbnail={courseDetails?.course_thumbnail}
                 discounted_price={courseDetails?.discounted_price}
@@ -288,6 +250,8 @@ const CourseDetails = () => {
             </div>
           </div>
         </main>
+      ) : (
+        <CourseDetailsLoader />
       )}
     </>
   );

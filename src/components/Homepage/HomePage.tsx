@@ -1,3 +1,5 @@
+import { ICourse } from "../../utils/interface";
+import { useAppSelector } from "../../redux/store/store";
 import featuredTopics from "../../data/featuredTopics.json";
 import HomepageCourseCard from "./HomepageCourseCard";
 import "slick-carousel/slick/slick.css";
@@ -6,18 +8,14 @@ import HomepageFeaturedTopics from "./HomepageFeaturedTopics";
 import Slider from "react-slick";
 import NextArrow from "../UI_Components/NextArrow";
 import PrevArrow from "../UI_Components/PrevArrow";
+import HomePageCourseCardLoader from "./HomePageCourseCardLoader";
 
 import "./homepage.css";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import HomePageCourseCardLoader from "./HomePageCourseCardLoader";
-import { showNotification } from "../../utils/ToastNotification";
-import { ICourse } from "../../utils/interface";
+import { selectStatus } from "../../redux/reducers/cart.reducer";
 
 const HomePage = () => {
-  const [allCourses, setAllCourses] = useState<ICourse[]>([]);
-  const [isLoading, setLoading] = useState<boolean>(true);
-
+  const { courses } = useAppSelector((store) => store.courses);
+  const status = useAppSelector(selectStatus);
   const sliderSettings = {
     slidesToShow: 5,
     slidesToScroll: 1,
@@ -64,34 +62,15 @@ const HomePage = () => {
     ],
   };
 
-  useEffect(() => {
-    const getAllCourses = async () => {
-      try {
-        let response = await fetch("http://localhost:3001/courses/all");
-        let data = await response.json();
-        if (data.success == true) {
-          setAllCourses(data.allCourses);
-          setLoading(false);
-        } else {
-          throw new Error(data.message);
-        }
-      } catch (error: any) {
-        showNotification("error", error.toString());
-        setLoading(false);
-      }
-    };
-    getAllCourses();
-  }, []);
-
   return (
     <main className="homepage">
       <div className="homepage__courses ">
         <h2 className="fw-bold mb-5 fs-1"> Students are viewing</h2>
-        {isLoading ? (
+        {status === "loading" ? (
           <HomePageCourseCardLoader />
         ) : (
           <Slider {...sliderSettings}>
-            {allCourses?.map((course: ICourse) => {
+            {courses?.map((course: ICourse) => {
               return <HomepageCourseCard key={course._id} course={course} />;
             })}
           </Slider>

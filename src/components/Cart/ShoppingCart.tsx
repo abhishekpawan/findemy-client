@@ -8,38 +8,19 @@ import { ICartCourse } from "../../utils/interface";
 import ShopingCartLoader from "./ShopingCartLoader";
 import EmptyCart from "./EmptyCart";
 import { Link } from "react-router-dom";
+import { AppDispatch, useAppSelector } from "../../redux/store/store";
+import {
+  deleteCourseFromCartAsync,
+  selectStatus,
+} from "../../redux/reducers/cart.reducer";
+import { useDispatch } from "react-redux";
 
 const ShoppingCart = () => {
   const { user } = useContext(AppContext);
-  const [cartCourses, setcartCourses] = useState<ICartCourse[]>([]);
-  const [isLoading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const getCartCourses = async () => {
-      try {
-        let response = await fetch(
-          `http://localhost:3001/cart/user/${user.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${user?.token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        let data = await response.json();
-        if (data.success == true) {
-          setcartCourses(data.cartCourse);
-          setLoading(false);
-        } else {
-          throw new Error(data.message);
-        }
-      } catch (error: any) {
-        showNotification("error", error.toString());
-        setLoading(false);
-      }
-    };
-    getCartCourses();
-  }, []);
+  const dispatch = useDispatch<AppDispatch>();
+  const { cartCourses } = useAppSelector((store) => store.cartCourses);
+  // Get the current `status`:
+  const status = useAppSelector(selectStatus);
 
   let totalOriginalPrice: number = 0;
   let totalDiscountedPrice: number = 0;
@@ -54,40 +35,12 @@ const ShoppingCart = () => {
     100 - Math.round((totalDiscountedPrice / totalOriginalPrice) * 100);
 
   const onDeleteHandler = (course_id: string) => {
-    const deleteCourseFromCart = async () => {
-      try {
-        let response = await fetch(`http://localhost:3001/cart/${course_id}`, {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${user?.token}`,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ user_id: user.id }),
-        });
-        let data = await response.json();
-        if (data.success == true) {
-          setcartCourses(
-            cartCourses.filter((cartDetail) => {
-              return cartDetail._id != course_id;
-            })
-          );
-          showNotification(
-            "success",
-            "Course successfully removed from your cart!"
-          );
-        } else {
-          throw new Error(data.message);
-        }
-      } catch (error: any) {
-        showNotification("error", error.toString());
-      }
-    };
-    deleteCourseFromCart();
+    dispatch(deleteCourseFromCartAsync({ course_id, user: user! }));
   };
 
   return (
     <>
-      {isLoading ? (
+      {status === "loading" ? (
         <ShopingCartLoader />
       ) : (
         <>
@@ -98,7 +51,9 @@ const ShoppingCart = () => {
               <div className="row">
                 <h1 className="fw-bold">Shopping Cart</h1>
                 <h3 className="fw-bold fs-4 mt-4 mb-3">
-                  {cartCourses.length} Courses in Cart
+                  {cartCourses.length}
+                  {cartCourses.length > 1 ? " Courses" : " Course "}
+                  in Cart
                 </h3>
                 <div className="col-12 col-lg-9">
                   {cartCourses?.map((cartCourse) => {

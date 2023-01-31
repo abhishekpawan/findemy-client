@@ -1,5 +1,8 @@
 import { useContext, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { AppContext } from "../../App";
+import { selectStatus } from "../../redux/reducers/cart.reducer";
+import { AppDispatch, useAppSelector } from "../../redux/store/store";
 import { ICartCourse, ICourse } from "../../utils/interface";
 import { showNotification } from "../../utils/ToastNotification";
 import HomepageCourseCard from "../Homepage/HomepageCourseCard";
@@ -7,40 +10,13 @@ import EmptyMyLearnings from "./EmptyMyLearnings";
 import MyLearningsLoader from "./MyLearningsLoader";
 
 const MyLearnings = () => {
-  const { user } = useContext(AppContext);
-  const [boughtCourses, setBoughtCourses] = useState<ICartCourse[]>([]);
-  const [isLoading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    const getBoughtCourses = async () => {
-      try {
-        let response = await fetch(
-          `http://localhost:3001/boughtcourse/${user.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${user?.token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        let data = await response.json();
-        if (data.success == true) {
-          setBoughtCourses(data.boughtCourse);
-          setLoading(false);
-        } else {
-          throw new Error(data.message);
-        }
-      } catch (error: any) {
-        showNotification("error", error.toString());
-        setLoading(false);
-      }
-    };
-    getBoughtCourses();
-  }, []);
+  const { boughtCourses } = useAppSelector((store) => store.boughtCouses);
+  // Get the current `status`:
+  const status = useAppSelector(selectStatus);
 
   return (
     <>
-      {isLoading ? (
+      {status === "loading" ? (
         <MyLearningsLoader />
       ) : (
         <main className="mylearning ">

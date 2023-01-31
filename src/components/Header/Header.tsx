@@ -11,6 +11,7 @@ import FindemyLogo from "../../assets/img/Findemy.png";
 import "./header.css";
 import { AppContext } from "../../App";
 import { showNotification } from "../../utils/ToastNotification";
+import { useAppSelector } from "../../redux/store/store";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Header = () => {
   const [isMobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
   const [isMobileSearchVisible, setMobileSearchVisible] =
     useState<boolean>(false);
+  const { cartCourses } = useAppSelector((store) => store.cartCourses);
 
   const loginHandler = () => {
     navigate("/login");
@@ -178,13 +180,18 @@ const Header = () => {
           <div className="cart-icon">
             <Link to="/cart">
               <AiOutlineShoppingCart />
+              {cartCourses.length > 0 ? (
+                <span className="cart-count">{cartCourses.length}</span>
+              ) : (
+                ""
+              )}
             </Link>
           </div>
         ) : (
           ""
         )}
       </div>
-      
+
       {isMobileSearchVisible ? (
         <div className="mobile-search d-block d-md-none">
           <div className="search-bar position-relative d-flex justify-content-center">
