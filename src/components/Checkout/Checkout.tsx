@@ -1,12 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdLock } from "react-icons/io";
-import { AppContext } from "../../App";
-import { ICartCourse } from "../../utils/interface";
 import { showNotification } from "../../utils/ToastNotification";
 import findemy_UPI_QR from "../../assets/img/findemy_upi_qr.png";
 import CheckoutCourse from "./CheckoutCourse";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FindemyLogo from "../../assets/img/Findemy.png";
 import CheckoutCompleteModal from "./CheckoutCompleteModal";
 import CheckoutSummary from "./CheckoutSummary";
@@ -41,6 +39,10 @@ const Checkout = () => {
   const [cardDetailsIsValid, setCardDetailsIsValid] = useState<boolean>(false);
   const [cardDetails, setCardDetails] = useState<CardDetails>();
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   let totalOriginalPrice: number = 0;
   let totalDiscounts: number = 0;
   let totalPrice: number = 0;
@@ -57,6 +59,16 @@ const Checkout = () => {
 
     setCardDetails(data);
   };
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (cartCourses.length! === 0) {
+      showNotification(
+        "info",
+        "Your cart is empty. Please add courses to your cart before proceding to checkout!"
+      );
+      navigate("/");
+    }
+  }, []);
 
   return (
     <>

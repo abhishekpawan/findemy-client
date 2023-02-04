@@ -1,9 +1,20 @@
 /* footer */
-footer {
+.footer {
   min-width: 40rem;
   background: var(--black-text);
   color: var(--white-text);
   padding: 2.4rem;
+}
+footer .footer-logos {
+  border-top: 1px solid #3e4143;
+  border-bottom: 1px solid #3e4143;
+  min-width: 40rem;
+  background: var(--black-text);
+  color: var(--white-text);
+  padding: 2.4rem;
+}
+footer .footer-logos img {
+  width: 100%;
 }
 footer .footer__language-btn button {
   display: flex;
@@ -37,6 +48,10 @@ footer .footer__list a {
   text-decoration: none;
 }
 
+footer .footer__list a:hover {
+  color: var(--white-text);
+  text-decoration: underline;
+}
 footer .footer__logo {
   font-weight: 1000;
   font-size: 3rem;

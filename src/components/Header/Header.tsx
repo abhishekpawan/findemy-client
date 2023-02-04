@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
 import { TbWorld } from "react-icons/tb";
 import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
 import { HiBars3 } from "react-icons/hi2";
@@ -16,12 +16,14 @@ import { useAppSelector } from "../../redux/store/store";
 const Header = () => {
   const navigate = useNavigate();
   const { isUserLoggedIn, setUserLoggedin, user } = useContext(AppContext);
-  const [searchText, setSearchText] = useState<string>();
+  const [searchText, setSearchText] = useState<string>("");
   const [isUserMenuVisible, setUserMenuVisible] = useState<boolean>(false);
   const [isMobileNavVisible, setMobileNavVisible] = useState<boolean>(false);
   const [isMobileSearchVisible, setMobileSearchVisible] =
     useState<boolean>(false);
   const { cartCourses } = useAppSelector((store) => store.cartCourses);
+
+  const params = useParams();
 
   const loginHandler = () => {
     navigate("/login");
@@ -152,6 +154,7 @@ const Header = () => {
           placeholder="Search for anything"
           aria-label="search"
           className="fs-5"
+          value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter") navigate(`/search/${searchText}`);

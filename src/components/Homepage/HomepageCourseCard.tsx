@@ -1,17 +1,26 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import StarRatings from "react-star-ratings";
 import { useNavigate } from "react-router-dom";
 import { ICourse } from "../../utils/interface";
 
-const HomepageCourseCard: FC<{ course: ICourse }> = (props) => {
+const HomepageCourseCard: FC<{ course: ICourse; course_id?: string }> = (
+  props
+) => {
   const navigate = useNavigate();
+
+  let course_id: string;
+  if (props.course_id) {
+    course_id = props.course_id;
+  } else {
+    course_id = props.course?._id!;
+  }
 
   return (
     <>
       <div
         key={props.course?._id}
         onClick={() => {
-          navigate(`/coursedetails/${props.course?._id}`);
+          navigate(`/coursedetails/${course_id}`);
         }}
         className="course__card me-4 col"
       >

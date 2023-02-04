@@ -187,3 +187,19 @@
   background-color: red;
   color: var(--white-text);
 }
+
+/* checkout success page */
+
+.success .start-learning-btn button {
+  height: 4.8rem;
+  margin-bottom: 0.8rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  padding: 0 1.2rem;
+  background: var(--purple-button-background);
+  color: white;
+}
+
+.success .start-learning-btn button:hover {
+  background-color: var(--purple-button-background-hover);
+}

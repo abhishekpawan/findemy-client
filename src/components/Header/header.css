@@ -28,6 +28,9 @@ header .header__search-bar input {
   background-color: var(--grey-background);
 }
 
+header .header__search-bar input:focus {
+  outline: none;
+}
 header .header__search-bar button {
   left: 1.2rem;
   top: 1.3rem;

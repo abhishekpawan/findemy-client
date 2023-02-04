@@ -79,6 +79,11 @@ const SearchScreen = () => {
     getSearchedCourses();
   }, [text, levels, ratings]);
 
+  useEffect(() => {
+    setLevels([""]);
+    setRatings([""]);
+  }, [text]);
+
   return (
     <>
       {isLoading ? (
@@ -131,6 +136,7 @@ const SearchScreen = () => {
                           value="All Levels"
                           name="All Levels"
                           onChange={(e) => levelFilterChangeHandler(e)}
+                          checked={levels.includes("All Levels")}
                         />
                         <label
                           className="form-check-label"
@@ -147,6 +153,7 @@ const SearchScreen = () => {
                           value="Beginner"
                           name="Beginner"
                           onChange={(e) => levelFilterChangeHandler(e)}
+                          checked={levels.includes("Beginner")}
                         />
                         <label className="form-check-label" htmlFor="beginner">
                           Beginner
@@ -160,6 +167,7 @@ const SearchScreen = () => {
                           value="Intermediate"
                           name="Intermediate"
                           onChange={(e) => levelFilterChangeHandler(e)}
+                          checked={levels.includes("Intermediate")}
                         />
                         <label
                           className="form-check-label"
@@ -176,6 +184,7 @@ const SearchScreen = () => {
                           value="Expert"
                           name="Expert"
                           onChange={(e) => levelFilterChangeHandler(e)}
+                          checked={levels.includes("Expert")}
                         />
                         <label className="form-check-label" htmlFor="expert">
                           Expert
@@ -211,6 +220,7 @@ const SearchScreen = () => {
                           value="4.5"
                           name="4.5"
                           onChange={(e) => ratingFilterChangeHandler(e)}
+                          checked={ratings.includes("4.5")}
                         />
                         <label className="form-check-label" htmlFor="4.5star">
                           4.5 & up
@@ -224,6 +234,7 @@ const SearchScreen = () => {
                           value="4.0"
                           name="4.0"
                           onChange={(e) => ratingFilterChangeHandler(e)}
+                          checked={ratings.includes("4.0")}
                         />
                         <label className="form-check-label" htmlFor="4.0star">
                           4.0 & up
@@ -237,6 +248,7 @@ const SearchScreen = () => {
                           value="3.5"
                           name="3.5"
                           onChange={(e) => ratingFilterChangeHandler(e)}
+                          checked={ratings.includes("3.5")}
                         />
                         <label className="form-check-label" htmlFor="3.5star">
                           3.5 & up
@@ -250,6 +262,7 @@ const SearchScreen = () => {
                           value="3.0"
                           name="3.0"
                           onChange={(e) => ratingFilterChangeHandler(e)}
+                          checked={ratings.includes("3.0")}
                         />
                         <label className="form-check-label" htmlFor="3.0star">
                           3.0 & up

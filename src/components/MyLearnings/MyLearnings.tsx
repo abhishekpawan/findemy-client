@@ -1,16 +1,13 @@
-import { useContext, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { AppContext } from "../../App";
 import { selectStatus } from "../../redux/reducers/cart.reducer";
-import { AppDispatch, useAppSelector } from "../../redux/store/store";
+import { useAppSelector } from "../../redux/store/store";
 import { ICartCourse, ICourse } from "../../utils/interface";
-import { showNotification } from "../../utils/ToastNotification";
 import HomepageCourseCard from "../Homepage/HomepageCourseCard";
 import EmptyMyLearnings from "./EmptyMyLearnings";
 import MyLearningsLoader from "./MyLearningsLoader";
 
 const MyLearnings = () => {
   const { boughtCourses } = useAppSelector((store) => store.boughtCouses);
+  const { courses } = useAppSelector((store) => store.courses);
   // Get the current `status`:
   const status = useAppSelector(selectStatus);
 
@@ -38,7 +35,10 @@ const MyLearnings = () => {
                     key={course._id}
                     className="col-12 col-md-6 col-lg-3 mt-4"
                   >
-                    <HomepageCourseCard course={course} />
+                    <HomepageCourseCard
+                      course={course}
+                      course_id={course.course_id}
+                    />
                   </div>
                 );
               })}

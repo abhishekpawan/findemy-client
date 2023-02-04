@@ -1,10 +1,7 @@
-import courseData from "../../data/courses.json";
 import { BsTagFill } from "react-icons/bs";
 import StarRatings from "react-star-ratings";
-import { FC, useContext, useEffect } from "react";
+import { FC} from "react";
 import { ICartCourse } from "../../utils/interface";
-import { AppContext } from "../../App";
-import { showNotification } from "../../utils/ToastNotification";
 import { useNavigate } from "react-router-dom";
 
 const CartCourse: FC<{
@@ -12,7 +9,6 @@ const CartCourse: FC<{
   onDeleteHandler(course_id: string): void;
 }> = (props) => {
   const navigate = useNavigate();
-  const { user } = useContext(AppContext);
 
   return (
     <div
@@ -95,7 +91,7 @@ const CartCourse: FC<{
         <div className="d-flex">
           <div className="actions fs-5 fs- d-flex flex-md-column align-items-end mt-3 mt-md-1 me-md-5">
             <a
-              onClick={() => props.onDeleteHandler(props.cartCourse._id)}
+              onClick={() => props.onDeleteHandler(props.cartCourse._id!)}
               className="me-3 me-md-0 mb-md-3"
               href="#"
             >

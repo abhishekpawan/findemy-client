@@ -12,6 +12,7 @@ import HomePageCourseCardLoader from "./HomePageCourseCardLoader";
 
 import "./homepage.css";
 import { selectStatus } from "../../redux/reducers/cart.reducer";
+import { useEffect } from "react";
 
 const HomePage = () => {
   const { courses } = useAppSelector((store) => store.courses);
@@ -61,6 +62,10 @@ const HomePage = () => {
       },
     ],
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <main className="homepage">

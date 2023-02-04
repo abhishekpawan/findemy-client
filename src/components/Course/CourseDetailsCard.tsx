@@ -19,27 +19,26 @@ const CourseDetailsCard: FC<{
 }> = (props) => {
   const navigate = useNavigate();
   const { isFooterVisible, setIsFooterVisible } = useContext(AppContext);
-  const [isScrollingStart, setIsScrollingStart] = useState<Boolean>(false);
+  // const [isScrollingStart, setIsScrollingStart] = useState<Boolean>(false);
 
-  window.onscroll = function () {
-    let scrollLimit = 80;
-    if (window.scrollY >= scrollLimit) {
-      setIsScrollingStart(true);
-    } else {
-      setIsScrollingStart(false);
-    }
-  };
+  // window.onscroll = function () {
+  //   let scrollLimit = 80;
+  //   if (window.scrollY >= scrollLimit) {
+  //     setIsScrollingStart(true);
+  //   } else {
+  //     setIsScrollingStart(false);
+  //   }
+  // };
+  // ${isScrollingStart ? "scrolling-start " : ""}
 
   return (
     <div
       className={`
      ${isFooterVisible ? "not-fixed" : ""}
-       ${isScrollingStart ? "scrolling-start " : ""} 
        course__details__card d-none d-lg-block`}
     >
-      <div
-        className={`${isScrollingStart ? " " : ""}course__details__card-img `}
-      >
+      
+      <div className={`course__details__card-img `}>
         <img src={props.course_thumbnail} alt="" />
       </div>
       <div className="course__details__card-details">

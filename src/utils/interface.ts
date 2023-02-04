@@ -6,7 +6,7 @@ export interface UserData {
 }
 
 export interface ICourse {
-  _id: string;
+  _id?: string;
   title: string;
   instructor_id: string;
   instructor_name: string;

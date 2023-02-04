@@ -63,6 +63,8 @@ export const addToCartAsync = createAsyncThunk<
     course_id: courseDetails?._id,
     user_id: user.id,
   };
+  delete CourseDataForCart._id;
+
   try {
     const response = await fetch("http://localhost:3001/cart/add", {
       headers: {
@@ -87,7 +89,7 @@ export const addToCartAsync = createAsyncThunk<
 });
 
 type DeleteFromCartBody = {
-  course_id: string;
+  _id: string;
   user: UserData;
 };
 
@@ -98,9 +100,9 @@ export const deleteCourseFromCartAsync = createAsyncThunk<
 >(
   "cartCourses/deleteCourseFromCartAsync",
   async (body: DeleteFromCartBody, thunkApi) => {
-    const { course_id, user } = body;
+    const { _id, user } = body;
     try {
-      let response = await fetch(`http://localhost:3001/cart/${course_id}`, {
+      let response = await fetch(`http://localhost:3001/cart/${_id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${user?.token}`,
@@ -132,7 +134,12 @@ export const selectStatus = (state: RootState) => state.cartCourses.status;
 export const cartCoursesSlice = createSlice({
   name: "cartCourses",
   initialState,
-  reducers: {},
+  reducers: {
+    removeCourseFromCartAfterPurchase: (state) => {
+      state.cartCourses = [];
+      return state;
+    },
+  },
   extraReducers: (builder) => {
     /******* FetchCartCoursesAsync*******/
     // When we send a request,
@@ -224,5 +231,7 @@ export const cartCoursesSlice = createSlice({
     );
   },
 });
+
+export const { removeCourseFromCartAfterPurchase } = cartCoursesSlice.actions;
 
 export default cartCoursesSlice.reducer;

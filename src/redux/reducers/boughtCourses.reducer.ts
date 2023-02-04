@@ -133,7 +133,9 @@ export const boughtCoursesSlice = createSlice({
     builder.addCase(addToBoughtCoursesAsync.fulfilled, (state, { payload }) => {
       // We add all the new todos into the state
       // and change `status` back to `idle`:
-      // state.boughtCourses.push(...payload);
+      // state.boughtCourses = payload;
+      console.log(payload);
+      state.boughtCourses.push(...payload);
       state.status = "idle";
     });
     // When a server responses with an error:

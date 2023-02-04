@@ -28,6 +28,7 @@ export const AppContext = createContext<any>(null);
 
 function App() {
   const [isFooterVisible, setIsFooterVisible] = useState<boolean>(false);
+  const [isCheckoutSuccess, setIsCheckoutSuccess] = useState<boolean>(false);
   const userData: UserData = JSON.parse(localStorage.getItem("user")!);
   const [user, setUser] = useState<UserData | null>(userData ? userData : null);
   const [isUserLoggedIn, setUserLoggedin] = useState<boolean>(
@@ -63,6 +64,8 @@ function App() {
           setUserLoggedin,
           user,
           setUser,
+          isCheckoutSuccess,
+          setIsCheckoutSuccess,
         }}
       >
         <Routes>
@@ -86,11 +89,7 @@ function App() {
             <Route path="search/:text" element={<SearchScreen />} />
             <Route path="*" element={<HomePage />} />
           </Route>
-          {cartCourses.length > 0 ? (
-            <Route path="/checkout" element={<Checkout />} />
-          ) : (
-            ""
-          )}
+          <Route path="/checkout" element={<Checkout />} />
 
           <Route path="/checkout/success" element={<CheckoutSuccess />} />
         </Routes>

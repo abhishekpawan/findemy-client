@@ -22,6 +22,8 @@ const ShoppingCart = () => {
   // Get the current `status`:
   const status = useAppSelector(selectStatus);
 
+  window.scrollTo(0, 0);
+
   let totalOriginalPrice: number = 0;
   let totalDiscountedPrice: number = 0;
 
@@ -34,8 +36,8 @@ const ShoppingCart = () => {
   let totalPercentageOff =
     100 - Math.round((totalDiscountedPrice / totalOriginalPrice) * 100);
 
-  const onDeleteHandler = (course_id: string) => {
-    dispatch(deleteCourseFromCartAsync({ course_id, user: user! }));
+  const onDeleteHandler = (_id: string) => {
+    dispatch(deleteCourseFromCartAsync({ _id, user: user! }));
   };
 
   return (

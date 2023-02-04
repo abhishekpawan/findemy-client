@@ -40,6 +40,10 @@ const InstructorDetailsPage = () => {
   }, []);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     const getInstructorCourses = async () => {
       try {
         let response = await fetch(

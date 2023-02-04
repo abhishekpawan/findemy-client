@@ -1,11 +1,56 @@
 import courseData from "../../data/courses.json";
 import StarRatings from "react-star-ratings";
-import { FC } from "react";
-import { ICourse } from "../../utils/interface";
+import { FC, useContext, useEffect, useState } from "react";
+import { ICartCourse, ICourse } from "../../utils/interface";
 import { useNavigate } from "react-router-dom";
+import { showNotification } from "../../utils/ToastNotification";
+import { useDispatch } from "react-redux";
+import { AppDispatch, useAppSelector } from "../../redux/store/store";
+import { AppContext } from "../../App";
+import { addToCartAsync } from "../../redux/reducers/cart.reducer";
 
 const SearchScreenCourse: FC<{ searchedCourse: ICourse }> = (props) => {
   const navigate = useNavigate();
+  const { isUserLoggedIn, user } = useContext(AppContext);
+  const dispatch = useDispatch<AppDispatch>();
+  const { cartCourses } = useAppSelector((store) => store.cartCourses);
+  const { boughtCourses } = useAppSelector((store) => store.boughtCouses);
+  let courseExistInCart;
+  const [isCourseAddedToCart, setCourseAddedToCart] = useState<boolean>(false);
+  let courseIsPurchased;
+  const [isCoursePurchased, setCoursePurchased] = useState<boolean>(false);
+
+  //checking if course is added to cart
+  courseExistInCart = cartCourses.filter((cartCourse: ICartCourse) => {
+    return cartCourse.course_id === props.searchedCourse?._id;
+  });
+
+  //checking if course is already purchased
+  courseIsPurchased = boughtCourses.filter((boughtCourse: ICartCourse) => {
+    return boughtCourse.course_id === props.searchedCourse?._id;
+  });
+
+  useEffect(() => {
+    if (courseExistInCart.length > 0) {
+      setCourseAddedToCart(true);
+    }
+    if (courseIsPurchased.length > 0) {
+      setCoursePurchased(true);
+    }
+  }, [courseExistInCart, courseIsPurchased]);
+
+  //adding course to cart
+  const addToCartHandler = () => {
+    if (isUserLoggedIn === false) {
+      showNotification(
+        "info",
+        "Please Log in or Sign up first to add the course in your cart!"
+      );
+    } else {
+      dispatch(addToCartAsync({ user, courseDetails: props.searchedCourse }));
+      setCourseAddedToCart(true);
+    }
+  };
   return (
     <div
       key={props?.searchedCourse._id}
@@ -59,21 +104,41 @@ const SearchScreenCourse: FC<{ searchedCourse: ICourse }> = (props) => {
           </div>
         </div>
         <div className="price d-flex flex-column justify-content-between">
-          <div className=" d-flex flex-column align-items-end">
-            <span className="mb-2 fw-bold fs-1">
-              ₹{props.searchedCourse?.discounted_price}
-            </span>
+          {isCoursePurchased ? (
+            <>
+              <div className="fs-3 fw-bold text-center my-4">
+                You have enrolled in this Course!
+              </div>
+              <div className="fs-4 text-center mb-4">Start Learning Now!</div>
+            </>
+          ) : (
+            <>
+              <div className=" d-flex flex-column align-items-end">
+                <span className="mb-2 fw-bold fs-1">
+                  ₹{props.searchedCourse?.discounted_price}
+                </span>
 
-            <span className="normal-price fs-5 text-decoration-line-through">
-              ₹{props.searchedCourse?.original_price}
-            </span>
-          </div>
-          <div
-            // onClick={addToCartHandler}
-            className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
-          >
-            <button className="fw-bold">Add to cart</button>
-          </div>
+                <span className="normal-price fs-5 text-decoration-line-through">
+                  ₹{props.searchedCourse?.original_price}
+                </span>
+              </div>
+              {isCourseAddedToCart ? (
+                <div
+                  onClick={() => navigate("/cart")}
+                  className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+                >
+                  <button className="fw-bold">Go to Cart</button>
+                </div>
+              ) : (
+                <div
+                  onClick={addToCartHandler}
+                  className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+                >
+                  <button className="fw-bold">Add to cart</button>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>

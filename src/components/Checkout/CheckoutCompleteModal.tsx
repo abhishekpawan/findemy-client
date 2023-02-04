@@ -3,7 +3,11 @@ import { Modal } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
-import { addToBoughtCoursesAsync } from "../../redux/reducers/boughtCourses.reducer";
+import {
+  addToBoughtCoursesAsync,
+  fetchBoughtCoursesAsync,
+} from "../../redux/reducers/boughtCourses.reducer";
+import { removeCourseFromCartAfterPurchase } from "../../redux/reducers/cart.reducer";
 import { AppDispatch } from "../../redux/store/store";
 import { ICartCourse } from "../../utils/interface";
 import { showNotification } from "../../utils/ToastNotification";
@@ -19,7 +23,7 @@ const CheckoutCompleteModal: FC<{
 }> = (props) => {
   const navigate = useNavigate();
 
-  const { user } = useContext(AppContext);
+  const { user, setIsCheckoutSuccess } = useContext(AppContext);
   const dispatch = useDispatch<AppDispatch>();
 
   const checkoutSuccessHandler = () => {
@@ -28,7 +32,10 @@ const CheckoutCompleteModal: FC<{
       totalBoughtCourses.push({ ...course, bought: true });
     }
     dispatch(addToBoughtCoursesAsync({ user, totalBoughtCourses }));
-    navigate("checkout/success", { replace: true });
+    dispatch(removeCourseFromCartAfterPurchase());
+    dispatch(fetchBoughtCoursesAsync(user!));
+    navigate("success", { replace: true });
+    setIsCheckoutSuccess(true);
   };
 
   const checkoutFailHandler = () => {

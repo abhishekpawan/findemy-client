@@ -29,6 +29,10 @@ const CourseDetails = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  useEffect(() => {
     setCourseDetails(
       courses.find((course) => {
         return course._id === id?.toString();
@@ -87,10 +91,46 @@ const CourseDetails = () => {
       (courseDetails?.discounted_price! / courseDetails?.original_price!) * 100
     );
 
+  const [isScrollingStart, setIsScrollingStart] = useState<Boolean>(false);
+
+  window.onscroll = function () {
+    let scrollLimit = 80;
+    if (window.scrollY >= scrollLimit) {
+      setIsScrollingStart(true);
+    } else {
+      setIsScrollingStart(false);
+    }
+  };
+
   return (
     <>
       {courseDetails?._id ? (
         <main className="course__details d-flex flex-column">
+          <div
+            className={` ${
+              isScrollingStart ? "onScroll " : ""
+            } scroll-course-header`}
+          >
+            <h3 className="fw-bold m-0">{courseDetails?.title} </h3>
+            <div className="course__details-rating d-flex align-items-center fw-bold fs-5 mb-2 ">
+              <span className="rating_num pt-2 me-2">
+                {courseDetails?.rating}
+              </span>
+              <StarRatings
+                rating={courseDetails?.rating}
+                starDimension="14px"
+                starSpacing="0px"
+                starRatedColor="orange"
+                numberOfStars={5}
+              />
+              <span className="num_reviews pt-2 fw-normal mx-2 text-decoration-underline">
+                ({courseDetails?.num_reviews} ratings)
+              </span>
+              <span className="num_students fw-normal pt-2 ms-2 ">
+                {courseDetails?.num_students} students
+              </span>
+            </div>
+          </div>
           <div className="course__details__body__container">
             <div className="course__details__body">
               <div className="course__details__body-wrapper">
