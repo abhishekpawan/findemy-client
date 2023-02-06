@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import StarRatings from "react-star-ratings";
 import { useNavigate, useParams } from "react-router-dom";
 import { BsPatchExclamationFill } from "react-icons/bs";
@@ -12,27 +12,38 @@ import { showNotification } from "../../utils/ToastNotification";
 import { ICartCourse, ICourse } from "../../utils/interface";
 import { AppDispatch, useAppSelector } from "../../redux/store/store";
 import { useDispatch } from "react-redux";
-import { addToCartAsync } from "../../redux/reducers/cart.reducer";
+import {
+  addToCartAsync,
+  selectStatus,
+} from "../../redux/reducers/cart.reducer";
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
 
 const CourseDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { isUserLoggedIn, user } = useContext(AppContext);
   const [courseDetails, setCourseDetails] = useState<ICourse>();
-  let courseExistInCart;
+  let courseExistInCart: ICourse[];
   const [isCourseAddedToCart, setCourseAddedToCart] = useState<boolean>(false);
-  let courseIsPurchased;
+  let courseIsPurchased: ICourse[];
   const [isCoursePurchased, setCoursePurchased] = useState<boolean>(false);
   const { courses } = useAppSelector((store) => store.courses);
   const { cartCourses } = useAppSelector((store) => store.cartCourses);
   const { boughtCourses } = useAppSelector((store) => store.boughtCouses);
   const dispatch = useDispatch<AppDispatch>();
-
+  const status = useAppSelector(selectStatus);
+  const [isScrollingStart, setIsScrollingStart] = useState<Boolean>(false);
+  const [isSpinning, setSpining] = useState<boolean>(true);
+  const antIcon = (
+    <LoadingOutlined style={{ fontSize: 34, color: "purple" }} spin />
+  );
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
+    setSpining(true);
     setCourseDetails(
       courses.find((course) => {
         return course._id === id?.toString();
@@ -53,34 +64,47 @@ const CourseDetails = () => {
   useEffect(() => {
     if (courseExistInCart.length > 0) {
       setCourseAddedToCart(true);
+      setSpining(false);
+    } else {
     }
     if (courseIsPurchased.length > 0) {
       setCoursePurchased(true);
+      setSpining(false);
     }
+  }, [courseExistInCart, courseIsPurchased]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (courseDetails?._id) {
+        setSpining(false);
+      }
+    }, 1000);
   }, [courseExistInCart, courseIsPurchased]);
 
   //adding course to cart
   const addToCartHandler = () => {
+    setSpining(true);
     if (isUserLoggedIn === false) {
+      setSpining(false);
       showNotification(
         "info",
         "Please Log in or Sign up first to add the course in your cart!"
       );
     } else {
       dispatch(addToCartAsync({ user, courseDetails: courseDetails! }));
-      setCourseAddedToCart(true);
     }
   };
 
   const buyNowHandler = () => {
+    setSpining(true);
     if (isUserLoggedIn === false) {
+      setSpining(false);
       showNotification(
         "info",
         "Please Log in or Sign up first to buy the course!"
       );
     } else {
       dispatch(addToCartAsync({ user, courseDetails: courseDetails! }));
-      setCourseAddedToCart(true);
       navigate("/cart");
     }
   };
@@ -90,8 +114,6 @@ const CourseDetails = () => {
     Math.round(
       (courseDetails?.discounted_price! / courseDetails?.original_price!) * 100
     );
-
-  const [isScrollingStart, setIsScrollingStart] = useState<Boolean>(false);
 
   window.onscroll = function () {
     let scrollLimit = 80;
@@ -160,12 +182,9 @@ const CourseDetails = () => {
                   <span className="num_reviews pt-2 fw-normal mx-2 text-decoration-underline">
                     ({courseDetails?.num_reviews} ratings)
                   </span>
-                  {/* <span className="num_students fw-normal ms-2 ">
-              {courseData[0].num_students} students
-            </span> */}
                 </div>
                 <div className="course__details-instructor mb-3">
-                  Created by{" "}
+                  Created by
                   <a href="#course__details_instructor">
                     {courseDetails?.instructor_name}
                   </a>
@@ -178,7 +197,6 @@ const CourseDetails = () => {
                     <TbWorld /> English
                   </span>
                 </div>
-
                 <div className="course__details__card-details d-block d-lg-none pt-1 ">
                   {isCoursePurchased ? (
                     <>
@@ -208,20 +226,22 @@ const CourseDetails = () => {
                           <button className="fw-bold">Go to Cart</button>
                         </div>
                       ) : (
-                        <>
-                          <div
-                            onClick={addToCartHandler}
-                            className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
-                          >
-                            <button className="fw-bold">Add to cart</button>
-                          </div>
-                          <div
-                            onClick={buyNowHandler}
-                            className="buy_now-btn d-flex justify-content-center align-items-center mb-4"
-                          >
-                            <button className="fw-bold">Buy now</button>
-                          </div>
-                        </>
+                        <Spin indicator={antIcon} spinning={isSpinning}>
+                          <>
+                            <div
+                              onClick={addToCartHandler}
+                              className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
+                            >
+                              <button className="fw-bold">Add to cart</button>
+                            </div>
+                            <div
+                              onClick={buyNowHandler}
+                              className="buy_now-btn d-flex justify-content-center align-items-center mb-4"
+                            >
+                              <button className="fw-bold">Buy now</button>
+                            </div>
+                          </>
+                        </Spin>
                       )}
                       <div className="fs-4 text-center mb-4">
                         30-Day Money-Back Guarantee <br /> <br />
@@ -254,10 +274,10 @@ const CourseDetails = () => {
                 <h2 className="fw-bold mb-4">What you'll learn</h2>
                 <div className="row">
                   {courseDetails?.learning_point?.map(
-                    (learningPoint: string) => {
+                    (learningPoint: string, index) => {
                       return (
                         <div
-                          key={learningPoint.charCodeAt(0)}
+                          key={index}
                           className="item d-flex p-3 col-12 col-md-6"
                         >
                           <div>

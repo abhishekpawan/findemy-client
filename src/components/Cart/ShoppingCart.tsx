@@ -22,7 +22,9 @@ const ShoppingCart = () => {
   // Get the current `status`:
   const status = useAppSelector(selectStatus);
 
-  window.scrollTo(0, 0);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   let totalOriginalPrice: number = 0;
   let totalDiscountedPrice: number = 0;

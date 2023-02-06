@@ -28,6 +28,7 @@ const Signup = () => {
   const antIcon = (
     <LoadingOutlined style={{ fontSize: 34, color: "purple" }} spin />
   );
+  
   const {
     register,
     handleSubmit,

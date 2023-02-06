@@ -16,7 +16,6 @@ import { useEffect } from "react";
 
 const HomePage = () => {
   const { courses } = useAppSelector((store) => store.courses);
-  const status = useAppSelector(selectStatus);
   const sliderSettings = {
     slidesToShow: 5,
     slidesToScroll: 1,

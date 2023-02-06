@@ -1,6 +1,6 @@
 import { BsTagFill } from "react-icons/bs";
 import StarRatings from "react-star-ratings";
-import { FC} from "react";
+import { FC } from "react";
 import { ICartCourse } from "../../utils/interface";
 import { useNavigate } from "react-router-dom";
 
@@ -93,7 +93,7 @@ const CartCourse: FC<{
             <a
               onClick={() => props.onDeleteHandler(props.cartCourse._id!)}
               className="me-3 me-md-0 mb-md-3"
-              href="#"
+              // href="#"
             >
               Remove
             </a>
