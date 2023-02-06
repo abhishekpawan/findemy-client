@@ -6,7 +6,7 @@ import { HiBars3 } from "react-icons/hi2";
 import { FaUserAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
-import FindemyLogo from "../../assets/img/Findemy.png";
+import FindemyLogo from "../../Assets/img/Findemy.png";
 
 import "./header.css";
 import { AppContext } from "../../App";

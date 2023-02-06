@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import Lottie from "react-lottie";
-import * as successIcon from "../../assets/icons/success.json";
+import * as successIcon from "../../Assets/icons/success.json";
 import { useContext, useEffect } from "react";
 import { AppContext } from "../../App";
 

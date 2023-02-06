@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { IoMdLock } from "react-icons/io";
 import { showNotification } from "../../utils/ToastNotification";
-import findemy_UPI_QR from "../../assets/img/findemy_upi_qr.png";
+import findemy_UPI_QR from "../../Assets/img/findemy_upi_qr.png";
 import CheckoutCourse from "./CheckoutCourse";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import FindemyLogo from "../../assets/img/Findemy.png";
+import FindemyLogo from "../../Assets/img/Findemy.png";
 import CheckoutCompleteModal from "./CheckoutCompleteModal";
 import CheckoutSummary from "./CheckoutSummary";
 

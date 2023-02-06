@@ -1,6 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import Lottie from "react-lottie";
-import * as noSearchResult from "../../assets/icons/nosearchresult.json";
+import * as noSearchResult from "../../Assets/icons/nosearchresult.json";
 import { FC } from "react";
 
 const EmptySearchScreen: FC<{ isFilterPanelHide: boolean }> = (props) => {

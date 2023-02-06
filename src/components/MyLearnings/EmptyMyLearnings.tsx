@@ -1,6 +1,6 @@
 import Lottie from "react-lottie";
 import { Link } from "react-router-dom";
-import * as emptymylearning from "../../assets/icons/emptymylearning.json";
+import * as emptymylearning from "../../Assets/icons/emptymylearning.json";
 
 const EmptyMyLearnings = () => {
   const defaultOptions = {

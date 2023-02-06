@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Lottie from "react-lottie";
-import * as emptyCartIcon from "../../assets/icons/emptycart.json";
+import * as emptyCartIcon from "../../Assets/icons/emptycart.json";
 
 const EmptyCart = () => {
   const defaultOptions = {
