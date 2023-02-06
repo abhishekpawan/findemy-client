@@ -71,7 +71,7 @@ const HomePage = () => {
     <main className="homepage">
       <div className="homepage__courses ">
         <h2 className="fw-bold mb-5 fs-1"> Students are viewing</h2>
-        {status === "loading" ? (
+        {courses.length === 0 ? (
           <HomePageCourseCardLoader />
         ) : (
           <Slider {...sliderSettings}>

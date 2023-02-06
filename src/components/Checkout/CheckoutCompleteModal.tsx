@@ -8,7 +8,7 @@ import {
   fetchBoughtCoursesAsync,
 } from "../../redux/reducers/boughtCourses.reducer";
 import { removeCourseFromCartAfterPurchase } from "../../redux/reducers/cart.reducer";
-import { AppDispatch } from "../../redux/store/store";
+import { AppDispatch, useAppSelector } from "../../redux/store/store";
 import { ICartCourse } from "../../utils/interface";
 import { showNotification } from "../../utils/ToastNotification";
 import { CardDetails } from "./Checkout";
@@ -22,8 +22,9 @@ const CheckoutCompleteModal: FC<{
   totalPrice: number;
 }> = (props) => {
   const navigate = useNavigate();
+  const { boughtCourses } = useAppSelector((store) => store.boughtCouses);
 
-  const { user, setIsCheckoutSuccess } = useContext(AppContext);
+  const { user, setIsCheckoutSuccess, isUserLoggedIn } = useContext(AppContext);
   const dispatch = useDispatch<AppDispatch>();
 
   const checkoutSuccessHandler = () => {
@@ -33,7 +34,6 @@ const CheckoutCompleteModal: FC<{
     }
     dispatch(addToBoughtCoursesAsync({ user, totalBoughtCourses }));
     dispatch(removeCourseFromCartAfterPurchase());
-    dispatch(fetchBoughtCoursesAsync(user!));
     navigate("success", { replace: true });
     setIsCheckoutSuccess(true);
   };

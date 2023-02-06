@@ -76,7 +76,7 @@ export const addToBoughtCoursesAsync = createAsyncThunk<
       const data = await response.json();
       if (data.success === true) {
         showNotification("success", "Course successfully purchased!");
-        return data.boughtCourses;
+        return data.allBoughtCourse;
       } else if (response.status !== 200) {
         // Return the error message:
         return thunkApi.rejectWithValue({

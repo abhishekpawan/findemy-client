@@ -33,7 +33,7 @@ const MyLearnings = () => {
                 return (
                   <div
                     key={course._id}
-                    className="col-12 col-md-6 col-lg-3 mt-4"
+                    className="col-12 col-md-6 col-lg-3 mt-4 mb-5"
                   >
                     <HomepageCourseCard
                       course={course}

@@ -58,8 +58,8 @@ const Footer = () => {
           <div className="footer__language-btn col-12 col-md-4 order-md-2">
             <button
               aria-label="language"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
+              // data-bs-toggle="modal"
+              // data-bs-target="#exampleModal"
             >
               <TbWorld /> <span>English</span>
             </button>
