@@ -25,12 +25,15 @@ export const fetchCartCoursesAsync = createAsyncThunk<
   { rejectValue: FetchCartCoursesError }
 >("cartCourses/fetchCartCoursesAsync", async (user: UserData, thunkApi) => {
   try {
-    let response = await fetch(`http://localhost:3001/cart/user/${user.id}`, {
-      headers: {
-        Authorization: `Bearer ${user?.token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    let response = await fetch(
+      `https://findemy-server.glitch.me/cart/user/${user.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
     let data = await response.json();
     if (data.success == true) {
       return data.cartCourse;
@@ -66,7 +69,7 @@ export const addToCartAsync = createAsyncThunk<
   delete CourseDataForCart._id;
 
   try {
-    const response = await fetch("http://localhost:3001/cart/add", {
+    const response = await fetch("https://findemy-server.glitch.me/cart/add", {
       headers: {
         Authorization: `Bearer ${user?.token}`,
         "Content-Type": "application/json",
@@ -102,14 +105,17 @@ export const deleteCourseFromCartAsync = createAsyncThunk<
   async (body: DeleteFromCartBody, thunkApi) => {
     const { _id, user } = body;
     try {
-      let response = await fetch(`http://localhost:3001/cart/${_id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${user?.token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user_id: user.id }),
-      });
+      let response = await fetch(
+        `https://findemy-server.glitch.me/cart/${_id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_id: user.id }),
+        }
+      );
       let data = await response.json();
       if (data.success == true) {
         showNotification(

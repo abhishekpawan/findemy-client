@@ -50,7 +50,7 @@ const Signup = () => {
         body: JSON.stringify(signupData),
       };
       let response = await fetch(
-        "http://localhost:3001/users/signup",
+        "https://findemy-server.glitch.me/users/signup",
         requestOptions
       );
       const data = await response.json();

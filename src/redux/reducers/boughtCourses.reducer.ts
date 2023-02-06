@@ -25,7 +25,7 @@ export const fetchBoughtCoursesAsync = createAsyncThunk<
 >("boughtCourses/fetchBoughtCoursesAsync", async (user, thunkApi) => {
   try {
     const response = await fetch(
-      `http://localhost:3001/boughtcourse/${user.id}`,
+      `https://findemy-server.glitch.me/boughtcourse/${user.id}`,
       {
         headers: {
           Authorization: `Bearer ${user?.token}`,
@@ -64,14 +64,17 @@ export const addToBoughtCoursesAsync = createAsyncThunk<
     const { totalBoughtCourses, user } = body;
 
     try {
-      const response = await fetch("http://localhost:3001/boughtcourse/add", {
-        headers: {
-          Authorization: `Bearer ${user?.token}`,
-          "Content-Type": "application/json",
-        },
-        method: "Post",
-        body: JSON.stringify(totalBoughtCourses),
-      });
+      const response = await fetch(
+        "https://findemy-server.glitch.me/boughtcourse/add",
+        {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+            "Content-Type": "application/json",
+          },
+          method: "Post",
+          body: JSON.stringify(totalBoughtCourses),
+        }
+      );
 
       const data = await response.json();
       if (data.success === true) {

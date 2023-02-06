@@ -23,7 +23,7 @@ export const CourseDetailsInstructorDetails: FC<{
     const getInstructorData = async () => {
       try {
         let response = await fetch(
-          `http://localhost:3001/instructors/${props?.instructor_id}`
+          `https://findemy-server.glitch.me/instructors/${props?.instructor_id}`
         );
         let data = await response.json();
         if (data.success == true) {
@@ -40,7 +40,7 @@ export const CourseDetailsInstructorDetails: FC<{
     const getInstructorCourses = async () => {
       try {
         let response = await fetch(
-          `http://localhost:3001/courses/instructor/${props?.instructor_id}`
+          `https://findemy-server.glitch.me/courses/instructor/${props?.instructor_id}`
         );
         let data = await response.json();
         if (data.success == true) {

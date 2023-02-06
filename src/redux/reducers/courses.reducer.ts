@@ -23,7 +23,7 @@ export const fetchCoursesAsync = createAsyncThunk<
   { rejectValue: FetchCoursesError }
 >("courses/fetchAllCourses", async (user, thunkApi) => {
   try {
-    let response = await fetch("http://localhost:3001/courses/all");
+    let response = await fetch("https://findemy-server.glitch.me/courses/all");
     let data = await response.json();
     if (data.success == true) {
       return data.allCourses;

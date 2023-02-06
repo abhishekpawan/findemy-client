@@ -48,7 +48,7 @@ const Login = () => {
         body: JSON.stringify(loginData),
       };
       let response = await fetch(
-        "http://localhost:3001/users/login",
+        "https://findemy-server.glitch.me/users/login",
         requestOptions
       );
       const data = await response.json();

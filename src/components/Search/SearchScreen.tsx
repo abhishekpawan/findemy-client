@@ -30,9 +30,10 @@ const SearchScreen = () => {
   };
 
   const getSearchedCourses = async () => {
+    setLoading(true);
     try {
       let response = await fetch(
-        `http://localhost:3001/courses?limit=2&skip=0&search=${text}&levels=${levels.toString()}&ratings=${ratings.toString()}`
+        `https://findemy-server.glitch.me/courses?limit=2&skip=0&search=${text}&levels=${levels.toString()}&ratings=${ratings.toString()}`
       );
       let data = await response.json();
       if (data.success == true) {
@@ -56,6 +57,8 @@ const SearchScreen = () => {
       levels.splice(levels.indexOf(e.target.value), 1);
     }
     setLevels(levels);
+    setLoading(true);
+
     getSearchedCourses();
   };
 
@@ -68,6 +71,7 @@ const SearchScreen = () => {
       ratings.splice(ratings.indexOf(e.target.value), 1);
     }
     setRatings(ratings);
+    setLoading(true);
     getSearchedCourses();
   };
 

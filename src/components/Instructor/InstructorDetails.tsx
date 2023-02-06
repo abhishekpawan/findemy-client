@@ -24,7 +24,9 @@ const InstructorDetailsPage = () => {
   useEffect(() => {
     const getInstructorData = async () => {
       try {
-        let response = await fetch(`http://localhost:3001/instructors/${id}`);
+        let response = await fetch(
+          `https://findemy-server.glitch.me/instructors/${id}`
+        );
         let data = await response.json();
         if (data.success == true) {
           setInstructorDetails(data.instructor);
@@ -47,7 +49,7 @@ const InstructorDetailsPage = () => {
     const getInstructorCourses = async () => {
       try {
         let response = await fetch(
-          `http://localhost:3001/courses/instructor/${id}`
+          `https://findemy-server.glitch.me/courses/instructor/${id}`
         );
         let data = await response.json();
         if (data.success == true) {
