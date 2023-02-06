@@ -87,14 +87,29 @@ header .user-profile-btn:hover {
 header .user-menu {
   display: flex;
   right: 1px;
-  top: 6rem;
+  top: 3rem;
   /* padding: 2rem; */
-  border: 1px solid var(--light-grey-border);
-  background-color: var(--white-text);
-  box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
+  /* border: 1px solid var(--light-grey-border); */
+}
+header .user-menu .invisible {
+  height: 3rem;
+  visibility: hidden;
 }
 header .user-menu.hidden {
   display: none;
+}
+header .user-menu .user-profile {
+  box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
+
+  background-color: var(--white-text);
+  border: 1px solid var(--light-grey-border);
+}
+header .user-menu .user-menu-options {
+  box-shadow: 0 2px 4px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 8%);
+
+  background-color: var(--white-text);
+  border: 1px solid var(--light-grey-border);
+  border-top: none;
 }
 
 header .user-menu-options a {

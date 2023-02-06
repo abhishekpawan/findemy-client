@@ -60,6 +60,7 @@ const Checkout = () => {
     setCardDetails(data);
   };
   const navigate = useNavigate();
+
   useEffect(() => {
     if (cartCourses.length! === 0) {
       showNotification(
@@ -91,8 +92,8 @@ const Checkout = () => {
             onSubmit={handleSubmit(onSubmit)}
             id="checkout-form"
           >
-            <div className="col-12 col-lg-7 mb-5">
-              <div className="payment col-12 me-lg-0 m-auto">
+            <div className="col-12 col-lg-7 mb-5 ">
+              <div className="payment col-12 me-lg-0 mx-auto">
                 <h1 className="fw-bold ">Checkout</h1>
                 <h2 className="fw-bold fs-2 mb-4">Billing address</h2>
                 <div className="row mb-2">

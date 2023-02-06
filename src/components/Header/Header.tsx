@@ -239,6 +239,7 @@ const Header = () => {
         <div className="position-relative d-none d-md-block">
           <button
             onMouseEnter={() => setUserMenuVisible(true)}
+            onMouseLeave={() => setUserMenuVisible(false)}
             className="user-profile-btn d-none d-md-block me-3 me-md-0"
           >
             <FaUserAlt />
@@ -247,9 +248,11 @@ const Header = () => {
             className={`
             ${isUserMenuVisible ? "" : "hidden"}
             user-menu flex-column position-absolute`}
+            onMouseEnter={() => setUserMenuVisible(true)}
             onMouseLeave={() => setUserMenuVisible(false)}
           >
-            <div className="user-profile d-flex align-items-center justify-content-center p-4 mb-4">
+            <div className="invisible"></div>
+            <div className="user-profile d-flex align-items-center justify-content-center p-4">
               <button className="user-profile-btn me-3">
                 <FaUserAlt />
               </button>
@@ -258,7 +261,7 @@ const Header = () => {
                 <div>{user?.email}</div>
               </div>
             </div>
-            <div className="user-menu-options p-4 pt-0 d-flex flex-column">
+            <div className="user-menu-options pt-4 p-4 pt-0 d-flex flex-column">
               <Link to="/mylearnings">My Learning</Link>
               <Link to="/cart">My Cart</Link>
               <Link to="/help">Help</Link>

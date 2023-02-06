@@ -12,10 +12,7 @@ import { showNotification } from "../../utils/ToastNotification";
 import { ICartCourse, ICourse } from "../../utils/interface";
 import { AppDispatch, useAppSelector } from "../../redux/store/store";
 import { useDispatch } from "react-redux";
-import {
-  addToCartAsync,
-  selectStatus,
-} from "../../redux/reducers/cart.reducer";
+import { addToCartAsync } from "../../redux/reducers/cart.reducer";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 
@@ -32,7 +29,6 @@ const CourseDetails = () => {
   const { cartCourses } = useAppSelector((store) => store.cartCourses);
   const { boughtCourses } = useAppSelector((store) => store.boughtCouses);
   const dispatch = useDispatch<AppDispatch>();
-  const status = useAppSelector(selectStatus);
   const [isScrollingStart, setIsScrollingStart] = useState<Boolean>(false);
   const [isSpinning, setSpining] = useState<boolean>(true);
   const antIcon = (
@@ -186,11 +182,11 @@ const CourseDetails = () => {
                 <div className="course__details-instructor mb-3">
                   Created by
                   <a href="#course__details_instructor">
-                    {courseDetails?.instructor_name}
+                    {`  ${courseDetails?.instructor_name}`}
                   </a>
                 </div>
                 <div className="course__details-last-update d-flex align-items-center ">
-                  <span className="date ">
+                  <span className="date me-3 ">
                     <BsPatchExclamationFill /> Last updated 07/2022
                   </span>
                   <span className="language">
@@ -265,6 +261,7 @@ const CourseDetails = () => {
                 original_price={courseDetails?.original_price}
                 addToCartHandler={addToCartHandler}
                 buyNowHandler={buyNowHandler}
+                isSpinning={isSpinning}
               />
             </div>
           </div>

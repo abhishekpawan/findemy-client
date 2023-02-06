@@ -107,6 +107,11 @@
     background: linear-gradient(#d1d7dc, #d1d7dc) no-repeat center/100% 0.3rem;
   }
 }
+@media screen and (max-width: 991px) {
+  .payment {
+    margin-bottom: 30rem;
+  }
+}
 
 .payment .or div {
   background: #d1d7dc;
