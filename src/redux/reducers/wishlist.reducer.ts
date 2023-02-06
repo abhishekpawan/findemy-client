@@ -28,7 +28,7 @@ export const fetchWishlistCoursesAsync = createAsyncThunk<
   async (user: UserData, thunkApi) => {
     try {
       let response = await fetch(
-        `http://localhost:3001/wishlist/user/${user.id}`,
+        `https://findemy-server.glitch.me/wishlist/user/${user.id}`,
         {
           headers: {
             Authorization: `Bearer ${user?.token}`,
@@ -74,14 +74,17 @@ export const addToWishlistAsync = createAsyncThunk<
     delete CourseDataForWishlist._id;
 
     try {
-      const response = await fetch("http://localhost:3001/wishlist/add", {
-        headers: {
-          Authorization: `Bearer ${user?.token}`,
-          "Content-Type": "application/json",
-        },
-        method: "Post",
-        body: JSON.stringify(CourseDataForWishlist),
-      });
+      const response = await fetch(
+        "https://findemy-server.glitch.me/wishlist/add",
+        {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+            "Content-Type": "application/json",
+          },
+          method: "Post",
+          body: JSON.stringify(CourseDataForWishlist),
+        }
+      );
 
       const data = await response.json();
       if (data.success === true) {
@@ -111,14 +114,17 @@ export const deleteCourseFromWishlistAsync = createAsyncThunk<
   async (body: DeleteFromWishlistBody, thunkApi) => {
     const { _id, user } = body;
     try {
-      let response = await fetch(`http://localhost:3001/wishlist/${_id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${user?.token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ user_id: user.id }),
-      });
+      let response = await fetch(
+        `https://findemy-server.glitch.me/wishlist/${_id}`,
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user_id: user.id }),
+        }
+      );
       let data = await response.json();
       if (data.success == true) {
         showNotification(
