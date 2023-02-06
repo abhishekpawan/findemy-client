@@ -1,0 +1,89 @@
+/* My learnings page */
+
+.mywishlist {
+  min-height: 100vh;
+}
+.mywishlist .mywishlist-header {
+  background-color: var(--black-text);
+  color: var(--white-text);
+  min-width: 40rem;
+}
+
+.mywishlist .mywishlist-header div,
+.mywishlist .mywishlist-courses {
+  min-width: 40rem;
+  margin: auto;
+  padding: 4rem 4rem 0;
+  max-width: 134rem;
+}
+.mywishlist .mywishlist-header h1 {
+  font-size: 4rem;
+}
+
+.mywishlist .mywishlist-header a {
+  position: relative;
+  bottom: 0.8rem;
+  color: var(--white-text);
+}
+
+.mywishlist .mywishlist-header a:last-child {
+  position: relative;
+  bottom: 0.8rem;
+  color: var(--white-text);
+  border-bottom: 5px solid var(--white-text);
+}
+
+.mywishlist .mywishlist-header a:hover {
+  filter: brightness(75%);
+}
+
+/* mywishlit courses */
+
+.mywishlist .description--title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mywishlist .add_to_cart-btn {
+  height: 4.8rem;
+  width: 100%;
+  background: var(--purple-button-background);
+}
+.mywishlist .add_to_cart-btn:hover {
+  cursor: pointer;
+  background-color: var(--purple-button-background-hover);
+}
+.mywishlist .add_to_cart-btn button {
+  color: var(--white-text);
+}
+
+.mywishlist .add_to_wishlist-btn {
+  border: 1px solid var(--black-text);
+  width: 6rem;
+  height: 4.7rem;
+  font-size: 3rem;
+}
+.mywishlist .add_to_wishlist-btn:hover {
+  cursor: pointer;
+  filter: brightness(75%);
+}
+
+/* empty my learnings */
+
+.emptymylearning-courses {
+  margin: 5rem;
+  border: 1px solid var(--light-grey-border);
+}
+
+.emptymylearning-courses a {
+  color: var(--purple-button-background-hover);
+  border-bottom: 3px solid var(--purple-button-background-hover);
+}
+
+.emptymylearning-courses a:hover {
+  color: var(--purple-text);
+  border-bottom: 3px solid var(--purple-text);
+}

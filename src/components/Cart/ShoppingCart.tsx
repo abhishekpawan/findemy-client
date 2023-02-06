@@ -1,24 +1,25 @@
 import CartCourse from "./ShoppingCartCourse";
-
 import "./shoppingcart.css";
 import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
-import { showNotification } from "../../utils/ToastNotification";
-import { ICartCourse } from "../../utils/interface";
 import ShopingCartLoader from "./ShopingCartLoader";
 import EmptyCart from "./EmptyCart";
 import { Link } from "react-router-dom";
 import { AppDispatch, useAppSelector } from "../../redux/store/store";
 import {
+  addToCartAsync,
   deleteCourseFromCartAsync,
   selectStatus,
 } from "../../redux/reducers/cart.reducer";
 import { useDispatch } from "react-redux";
+import WishlistCartCourse from "./WishlistCartCourse";
+import { deleteCourseFromWishlistAsync } from "../../redux/reducers/wishlist.reducer";
 
 const ShoppingCart = () => {
   const { user } = useContext(AppContext);
   const dispatch = useDispatch<AppDispatch>();
   const { cartCourses } = useAppSelector((store) => store.cartCourses);
+  const { wishlistCourses } = useAppSelector((store) => store.wishlistCourses);
   // Get the current `status`:
   const status = useAppSelector(selectStatus);
 
@@ -38,8 +39,9 @@ const ShoppingCart = () => {
   let totalPercentageOff =
     100 - Math.round((totalDiscountedPrice / totalOriginalPrice) * 100);
 
+  //removing course from cart
   const onDeleteHandler = (_id: string) => {
-    dispatch(deleteCourseFromCartAsync({ _id, user: user! }));
+    dispatch(deleteCourseFromCartAsync({ _id, user }));
   };
 
   return (
@@ -87,6 +89,38 @@ const ShoppingCart = () => {
                       <button className="fw-bold ">Checkout</button>
                     </Link>
                   </div>
+                </div>
+              </div>
+            </main>
+          )}
+        </>
+      )}
+
+      {status === "loading" ? (
+        <ShopingCartLoader />
+      ) : (
+        <>
+          {wishlistCourses.length === 0 ? (
+            ""
+          ) : (
+            <main className="cart container p-4">
+              <div className="row">
+                <h1 className="fw-bold">Your Wishlist</h1>
+                <h3 className="fw-bold fs-4 mt-4 mb-3">
+                  {wishlistCourses.length}
+                  {wishlistCourses.length > 1 ? " Courses" : " Course "}
+                  in Wishlist
+                </h3>
+                <div className="col-12">
+                  {wishlistCourses?.map((wishlistCourse) => {
+                    return (
+                      <WishlistCartCourse
+                        key={wishlistCourse._id}
+                        cartCourse={wishlistCourse}
+                        wishListCourse={wishlistCourse}
+                      />
+                    );
+                  })}
                 </div>
               </div>
             </main>

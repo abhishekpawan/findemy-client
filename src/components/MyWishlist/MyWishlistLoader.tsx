@@ -1,7 +1,7 @@
 import { Skeleton } from "antd";
 import React from "react";
 
-const MyWishlistLoader = () => {
+const MyLearningsLoader = () => {
   return (
     <main className="cart container p-4">
       <div className="row">
@@ -14,4 +14,4 @@ const MyWishlistLoader = () => {
   );
 };
 
-export default MyWishlistLoader;
+export default MyLearningsLoader;

@@ -1,25 +1,35 @@
 import { BsTagFill } from "react-icons/bs";
 import StarRatings from "react-star-ratings";
-import { FC, useContext, useDebugValue } from "react";
-import { ICartCourse } from "../../utils/interface";
+import { FC, useContext } from "react";
+import { ICartCourse, ICourse } from "../../utils/interface";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addToWishlistAsync } from "../../redux/reducers/wishlist.reducer";
-import { AppDispatch } from "../../redux/store/store";
 import { AppContext } from "../../App";
-import { deleteCourseFromCartAsync } from "../../redux/reducers/cart.reducer";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../../redux/store/store";
+import { deleteCourseFromWishlistAsync } from "../../redux/reducers/wishlist.reducer";
+import { addToCartAsync } from "../../redux/reducers/cart.reducer";
 
-const CartCourse: FC<{
+const WishlistCartCourse: FC<{
   cartCourse: ICartCourse;
-  onDeleteHandler(course_id: string): void;
+  wishListCourse: ICourse;
 }> = (props) => {
-  const { user } = useContext(AppContext);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  //adding course to wishlist
-  const addToWishlistHandler = () => {
-    dispatch(deleteCourseFromCartAsync({ _id: props.cartCourse?._id!, user }));
-    dispatch(addToWishlistAsync({ user, courseDetails: props.cartCourse }));
+  const { user } = useContext(AppContext);
+
+  // removing course form wishlist
+  const removerFromWishlistHandler = (_id: string) => {
+    dispatch(deleteCourseFromWishlistAsync({ _id, user }));
+  };
+  // moving course from wishlist to cart
+  const moveToCartHandler = () => {
+    dispatch(addToCartAsync({ user, courseDetails: props?.wishListCourse }));
+    dispatch(
+      deleteCourseFromWishlistAsync({
+        user,
+        _id: props.cartCourse?._id!,
+      })
+    );
   };
 
   return (
@@ -103,16 +113,15 @@ const CartCourse: FC<{
         <div className="d-flex">
           <div className="actions fs-5 fs- d-flex flex-md-column align-items-end mt-3 mt-md-1 me-md-5">
             <a
-              onClick={() => props.onDeleteHandler(props.cartCourse._id!)}
+              onClick={() => removerFromWishlistHandler(props.cartCourse._id!)}
               className="me-3 me-md-0 mb-md-3"
-              // href="#"
             >
-              Remove
+              Remove from wishlist
             </a>
-            <a className="me-3 me-md-0 mb-md-3" href="">
-              Save for Later
+            <a onClick={moveToCartHandler} className="me-3 me-md-0 mb-md-3">
+              Move to cart
             </a>
-            <a onClick={addToWishlistHandler}>Move to Wishlist</a>
+            <a href="">Save for later</a>
           </div>
           <div className="price d-none d-md-flex flex-column align-items-end ">
             <span className="mb-2 fw-bold fs-1">
@@ -132,4 +141,4 @@ const CartCourse: FC<{
   );
 };
 
-export default CartCourse;
+export default WishlistCartCourse;

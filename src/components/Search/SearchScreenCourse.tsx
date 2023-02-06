@@ -14,7 +14,7 @@ const SearchScreenCourse: FC<{ searchedCourse: ICourse }> = (props) => {
   const { isUserLoggedIn, user } = useContext(AppContext);
   const dispatch = useDispatch<AppDispatch>();
   const { cartCourses } = useAppSelector((store) => store.cartCourses);
-  const { boughtCourses } = useAppSelector((store) => store.boughtCouses);
+  const { boughtCourses } = useAppSelector((store) => store.boughtCourses);
   let courseExistInCart;
   const [isCourseAddedToCart, setCourseAddedToCart] = useState<boolean>(false);
   let courseIsPurchased;

@@ -3,7 +3,7 @@ import StarRatings from "react-star-ratings";
 import { useNavigate, useParams } from "react-router-dom";
 import { BsPatchExclamationFill } from "react-icons/bs";
 import { TbWorld } from "react-icons/tb";
-import { AiOutlineCheck } from "react-icons/ai";
+import { AiOutlineCheck, AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import CourseDetailsCard from "./CourseDetailsCard";
 import { CourseDetailsInstructorDetails } from "../Instructor/CourseDetailsInstructorDetails";
 import CourseDetailsLoader from "./CourseDetailsLoader";
@@ -12,9 +12,15 @@ import { showNotification } from "../../utils/ToastNotification";
 import { ICartCourse, ICourse } from "../../utils/interface";
 import { AppDispatch, useAppSelector } from "../../redux/store/store";
 import { useDispatch } from "react-redux";
-import { addToCartAsync } from "../../redux/reducers/cart.reducer";
+import {
+  addToCartAsync,
+} from "../../redux/reducers/cart.reducer";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
+import {
+  addToWishlistAsync,
+  deleteCourseFromWishlistAsync,
+} from "../../redux/reducers/wishlist.reducer";
 
 const CourseDetails = () => {
   const navigate = useNavigate();
@@ -25,9 +31,13 @@ const CourseDetails = () => {
   const [isCourseAddedToCart, setCourseAddedToCart] = useState<boolean>(false);
   let courseIsPurchased: ICourse[];
   const [isCoursePurchased, setCoursePurchased] = useState<boolean>(false);
+  let courseExistInWishlist: ICourse[];
+  const [isCourseAddedToWishlist, setCourseAddedToWishlist] =
+    useState<boolean>(false);
   const { courses } = useAppSelector((store) => store.courses);
   const { cartCourses } = useAppSelector((store) => store.cartCourses);
-  const { boughtCourses } = useAppSelector((store) => store.boughtCouses);
+  const { boughtCourses } = useAppSelector((store) => store.boughtCourses);
+  const { wishlistCourses } = useAppSelector((store) => store.wishlistCourses);
   const dispatch = useDispatch<AppDispatch>();
   const [isScrollingStart, setIsScrollingStart] = useState<Boolean>(false);
   const [isSpinning, setSpining] = useState<boolean>(true);
@@ -57,6 +67,13 @@ const CourseDetails = () => {
     return boughtCourse.course_id === courseDetails?._id;
   });
 
+  //checking if course is added to wishlist
+  courseExistInWishlist = wishlistCourses.filter(
+    (wishlistCourses: ICartCourse) => {
+      return wishlistCourses.course_id === courseDetails?._id;
+    }
+  );
+
   useEffect(() => {
     if (courseExistInCart.length > 0) {
       setCourseAddedToCart(true);
@@ -67,7 +84,13 @@ const CourseDetails = () => {
       setCoursePurchased(true);
       setSpining(false);
     }
-  }, [courseExistInCart, courseIsPurchased]);
+    if (courseExistInWishlist.length > 0) {
+      setCourseAddedToWishlist(true);
+      setSpining(false);
+    } else {
+      setCourseAddedToWishlist(false);
+    }
+  }, [courseExistInCart, courseIsPurchased, courseExistInWishlist]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -75,7 +98,7 @@ const CourseDetails = () => {
         setSpining(false);
       }
     }, 1000);
-  }, [courseExistInCart, courseIsPurchased]);
+  }, [courseExistInCart, courseIsPurchased, courseExistInWishlist]);
 
   //adding course to cart
   const addToCartHandler = () => {
@@ -86,6 +109,14 @@ const CourseDetails = () => {
         "info",
         "Please Log in or Sign up first to add the course in your cart!"
       );
+    } else if (courseExistInWishlist.length > 0) {
+      dispatch(
+        deleteCourseFromWishlistAsync({
+          user,
+          _id: courseExistInWishlist[0]._id!,
+        })
+      );
+      dispatch(addToCartAsync({ user, courseDetails: courseDetails! }));
     } else {
       dispatch(addToCartAsync({ user, courseDetails: courseDetails! }));
     }
@@ -99,9 +130,47 @@ const CourseDetails = () => {
         "info",
         "Please Log in or Sign up first to buy the course!"
       );
+    } else if (courseExistInWishlist.length > 0) {
+      dispatch(
+        deleteCourseFromWishlistAsync({
+          user,
+          _id: courseExistInWishlist[0]._id!,
+        })
+      );
+      dispatch(addToCartAsync({ user, courseDetails: courseDetails! }));
+      navigate("/cart");
     } else {
       dispatch(addToCartAsync({ user, courseDetails: courseDetails! }));
       navigate("/cart");
+    }
+  };
+
+  //adding course to wishlist
+  const addToWishlistHandler = () => {
+    setSpining(true);
+    if (isUserLoggedIn === false) {
+      setSpining(false);
+      showNotification(
+        "info",
+        "Please Log in or Sign up first to add the course in your wishlist!"
+      );
+    } else {
+      dispatch(addToWishlistAsync({ user, courseDetails: courseDetails! }));
+    }
+  };
+
+  //removing course to wishlist
+  const removeFromWishlistHandler = () => {
+    setSpining(true);
+    if (isCourseAddedToWishlist === true && courseExistInWishlist.length > 0) {
+      dispatch(
+        deleteCourseFromWishlistAsync({
+          user,
+          _id: courseExistInWishlist[0]._id!,
+        })
+      );
+      setCourseAddedToWishlist(false);
+      setSpining(false);
     }
   };
 
@@ -224,12 +293,30 @@ const CourseDetails = () => {
                       ) : (
                         <Spin indicator={antIcon} spinning={isSpinning}>
                           <>
-                            <div
-                              onClick={addToCartHandler}
-                              className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
-                            >
-                              <button className="fw-bold">Add to cart</button>
+                            <div className="d-flex justify-content-center align-items-center">
+                              <div
+                                onClick={addToCartHandler}
+                                className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3 me-4"
+                              >
+                                <button className="fw-bold">Add to cart</button>
+                              </div>
+                              {isCourseAddedToWishlist ? (
+                                <div
+                                  onClick={removeFromWishlistHandler}
+                                  className="add_to_wishlist-btn d-flex justify-content-center align-items-center mb-3"
+                                >
+                                  <AiFillHeart color="white" />
+                                </div>
+                              ) : (
+                                <div
+                                  onClick={addToWishlistHandler}
+                                  className="add_to_wishlist-btn d-flex justify-content-center align-items-center mb-3"
+                                >
+                                  <AiOutlineHeart />
+                                </div>
+                              )}
                             </div>
+
                             <div
                               onClick={buyNowHandler}
                               className="buy_now-btn d-flex justify-content-center align-items-center mb-4"
@@ -262,6 +349,9 @@ const CourseDetails = () => {
                 addToCartHandler={addToCartHandler}
                 buyNowHandler={buyNowHandler}
                 isSpinning={isSpinning}
+                isCourseAddedToWishlist={isCourseAddedToWishlist}
+                addToWishlistHandler={addToWishlistHandler}
+                removeFromWishlistHandler={removeFromWishlistHandler}
               />
             </div>
           </div>

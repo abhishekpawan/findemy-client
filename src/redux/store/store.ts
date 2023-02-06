@@ -2,13 +2,15 @@ import { configureStore } from "@reduxjs/toolkit";
 // import products from "../reducers/products.reducer";
 import courses from "../reducers/courses.reducer";
 import cartCourses from "../reducers/cart.reducer";
-import boughtCouses from "../reducers/boughtCourses.reducer";
+import boughtCourses from "../reducers/boughtCourses.reducer";
+import wishlistCourses from "../reducers/wishlist.reducer";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 const store = configureStore({
   reducer: {
     courses,
     cartCourses,
-    boughtCouses,
+    boughtCourses,
+    wishlistCourses,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

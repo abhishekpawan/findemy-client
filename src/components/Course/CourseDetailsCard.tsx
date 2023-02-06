@@ -2,6 +2,7 @@ import { FC, useContext, useState } from "react";
 import { BsPlayBtn, BsFileEarmark, BsTrophy } from "react-icons/bs";
 import { HiOutlineFolderDownload, HiOutlineDeviceMobile } from "react-icons/hi";
 import { IoIosInfinite } from "react-icons/io";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -18,6 +19,9 @@ const CourseDetailsCard: FC<{
   buyNowHandler(): void;
   addToCartHandler(): void;
   isSpinning: boolean;
+  isCourseAddedToWishlist: boolean;
+  addToWishlistHandler(): void;
+  removeFromWishlistHandler(): void;
 }> = (props) => {
   const navigate = useNavigate();
   const { isFooterVisible, setIsFooterVisible } = useContext(AppContext);
@@ -82,11 +86,28 @@ const CourseDetailsCard: FC<{
             ) : (
               <Spin indicator={antIcon} spinning={props.isSpinning}>
                 <>
-                  <div
-                    onClick={props.addToCartHandler}
-                    className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3"
-                  >
-                    <button className="fw-bold">Add to cart</button>
+                  <div className="d-flex justify-content-center align-items-center">
+                    <div
+                      onClick={props.addToCartHandler}
+                      className="add_to_cart-btn d-flex justify-content-center align-items-center mb-3 me-4"
+                    >
+                      <button className="fw-bold">Add to cart</button>
+                    </div>
+                    {props.isCourseAddedToWishlist ? (
+                      <div
+                        onClick={props.removeFromWishlistHandler}
+                        className="add_to_wishlist-btn d-flex justify-content-center align-items-center mb-3"
+                      >
+                        <AiFillHeart color="black" />
+                      </div>
+                    ) : (
+                      <div
+                        onClick={props.addToWishlistHandler}
+                        className="add_to_wishlist-btn d-flex justify-content-center align-items-center mb-3"
+                      >
+                        <AiOutlineHeart color="black" />
+                      </div>
+                    )}
                   </div>
                   <div
                     onClick={props.buyNowHandler}

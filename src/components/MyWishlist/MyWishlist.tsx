@@ -1,27 +1,27 @@
+import { Link } from "react-router-dom";
 import { selectStatus } from "../../redux/reducers/cart.reducer";
 import { useAppSelector } from "../../redux/store/store";
-import { ICartCourse, ICourse } from "../../utils/interface";
+import { ICartCourse } from "../../utils/interface";
 import HomepageCourseCard from "../Homepage/HomepageCourseCard";
-import EmptyMyLearnings from "./EmptyMyLearnings";
-import MyLearningsLoader from "./MyLearningsLoader";
+import MyWishlistLoader from "../MyLearnings/MyLearningsLoader";
+import EmptyMyWishlist from "./EmptyMyWishlist";
 
-import "./mylearnings.css";
-import { Link } from "react-router-dom";
-const MyLearnings = () => {
-  const { boughtCourses } = useAppSelector((store) => store.boughtCourses);
-  const { courses } = useAppSelector((store) => store.courses);
-  // Get the current `status`:
+import "./mywishlist.css";
+import WishlistCourseCard from "./WishlistCourseCard";
+const MyWishlist = () => {
+  const { wishlistCourses } = useAppSelector((store) => store.wishlistCourses);
+
   const status = useAppSelector(selectStatus);
 
   return (
     <>
       {status === "loading" ? (
-        <MyLearningsLoader />
+        <MyWishlistLoader />
       ) : (
-        <main className="mylearning ">
-          <div className="mylearning-header">
+        <main className="mywishlist ">
+          <div className="mywishlist-header">
             <div>
-              <h1 className="fw-bold pb-5">My Learnings</h1>
+              <h1 className="fw-bold pb-5">My Wishlist</h1>
               <Link className="fw-bold fs-3 pb-2 me-4" to="/mylearnings">
                 All Courses
               </Link>
@@ -30,17 +30,17 @@ const MyLearnings = () => {
               </Link>
             </div>
           </div>
-          {boughtCourses.length === 0 ? (
-            <EmptyMyLearnings />
+          {wishlistCourses.length === 0 ? (
+            <EmptyMyWishlist />
           ) : (
-            <div className="mylearning-courses row">
-              {boughtCourses?.map((course: ICartCourse) => {
+            <div className="mywishlist-courses row">
+              {wishlistCourses?.map((course: ICartCourse) => {
                 return (
                   <div
                     key={course._id}
                     className="col-12 col-md-6 col-lg-3 mt-4 mb-5"
                   >
-                    <HomepageCourseCard
+                    <WishlistCourseCard
                       course={course}
                       course_id={course.course_id}
                     />
@@ -55,4 +55,4 @@ const MyLearnings = () => {
   );
 };
 
-export default MyLearnings;
+export default MyWishlist;

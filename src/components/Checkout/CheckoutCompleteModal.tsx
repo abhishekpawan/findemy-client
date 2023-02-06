@@ -22,7 +22,7 @@ const CheckoutCompleteModal: FC<{
   totalPrice: number;
 }> = (props) => {
   const navigate = useNavigate();
-  const { boughtCourses } = useAppSelector((store) => store.boughtCouses);
+  const { boughtCourses } = useAppSelector((store) => store.boughtCourses);
 
   const { user, setIsCheckoutSuccess, isUserLoggedIn } = useContext(AppContext);
   const dispatch = useDispatch<AppDispatch>();

@@ -1,7 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { TbWorld } from "react-icons/tb";
-import { AiOutlineShoppingCart, AiOutlineSearch } from "react-icons/ai";
+import {
+  AiOutlineShoppingCart,
+  AiOutlineSearch,
+  AiOutlineHeart,
+} from "react-icons/ai";
 import { HiBars3 } from "react-icons/hi2";
 import { FaUserAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +26,7 @@ const Header = () => {
   const [isMobileSearchVisible, setMobileSearchVisible] =
     useState<boolean>(false);
   const { cartCourses } = useAppSelector((store) => store.cartCourses);
+  const { wishlistCourses } = useAppSelector((store) => store.wishlistCourses);
 
   const params = useParams();
 
@@ -81,7 +86,10 @@ const Header = () => {
                 onClick={() => setMobileNavVisible(false)}
                 to="/mylearnings"
               >
-                My Learning
+                My Learnings
+              </Link>
+              <Link onClick={() => setMobileNavVisible(false)} to="/mywishlist">
+                My Wishlist
               </Link>
               <Link onClick={() => setMobileNavVisible(false)} to="/cart">
                 My Cart
@@ -180,16 +188,28 @@ const Header = () => {
           <AiOutlineSearch />
         </div>
         {isUserLoggedIn ? (
-          <div className="cart-icon">
-            <Link to="/cart">
-              <AiOutlineShoppingCart />
-              {cartCourses.length > 0 ? (
-                <span className="cart-count">{cartCourses.length}</span>
-              ) : (
-                ""
-              )}
-            </Link>
-          </div>
+          <>
+            <div className="cart-icon me-3">
+              <Link to="/cart">
+                <AiOutlineShoppingCart />
+                {cartCourses.length > 0 ? (
+                  <span className="cart-count">{cartCourses.length}</span>
+                ) : (
+                  ""
+                )}
+              </Link>
+            </div>
+            <div className="cart-icon">
+              <Link to="/mywishlist">
+                <AiOutlineHeart />
+                {wishlistCourses.length > 0 ? (
+                  <span className="cart-count">{wishlistCourses.length}</span>
+                ) : (
+                  ""
+                )}
+              </Link>
+            </div>
+          </>
         ) : (
           ""
         )}
@@ -263,6 +283,7 @@ const Header = () => {
             </div>
             <div className="user-menu-options pt-4 p-4 pt-0 d-flex flex-column">
               <Link to="/mylearnings">My Learning</Link>
+              <Link to="/mywishlist">My Wishlist</Link>
               <Link to="/cart">My Cart</Link>
               <Link to="/help">Help</Link>
               <a href="" onClick={logoutUser}>

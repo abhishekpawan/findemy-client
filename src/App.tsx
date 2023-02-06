@@ -17,12 +17,11 @@ import CheckoutSuccess from "./components/Checkout/CheckoutSuccess";
 import { AppDispatch, useAppSelector } from "./redux/store/store";
 import { useDispatch } from "react-redux";
 import { fetchCoursesAsync } from "./redux/reducers/courses.reducer";
-import {
-  fetchCartCoursesAsync,
-  selectStatus,
-} from "./redux/reducers/cart.reducer";
+import { fetchCartCoursesAsync } from "./redux/reducers/cart.reducer";
 import { showNotification } from "./utils/ToastNotification";
 import { fetchBoughtCoursesAsync } from "./redux/reducers/boughtCourses.reducer";
+import { fetchWishlistCoursesAsync } from "./redux/reducers/wishlist.reducer";
+import MyWishlist from "./components/MyWishlist/MyWishlist";
 
 export const AppContext = createContext<any>(null);
 
@@ -37,7 +36,8 @@ function App() {
   const dispatch = useDispatch<AppDispatch>();
   const { courses } = useAppSelector((store) => store.courses);
   const { cartCourses, error } = useAppSelector((store) => store.cartCourses);
-  const { boughtCourses } = useAppSelector((store) => store.boughtCouses);
+  const { boughtCourses } = useAppSelector((store) => store.boughtCourses);
+  const { wishlistCourses } = useAppSelector((store) => store.wishlistCourses);
 
   useEffect(() => {
     if (courses.length === 0) {
@@ -48,6 +48,9 @@ function App() {
     }
     if (boughtCourses.length === 0 && isUserLoggedIn === true) {
       dispatch(fetchBoughtCoursesAsync(user!));
+    }
+    if (wishlistCourses.length === 0 && isUserLoggedIn === true) {
+      dispatch(fetchWishlistCoursesAsync(user!));
     }
   }, []);
 
@@ -82,6 +85,7 @@ function App() {
               <>
                 <Route path="cart" element={<ShoppingCart />} />
                 <Route path="mylearnings" element={<MyLearnings />} />
+                <Route path="mywishlist" element={<MyWishlist />} />
               </>
             ) : (
               ""

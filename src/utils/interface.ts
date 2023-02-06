@@ -41,6 +41,7 @@ export interface ICourse {
 // }
 
 export interface ICartCourse extends ICourse {
+  _id?: string;
   user_id: string;
   course_id: string;
 }
