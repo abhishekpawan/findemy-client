@@ -57,9 +57,9 @@ export const CourseDetailsInstructorDetails: FC<{
 
   for (const course of instructorsCourses) {
     totalStudents =
-      totalStudents + parseFloat(course.num_students.replaceAll(",", ""));
+      totalStudents + parseFloat(course?.num_students.replaceAll(",", ""));
     totalReviews =
-      totalReviews + parseFloat(course.num_reviews.replaceAll(",", ""));
+      totalReviews + parseFloat(course?.num_reviews.replaceAll(",", ""));
   }
 
   return (
